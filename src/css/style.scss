@@ -2,7 +2,7 @@
 
 @import './base/reset';
 
-@import './abstract/variables';
+@import './abstract/global-variables';
 @import './abstract/mixin';
 
 @import './base/main';
@@ -10,6 +10,7 @@
 @import './components/menu-button';
 @import './components/menu';
 @import './components/main-card';
+@import './components/switch-button';
 
 @import './layout/wrapper';
 @import './layout/header';

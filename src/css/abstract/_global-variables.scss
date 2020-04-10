@@ -4,20 +4,16 @@ $fontSize: 30px;
 $color: rgb(255, 250, 240);
 $hoverColor: rgb(255, 255, 0);
 
+// Make circle border-radius
+$circle: 50%;
+
 // Body gradient color
 $bodyFirstColor: rgb(2, 0, 36);
-$bodySecodColor: rgb(101, 101, 164);
+$bodySecondColor: rgb(101, 101, 164);
 $bodyThirdColor: rgb(0, 212, 255);
 
-// Burder-menu 
+// Burger-menu 
 $BurgerBackground: rgb(70, 130, 180);
 
-//Burger-menu button
-$lineFirstColor: $bodyThirdColor;
-$lineSecondColor: $BurgerBackground;
-$transition: all 0.3s;
-
-// Main-card
-$mainCardBorderRadius: 50%;
 
 

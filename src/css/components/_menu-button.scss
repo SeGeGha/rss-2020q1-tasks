@@ -1,9 +1,14 @@
+$lineFirstColor: $bodyThirdColor;
+$lineSecondColor: $BurgerBackground;
+$transition: all 0.3s;
+$btnSize: 60px;
+
 .burger-menu {
   @include flex(row, center);
 }
 
 .burger-menu__btn {
-  @include size(60px, 60px);
+  @include size($btnSize, $btnSize);
   display: block;
   z-index: 30;
   overflow: hidden;
@@ -29,6 +34,10 @@
     transition: $transition 0.1s;  
   }
 
+  &:hover {
+    transform: scale(1.1);
+  }
+
   &_active {
     position: fixed;
     left: 120px;
@@ -52,5 +61,3 @@
     }
   }
 }
-
-

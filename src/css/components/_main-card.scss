@@ -1,19 +1,21 @@
+
+
 .main-card {
   @include flex(column);
   margin: 30px;
   @include size(300px, 300px);
-  border-radius: $mainCardBorderRadius;
+  border-radius: $circle;
   box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
   overflow: hidden;
   transition: all 0.4s;
 
   .card__image {
     @include size(inherit, inherit);
-    border-radius: $mainCardBorderRadius;
+    border-radius: $circle;
 
     img {
       @include size(inherit, inherit);
-      border-radius: $mainCardBorderRadius;
+      border-radius: $circle;
       object-fit: cover;
     }
   }
