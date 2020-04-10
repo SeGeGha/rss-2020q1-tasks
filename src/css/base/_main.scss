@@ -1,0 +1,9 @@
+html {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+}
+
+body {
+  background: $bodyFirstColor;
+  background: linear-gradient(90deg, $bodyFirstColor 0%, $bodySecodColor 0%, $bodyThirdColor 100%);
+}

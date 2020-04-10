@@ -1,0 +1,47 @@
+.main-card {
+  @include flex(column);
+  margin: 30px;
+  @include size(300px, 300px);
+  border-radius: $mainCardBorderRadius;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  overflow: hidden;
+  transition: all 0.4s;
+
+  .card__image {
+    @include size(inherit, inherit);
+    border-radius: $mainCardBorderRadius;
+
+    img {
+      @include size(inherit, inherit);
+      border-radius: $mainCardBorderRadius;
+      object-fit: cover;
+    }
+  }
+
+  .card__title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-weight: bold;
+    margin-top: -50px;
+    @include size(100%, 50px);
+    color: $color;
+    background: linear-gradient(45deg, black, transparent);
+
+    p {
+      font-family: $fontFamily;
+      font-size: $fontSize;
+      letter-spacing: 2.5px;
+    }
+  }
+
+  &:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+      -5px -5px 30px 15px rgba(0,0,0,0.22);
+
+    .card__title {
+      color: $hoverColor;
+    }
+  }
+}
+
