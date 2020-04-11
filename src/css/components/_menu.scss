@@ -17,7 +17,7 @@
 
   nav {
     @include flex(column);
-    margin: 120px auto;
+    margin: 120px auto 0;
     font-size: $fontSize;
 
     a {

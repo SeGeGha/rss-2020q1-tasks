@@ -18,15 +18,15 @@
       </div>
       <div class="burger-menu__navigation">
         <nav>
-          <a href="">Animal</a>
-          <a href="">Food</a>
-          <a href="">Emotion</a>
-          <a href="">Action(set A)</a>
-          <a href="">Action(set B)</a>
-          <a href="">Action(set C)</a>
-          <a href="">Adjective</a>
-          <a href="">Family</a>
-          <a href="">Clothes</a>
+          <a href="#main">Main Page</a>
+          <a href="#category" data-name="animal">Animal</a>
+          <a href="#category" data-name="food">Food</a>
+          <a href="#category" data-name="school">School</a>
+          <a href="#category" data-name="action">Action</a>
+          <a href="#category" data-name="profession">Profession</a>
+          <a href="#category" data-name="nature">Nature</a>
+          <a href="#category" data-name="emotion">Emotion</a>
+          <a href="#category" data-name="clothes">Clothes</a>
         </nav>
       </div>
       </div>
@@ -35,65 +35,141 @@
         <label for="checkbox"></label>
       </div>
     </header>
-
-    <div class="main-container">
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/animal/dog.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Animal</p>
-        </div>
+  <main class="container">
+    <section class="main-page page_active">
+      <a href="#category" data-name="animal" class="main-card">
+        <img src="./img/card/animal/animal.jpg" class="card__image"> 
+        <p class ="card__title">Animal</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/food/cookies.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Food</p>
-        </div>
+      <a href="#category" data-name="food" class="main-card">
+        <img src="./img/card/food/food.jpg" class="card__image"> 
+        <p class="card__title">Food</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/emotion/smile.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Emotion</p>
-        </div>
+      <a href="#category" data-name="school" class="main-card">
+        <img src="./img/card/school/school.jpg" class="card__image"> 
+        <p class="card__title">School</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/actions/open.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Action</p>
-        </div>
+      <a href="#category" data-name="action" class="main-card">
+        <img src="./img/card/action/action.jpg" class="card__image"> 
+        <p class="card__title">Action</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/item/pencil.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Item</p>
-        </div>
+      <a href="#category" data-name="profession" class="main-card">
+        <img src="./img/card/profession/profession.jpg" class="card__image"> 
+        <p class="card__title">Profession</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/transport/car.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Transport</p>
-        </div>
+      <a href="#category" data-name="nature" class="main-card">
+        <img src="./img/card/nature/nature.jpg" class="card__image"> 
+        <p class="card__title">Nature</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/adjective/surprised.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Adjective</p>
-        </div>
+      <a href="#category" data-name="emotion" class="main-card">
+        <img src="./img/card/emotion/emotions.jpg" class="card__image"> 
+        <p class="card__title">Emotion</p>
       </a>
-      <a href="" class="main-card">
-        <div class="card__image"> <img src="./img/card/clothes/shirt.jpg"> 
-        </div>
-        <div class="card__title title-white">
-          <p>Clothes</p>
-        </div>
+      <a href="#category" data-name="clothes" class="main-card">
+        <img src="./img/card/clothes/clothes.jpg" class="card__image"> 
+        <p class="card__title">Clothes</p>
       </a>     
-    </div>
+    </section>   
+    <section class="category-page">
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>  
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>  
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="image-wrapper">
+          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        </div>
+        <div class="card_front">
+          <p class="card__title">Animal</p>  
+          <p class="title__reverse">&#8634;</p>  
+        </div>
+        <div class="card_back">
+            <p class="card__title">Животное</p>          
+        </div>
+      </div>                                                                             
+    </section>      
+  </main>
+
   </div>
 
 

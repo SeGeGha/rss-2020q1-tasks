@@ -98,7 +98,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  margin: 120px auto;
+  margin: 120px auto 0;
   font-size: 30px;
 }
 .burger-menu__navigation nav a {
@@ -128,11 +128,6 @@ body {
   width: inherit;
   height: inherit;
   border-radius: 50%;
-}
-.main-card .card__image img {
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
   object-fit: cover;
 }
 .main-card .card__title {
@@ -144,8 +139,6 @@ body {
   height: 50px;
   color: floralwhite;
   background: linear-gradient(45deg, black, transparent);
-}
-.main-card .card__title p {
   font-family: "Indie Flower", cursive;
   font-size: 30px;
   letter-spacing: 2.5px;
@@ -156,6 +149,69 @@ body {
 }
 .main-card:hover .card__title {
   color: yellow;
+}
+
+.category-card {
+  position: relative;
+  margin: 30px 15px;
+  padding: 5px;
+  width: 300px;
+  height: 300px;
+  background: lavender;
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.category-card.flip {
+  transform: rotateY(180deg) scaleX(-1);
+}
+.category-card.flip .card_back {
+  transform: rotateY(0deg);
+}
+.category-card .card__image {
+  height: 230px;
+}
+
+.image-wrapper {
+  width: 290px;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card_front, .card_back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 290px;
+  height: 70px;
+  position: absolute;
+  background: inherit;
+  backface-visibility: hidden;
+}
+.card_front .card__title, .card_back .card__title {
+  margin-right: 15px;
+  font-weight: bold;
+  letter-spacing: 2.5px;
+  user-select: none;
+}
+
+.card_back {
+  transition: all 0.5s;
+  transform: rotateY(180deg);
+}
+
+.title__reverse {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  height: 40px;
+  transition: all 0.4s ease-in;
+}
+.title__reverse:hover {
+  transform: rotate(-180deg);
 }
 
 .switch-btn {
@@ -232,10 +288,19 @@ body {
   width: 100%;
 }
 
-.main-container {
-  display: flex;
+.main-page,
+.category-page {
+  display: none;
   flex-wrap: wrap;
   justify-content: space-around;
+  width: 100%;
+}
+
+.page_active {
+  display: flex;
+}
+
+.container {
   width: 100%;
   margin: 40px 0;
 }

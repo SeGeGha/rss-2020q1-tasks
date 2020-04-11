@@ -1,0 +1,63 @@
+$cardWidth: 300px;
+$cardHeight: 300px;
+$cardPadding: 5px;
+$captionHeight: 70px;
+
+.category-card {
+  position: relative;
+  margin: 30px 15px;
+  padding: $cardPadding;
+  @include size($cardWidth, $cardHeight);
+  background: rgb(230, 230, 250);
+  box-shadow: $boxShadow;
+  cursor: pointer;
+  transition: all 0.5s;
+  
+  &.flip {
+    transform: rotateY(180deg) scaleX(-1);
+
+    .card_back {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .card__image {
+    height: ($cardHeight - $captionHeight);
+  }
+}
+
+.image-wrapper {
+  @include size(($cardWidth - $cardPadding * 2), ($cardHeight - $captionHeight - $cardPadding * 2));
+  overflow: hidden;
+}
+
+.card_front, .card_back {
+  @include flex(row, center, center);
+  @include size(($cardWidth - $cardPadding * 2), $captionHeight);
+  position: absolute;
+  background: inherit;
+  backface-visibility: hidden;
+
+  .card__title {
+    margin-right: 15px;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    user-select: none;
+  }
+}
+
+.card_back {
+  transition: all 0.5s;
+  transform: rotateY(180deg);
+}
+
+.title__reverse {
+  @include flex(row, center, center);
+  font-size: 40px;
+  height: 40px;
+  transition: all 0.4s ease-in;
+
+  &:hover {
+    transform: rotate(-180deg);
+  }
+}
