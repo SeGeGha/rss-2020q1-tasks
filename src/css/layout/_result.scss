@@ -1,0 +1,14 @@
+.result {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1111;
+  @include size(100%, 100vh);
+  background: $bodyFirstColor;
+  background: linear-gradient(90deg, $bodyFirstColor 0%, $bodySecondColor 0%, $bodyThirdColor 100%);
+
+  &.show {
+    @include flex(column, center, center);
+  }
+}

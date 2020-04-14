@@ -1,0 +1,11 @@
+.star-container {
+  display: none;
+  @include size(100%, 40px);
+  overflow: hidden;
+  text-align: right;
+  color: rgb(255, 215, 0);
+
+  &.play-mode {
+    @include flex(row, center, flex-end);
+  }
+}

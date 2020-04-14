@@ -1,16 +1,19 @@
 $cardWidth: 300px;
 $cardHeight: 300px;
-$cardPadding: 5px;
+$cardBorder: 5px;
 $captionHeight: 70px;
+$color: rgb(230, 230, 250);
 
 .category-card {
   position: relative;
   margin: 30px 15px;
-  padding: $cardPadding;
+  border: $cardBorder solid $color;
   @include size($cardWidth, $cardHeight);
-  background: rgb(230, 230, 250);
+  background: $color;
   box-shadow: $boxShadow;
   cursor: pointer;
+  user-select: none;
+  opacity: 1;
   transition: all 0.5s;
   
   &.flip {
@@ -21,19 +24,38 @@ $captionHeight: 70px;
     }
   }
 
-  .card__image {
-    height: ($cardHeight - $captionHeight);
+  .play-mode & {
+    .image-wrapper {
+      height: 100%;
+    }
+
+    .card_front {
+      display: none
+    }    
+  }
+
+  &.darken {
+    background: rgb(0, 0, 0);
+
+    .image-wrapper {
+      opacity: 0.3;
+    }
   }
 }
 
 .image-wrapper {
-  @include size(($cardWidth - $cardPadding * 2), ($cardHeight - $captionHeight - $cardPadding * 2));
+  @include flex(row, center, center);
+  @include size(($cardWidth - $cardBorder * 2), ($cardHeight - $captionHeight - $cardBorder * 2));
   overflow: hidden;
+
+  .card__image {
+    height: 100%;
+  }
 }
 
 .card_front, .card_back {
   @include flex(row, center, center);
-  @include size(($cardWidth - $cardPadding * 2), $captionHeight);
+  @include size(($cardWidth - $cardBorder * 2), $captionHeight);
   position: absolute;
   background: inherit;
   backface-visibility: hidden;
@@ -42,7 +64,6 @@ $captionHeight: 70px;
     margin-right: 15px;
     font-weight: bold;
     letter-spacing: 2.5px;
-    user-select: none;
   }
 }
 

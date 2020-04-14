@@ -27,6 +27,10 @@
     
       &:hover {
         color: $hoverColor;
+      }
+
+      &.active {
+        color: $hoverColor;
         text-decoration: underline;
       }
     }

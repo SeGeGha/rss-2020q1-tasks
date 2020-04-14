@@ -1,10 +1,10 @@
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>English for kids</title>
+    <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
       </div>
       <div class="burger-menu__navigation">
         <nav>
-          <a href="#main">Main Page</a>
+          <a href="#main" class="active">Main Page</a>
           <a href="#category" data-name="animal">Animal</a>
           <a href="#category" data-name="food">Food</a>
           <a href="#category" data-name="school">School</a>
@@ -35,144 +35,146 @@
         <label for="checkbox"></label>
       </div>
     </header>
-  <main class="container">
-    <section class="main-page page_active">
-      <a href="#category" data-name="animal" class="main-card">
-        <img src="./img/card/animal/animal.jpg" class="card__image"> 
-        <p class ="card__title">Animal</p>
-      </a>
-      <a href="#category" data-name="food" class="main-card">
-        <img src="./img/card/food/food.jpg" class="card__image"> 
-        <p class="card__title">Food</p>
-      </a>
-      <a href="#category" data-name="school" class="main-card">
-        <img src="./img/card/school/school.jpg" class="card__image"> 
-        <p class="card__title">School</p>
-      </a>
-      <a href="#category" data-name="action" class="main-card">
-        <img src="./img/card/action/action.jpg" class="card__image"> 
-        <p class="card__title">Action</p>
-      </a>
-      <a href="#category" data-name="profession" class="main-card">
-        <img src="./img/card/profession/profession.jpg" class="card__image"> 
-        <p class="card__title">Profession</p>
-      </a>
-      <a href="#category" data-name="nature" class="main-card">
-        <img src="./img/card/nature/nature.jpg" class="card__image"> 
-        <p class="card__title">Nature</p>
-      </a>
-      <a href="#category" data-name="emotion" class="main-card">
-        <img src="./img/card/emotion/emotions.jpg" class="card__image"> 
-        <p class="card__title">Emotion</p>
-      </a>
-      <a href="#category" data-name="clothes" class="main-card">
-        <img src="./img/card/clothes/clothes.jpg" class="card__image"> 
-        <p class="card__title">Clothes</p>
-      </a>     
-    </section>   
-    <section class="category-page">
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
+    <div class="star-container"></div>
+    <main class="container">
+      <section class="main-page page_active">
+        <a href="#category" data-name="animal" class="main-card">
+          <img src="./image/animal.jpg" class="card__image" alt="Animal"> 
+          <p class ="card__title">Animal</p>
+        </a>
+        <a href="#category" data-name="food" class="main-card">
+          <img src="./image/food.jpg" class="card__image" alt="Food"> 
+          <p class="card__title">Food</p>
+        </a>
+        <a href="#category" data-name="school" class="main-card">
+          <img src="./image/school.jpg" class="card__image" alt="School"> 
+          <p class="card__title">School</p>
+        </a>
+        <a href="#category" data-name="action" class="main-card">
+          <img src="./image/action.jpg" class="card__image" alt="Action"> 
+          <p class="card__title">Action</p>
+        </a>
+        <a href="#category" data-name="profession" class="main-card" alt="Profession">
+          <img src="./image/profession.jpg" class="card__image"> 
+          <p class="card__title">Profession</p>
+        </a>
+        <a href="#category" data-name="nature" class="main-card" alt="Nature">
+          <img src="./image/nature.jpg" class="card__image"> 
+          <p class="card__title">Nature</p>
+        </a>
+        <a href="#category" data-name="emotion" class="main-card" alt="Emotion">
+          <img src="./image/emotions.jpg" class="card__image"> 
+          <p class="card__title">Emotion</p>
+        </a>
+        <a href="#category" data-name="clothes" class="main-card" alt="Clothes">
+          <img src="./image/clothes.jpg" class="card__image"> 
+          <p class="card__title">Clothes</p>
+        </a>     
+      </section>   
+      <section class="category-page">
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 1">   
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 1</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 1</p>          
+          </div>
         </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 2">   
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 2</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 2</p>          
+          </div>
         </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 3">  
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 3</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 3</p>          
+          </div>
         </div>
-      </div>
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 4">    
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 4</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 4</p>          
+          </div>
+        </div>  
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 5">   
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 5</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 5</p>          
+          </div>
         </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 6">  
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 6</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 6</p>          
+          </div>
+        </div>  
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 7"> 
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 7</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 7</p>          
+          </div>
         </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>  
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>  
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="image-wrapper">
-          <img src="./img/card/animal/animal.jpg" class="card__image">   
-        </div>
-        <div class="card_front">
-          <p class="card__title">Animal</p>  
-          <p class="title__reverse">&#8634;</p>  
-        </div>
-        <div class="card_back">
-            <p class="card__title">Животное</p>          
-        </div>
-      </div>                                                                             
-    </section>      
-  </main>
-
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img src="#" class="card__image" alt="Picture 8">  
+          </div>
+          <div class="card_front">
+            <p class="card__title">Picture 8</p>  
+            <p class="title__reverse">&#8634;</p>  
+          </div>
+          <div class="card_back">
+              <p class="card__title">Picture 8</p>          
+          </div>
+        </div> 
+        <div class="btn-wrapper">
+          <button class="game-btn">Start Game</button>
+        </div>                                                                            
+      </section>      
+    </main>
   </div>
-
-
-  <script src="./js/index.js"></script>
+  <div class="result"></div> 
+  <script type="module" src="./js/index.js"></script>
 </body>
 </html>

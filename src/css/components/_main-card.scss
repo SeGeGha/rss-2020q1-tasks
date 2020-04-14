@@ -5,6 +5,7 @@
   border-radius: $circle;
   box-shadow: $boxShadow;
   overflow: hidden;
+  user-select: none;
   transition: all 0.4s;
 
   .card__image {
@@ -24,16 +25,22 @@
     font-family: $fontFamily;
     font-size: $fontSize;
     letter-spacing: 2.5px;
+
+    .play-mode & {
+      color: rgb(0, 128, 0);
+    }
   }
 
   &:hover {
     transform: scale(0.9, 0.9);
     box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
       -5px -5px 30px 15px rgba(0,0,0,0.22);
-
-    .card__title {
-      color: $hoverColor;
-    }
   }
 }
 
+@media (max-width: 400px) {
+  .main-card {
+    margin: 15px 0;
+    @include size (270px, 270px);
+  } 
+}
