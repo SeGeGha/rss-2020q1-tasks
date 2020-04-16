@@ -20,14 +20,14 @@
     font-weight: bold;
     margin-top: -50px;
     @include size(100%, 50px);
-    color: $color;
-    background: linear-gradient(45deg, black, transparent);
+    color: rgb(255, 140, 0);
+    background: rgba(0, 0, 0, 0.7);
     font-family: $fontFamily;
     font-size: $fontSize;
     letter-spacing: 2.5px;
 
     .play-mode & {
-      color: rgb(0, 128, 0);
+      color: rgb(124, 252, 0);
     }
   }
 

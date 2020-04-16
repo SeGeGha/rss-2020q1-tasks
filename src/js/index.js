@@ -1,23 +1,54 @@
-import Game from './playMode.js';
+import { Game, statistics } from './playMode.js';
 import { changeCard, cards } from './changerCards.js';
 
 let newGame = null;
 
-function gameDestroyer(condition) {
-  if (condition) {
+function gameDestroyer() {
+  if (newGame) {
     newGame.clearPage();
     newGame = null;
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const gameBtn = document.querySelector('.game-btn');
+  // header
+  const navigation = document.querySelector('.burger-menu__navigation');
+  const checkBoxLabel = document.querySelector('div.switch-btn > label');
+  // Pages
   const mainPage = document.querySelector('.main-page');
   const categoryPage = document.querySelector('.category-page');
+  // Button
   const burgerBtn = document.querySelector('.burger-menu__btn');
-  const navigation = document.querySelector('.burger-menu__navigation');
+  const gameBtn = document.querySelector('.game-btn');
+  const resetBtn = document.querySelector('.statistics__btn-reset');
+  // Other
   const starContainer = document.querySelector('.star-container');
-  const checkBoxLabel = document.querySelector('div.switch-btn > label');
+  const table = document.querySelector('.statistics');
+
+  statistics.init(); // Load data to a statistics-page
+
+  // Show || hide menu
+  document.addEventListener('click', (event) => {
+    const { target } = event;
+
+    if (target.closest('.burger-menu__btn')) {
+      burgerBtn.classList.toggle('active');
+      navigation.classList.toggle('active');
+    } else if (target !== navigation) {
+      burgerBtn.classList.remove('active');
+      navigation.classList.remove('active');
+    }
+  });
+
+  // Click on link (navigation or main-page)
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+
+    if (link) {
+      gameDestroyer();
+      changeCard(link);
+    }
+  });
 
   categoryPage.addEventListener('click', (event) => {
     let { target } = event;
@@ -71,29 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  burgerBtn.addEventListener('click', () => {
-    burgerBtn.classList.toggle('burger-menu__btn_active');
-    navigation.classList.toggle('burger-menu__navigation_active');
+  resetBtn.addEventListener('click', () => {
+    statistics.resetData();
   });
 
-  navigation.querySelector('nav').addEventListener('click', (event) => {
-    if (event.target.tagName.toLowerCase() === 'a') {
-      gameDestroyer(newGame); // Destroy game if you clicked on link during the game
-      changeCard(event.target);
+  table.addEventListener('click', (event) => {
+    if (event.target.tagName.toLowerCase() === 'th') {
+      statistics.sort(event.target);
     }
-
-    burgerBtn.classList.toggle('burger-menu__btn_active');
-    navigation.classList.toggle('burger-menu__navigation_active');
-  });
-
-  mainPage.addEventListener('click', (event) => {
-    if (event.target.parentElement.tagName.toLowerCase() === 'a') {
-      if (newGame) { newGame = null; } // Clearing after passing game
-      changeCard(event.target.parentElement);
-    }
-
-    burgerBtn.classList.remove('burger-menu__btn_active');
-    navigation.classList.remove('burger-menu__navigation_active');
   });
 
   checkBoxLabel.addEventListener('click', () => {
@@ -101,6 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     categoryPage.classList.toggle('play-mode');
     starContainer.classList.toggle('play-mode');
     document.querySelector('.container').classList.toggle('play-mode');
-    gameDestroyer(newGame); // Destroy game if you clicked on switch-btn during the game
+    gameDestroyer(); // Destroy game if you clicked on switch-btn during the game
   });
 });

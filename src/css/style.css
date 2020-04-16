@@ -14,6 +14,7 @@ html {
 body {
   background: #020024;
   background: linear-gradient(90deg, #020024 0%, #6565a4 0%, #00d4ff 100%);
+  user-select: none;
 }
 
 .burger-menu {
@@ -52,22 +53,22 @@ body {
 .burger-menu__btn:hover {
   transform: scale(1.1);
 }
-.burger-menu__btn_active {
+.burger-menu__btn.active {
   position: fixed;
   left: 120px;
 }
-.burger-menu__btn_active .line_top {
+.burger-menu__btn.active .line_top {
   width: 90%;
   height: 90%;
   margin: 5px auto;
   transition: all 0.3s 0.1s;
 }
-.burger-menu__btn_active .line_middle {
+.burger-menu__btn.active .line_middle {
   background-color: steelblue;
   transform: translateY(-40px) rotateZ(45deg);
   transition: all 0.3s 0.3s;
 }
-.burger-menu__btn_active .line_bottom {
+.burger-menu__btn.active .line_bottom {
   background-color: steelblue;
   transform: translateY(-55px) rotateZ(-45deg);
   transition: all 0.3s 0.5s;
@@ -75,41 +76,36 @@ body {
 
 .burger-menu__navigation {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
   position: absolute;
   left: -100%;
   top: 0;
   z-index: 25;
-  margin: 0;
+  padding: 100px 0 0 0;
   width: 300px;
-  height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  font-size: 30px;
   background: steelblue;
   box-shadow: 0px -40px 20px rgba(0, 0, 0, 0.4);
   transition: left 0.7s;
 }
-.burger-menu__navigation_active {
+.burger-menu__navigation.active {
   position: fixed;
   left: 0;
 }
-.burger-menu__navigation nav {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  margin: 120px auto 0;
-  font-size: 30px;
-}
-.burger-menu__navigation nav a {
+.burger-menu__navigation a {
   font-family: "Indie Flower", cursive;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
+  width: fit-content;
   color: floralwhite;
 }
-.burger-menu__navigation nav a:hover {
+.burger-menu__navigation a:hover {
   color: yellow;
 }
-.burger-menu__navigation nav a.active {
+.burger-menu__navigation a.active {
   color: yellow;
   text-decoration: underline;
 }
@@ -141,14 +137,14 @@ body {
   margin-top: -50px;
   width: 100%;
   height: 50px;
-  color: floralwhite;
-  background: linear-gradient(45deg, black, transparent);
+  color: darkorange;
+  background: rgba(0, 0, 0, 0.7);
   font-family: "Indie Flower", cursive;
   font-size: 30px;
   letter-spacing: 2.5px;
 }
 .play-mode .main-card .card__title {
-  color: green;
+  color: lawngreen;
 }
 .main-card:hover {
   transform: scale(0.9, 0.9);
@@ -173,7 +169,7 @@ body {
   cursor: pointer;
   user-select: none;
   opacity: 1;
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 .category-card.flip {
   transform: rotateY(180deg) scaleX(-1);
@@ -192,6 +188,13 @@ body {
 }
 .category-card.darken .image-wrapper {
   opacity: 0.3;
+}
+.category-card:hover {
+  border-color: gold;
+}
+.category-card:hover .card_front,
+.category-card:hover .card_back {
+  background: gold;
 }
 
 .image-wrapper {
@@ -217,6 +220,7 @@ body {
   position: absolute;
   background: inherit;
   backface-visibility: hidden;
+  transition: all 0.4s;
 }
 .card_front .card__title, .card_back .card__title {
   margin-right: 15px;
@@ -225,7 +229,7 @@ body {
 }
 
 .card_back {
-  transition: all 0.5s;
+  transition: all 0.4s;
   transform: rotateY(180deg);
 }
 
@@ -341,6 +345,46 @@ body {
   justify-content: center;
 }
 
+.statistics__btn-repeat,
+.statistics__btn-reset {
+  width: 150px;
+  height: 50px;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+  background: gold;
+  font-family: "Indie Flower", cursive;
+  font-size: 25px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.statistics__btn-repeat:hover,
+.statistics__btn-reset:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.statistics {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  height: 50px;
+}
+
+th {
+  border: 1px solid black;
+  width: 14.2857142857%;
+}
+
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+
 .wrapper {
   width: 88vw;
   margin: 0 auto;
@@ -354,7 +398,8 @@ body {
 }
 
 .main-page,
-.category-page {
+.category-page,
+.statistics-page {
   display: none;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -363,6 +408,12 @@ body {
 
 .page_active {
   display: flex;
+}
+
+.statistics-page {
+  justify-content: flex-start;
+  height: 650px;
+  overflow: auto;
 }
 
 .container {
@@ -399,11 +450,27 @@ body {
   background: #020024;
   background: linear-gradient(90deg, #020024 0%, #6565a4 0%, #00d4ff 100%);
 }
-.result.show {
+.result img,
+.result .result__caption {
+  display: none;
+  width: 50%;
+  text-align: center;
+  color: snow;
+  font-size: 60px;
+  font-weight: bold;
+}
+.result.success, .result.failure {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.result.success img[alt=Win] {
+  display: inline;
+}
+.result.failure .result__caption,
+.result.failure img[alt=Lose] {
+  display: inline;
 }
 
 /*# sourceMappingURL=style.css.map */

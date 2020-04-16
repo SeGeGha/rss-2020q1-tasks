@@ -1,4 +1,4 @@
-import Page from './categoryPageMaker.js';
+import Page from './trainMode.js';
 import changePage from './changerPage.js';
 
 let cards = null;

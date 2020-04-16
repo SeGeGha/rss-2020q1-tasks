@@ -3,6 +3,7 @@ $cardHeight: 300px;
 $cardBorder: 5px;
 $captionHeight: 70px;
 $color: rgb(230, 230, 250);
+$transition: all 0.4s;
 
 .category-card {
   position: relative;
@@ -14,7 +15,7 @@ $color: rgb(230, 230, 250);
   cursor: pointer;
   user-select: none;
   opacity: 1;
-  transition: all 0.5s;
+  transition: $transition;
   
   &.flip {
     transform: rotateY(180deg) scaleX(-1);
@@ -41,6 +42,15 @@ $color: rgb(230, 230, 250);
       opacity: 0.3;
     }
   }
+
+  &:hover {
+    border-color: rgb(255, 215, 0);
+
+    .card_front,
+    .card_back {
+      background: rgb(255, 215, 0);
+    }
+  }
 }
 
 .image-wrapper {
@@ -59,6 +69,7 @@ $color: rgb(230, 230, 250);
   position: absolute;
   background: inherit;
   backface-visibility: hidden;
+  transition: $transition;
 
   .card__title {
     margin-right: 15px;
@@ -68,7 +79,7 @@ $color: rgb(230, 230, 250);
 }
 
 .card_back {
-  transition: all 0.5s;
+  transition: $transition;
   transform: rotateY(180deg);
 }
 
@@ -76,7 +87,7 @@ $color: rgb(230, 230, 250);
   @include flex(row, center, center);
   font-size: 40px;
   height: 40px;
-  transition: all 0.4s ease-in;
+  transition: $transition ease-in;
 
   &:hover {
     transform: rotate(-180deg);

@@ -6,7 +6,6 @@ const soundPreloader = [];
 function preLoader(type) {
   Object.keys(cardsNamesDirectory).forEach((category) => {
     const categoryArr = [];
-
     cardsNamesDirectory[category].forEach((card) => {
       const variable = (type === 'image') ? new Image() : new Audio();
       variable.src = (type === 'image') ? `./image/${card[0]}.jpg` : `./audio/${card[0]}.mp3`;

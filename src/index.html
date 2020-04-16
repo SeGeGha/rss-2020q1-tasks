@@ -16,9 +16,8 @@
         <span class="btn__line line_middle"></span>
         <span class="btn__line line_bottom"></span>
       </div>
-      <div class="burger-menu__navigation">
-        <nav>
-          <a href="#main" class="active">Main Page</a>
+        <nav class="burger-menu__navigation">
+          <a href="#main" data-name="main" class="active">Main Page</a>
           <a href="#category" data-name="animal">Animal</a>
           <a href="#category" data-name="food">Food</a>
           <a href="#category" data-name="school">School</a>
@@ -27,8 +26,8 @@
           <a href="#category" data-name="nature">Nature</a>
           <a href="#category" data-name="emotion">Emotion</a>
           <a href="#category" data-name="clothes">Clothes</a>
+          <a href="#statistics" data-name="statistics">Statistics</a>
         </nav>
-      </div>
       </div>
       <div class="switch-btn">
         <input type="checkbox" id="checkbox">
@@ -37,7 +36,7 @@
     </header>
     <div class="star-container"></div>
     <main class="container">
-      <section class="main-page page_active">
+      <section class="main-page">
         <a href="#category" data-name="animal" class="main-card">
           <img src="./image/animal.jpg" class="card__image" alt="Animal"> 
           <p class ="card__title">Animal</p>
@@ -171,10 +170,29 @@
         <div class="btn-wrapper">
           <button class="game-btn">Start Game</button>
         </div>                                                                            
-      </section>      
+      </section> 
+      <section class="statistics-page page_active">
+        <table class="statistics">
+          <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Translate</th>
+            <th>Click number (train mode)</th>
+            <th>Guessed</th>
+            <th>Mistakes</th>
+            <th>Mistakes / guessed</th>
+          </tr>
+        </table>
+        <button class="statistics__btn-repeat">Repeat difficult world</button>
+        <button class="statistics__btn-reset">Reset</button>
+      </section>     
     </main>
   </div>
-  <div class="result"></div> 
+  <div class="result">
+    <p class="result__caption"></p>
+    <img src="./image/win.png" alt="Win">
+    <img src="./image/lose.jpg" alt="Lose">
+  </div> 
   <script type="module" src="./js/index.js"></script>
 </body>
 </html>

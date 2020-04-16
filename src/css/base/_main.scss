@@ -6,4 +6,5 @@ html {
 body {
   background: $bodyFirstColor;
   background: linear-gradient(90deg, $bodyFirstColor 0%, $bodySecondColor 0%, $bodyThirdColor 100%);
+  user-select: none;
 }

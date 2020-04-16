@@ -1,5 +1,6 @@
 .main-page,
-.category-page {
+.category-page,
+.statistics-page {
   display: none;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -8,4 +9,10 @@
 
 .page_active {
   display: flex;
+}
+
+.statistics-page {
+  justify-content: flex-start;
+  height: 650px;
+  overflow: auto;
 }

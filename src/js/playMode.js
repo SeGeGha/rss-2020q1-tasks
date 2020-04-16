@@ -1,10 +1,11 @@
 import changePage from './changerPage.js';
+import statistics from './statistics.js';
 
 class Game {
   constructor(pageCards, ...elements) {
     this.arrPage = pageCards;
     this.controlElements = [...elements];
-    this.cards = [];
+    this.gameCards = [];
     this.currentCard = null;
     this.soundEffect = null;
     this.error = 0;
@@ -12,19 +13,17 @@ class Game {
 
   makeGameCards() {
     this.arrPage.cards.forEach((card, index) => {
-      this.cards.push({
+      this.gameCards.push({
         name: card.name,
         id: index,
         sound: card.sound,
-        error: 0,
-        success: 0,
       });
     });
     this.shuffleCards();
   }
 
   shuffleCards() {
-    let currentIndex = this.cards.length;
+    let currentIndex = this.gameCards.length;
     let temporaryValue;
     let randomIndex;
 
@@ -32,14 +31,14 @@ class Game {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
 
-      temporaryValue = this.cards[currentIndex];
-      this.cards[currentIndex] = this.cards[randomIndex];
-      this.cards[randomIndex] = temporaryValue;
+      temporaryValue = this.gameCards[currentIndex];
+      this.gameCards[currentIndex] = this.gameCards[randomIndex];
+      this.gameCards[randomIndex] = temporaryValue;
     }
   }
 
   getCurrentCard() {
-    [this.currentCard] = this.cards;
+    [this.currentCard] = this.gameCards; // Current game card - 1 card in array
     this.currentCard.sound();
   }
 
@@ -56,59 +55,71 @@ class Game {
 
   checkCard(card) {
     // Find card index from page
-    const cardIndex = this.arrPage.page.findIndex((currentCard) => currentCard === card);
+    const cardIndex = this.arrPage.page.findIndex((item) => item === card);
 
-    function validation(condition) {
-      if (condition) { // If card is correct
-        this.getSoundGame('correct');
-        this.arrPage.page[cardIndex].classList.add('darken');
-        this.controlElements[0].innerHTML += '&#9733;'; // Add "correct-star" to star-container
-        this.cards.splice(0, 1); // Delete a guessed card from array
-
-        // Continue or finish the current game
-        setTimeout(() => {
-          if (this.cards.length !== 0) {
-            this.getCurrentCard();
-          } else {
-            this.finishGame();
-          }
-        }, 1000);
-      } else { // If card is wrong
-        this.getSoundGame('error');
-        this.error += 1;
-        this.controlElements[0].innerHTML += '&#9734'; // Add "wrong-star" to star-container
-      }
-    }
     // Check cardIndex in cards array
-    if (this.cards.some((currentCard) => currentCard.id === cardIndex)) {
-      validation.call(this, this.currentCard.id === cardIndex);
+    if (this.gameCards.some((currentCard) => currentCard.id === cardIndex)) {
+      const condition = this.currentCard.id === cardIndex; // card is correct?
+      this.validation(condition, cardIndex);
+      statistics.counter(this.currentCard.name, true, condition);
+    }
+  }
+
+  validation(condition, cardIndex) {
+    const correctCard = this.arrPage.page[cardIndex]; // Find correct card on page
+    const starContainer = this.controlElements[0];
+
+    if (condition) { // If card is correct
+      correctCard.classList.add('darken');
+      this.getSoundGame('correct');
+      starContainer.innerHTML += '&#9733;'; // Add "correct-star" to star-container
+      this.gameCards.splice(0, 1); // Delete a guessed card from array
+
+      // Continue or finish a current game
+      setTimeout(() => {
+        if (this.gameCards.length !== 0) {
+          this.getCurrentCard();
+        } else {
+          this.finishGame();
+        }
+      }, 1000);
+    } else { // If card is wrong
+      this.getSoundGame('error');
+      this.error += 1;
+      starContainer.innerHTML += '&#9734'; // Add "wrong-star" to star-container
     }
   }
 
   finishGame() {
-    this.controlElements[1].classList.add('show'); // Display screen with a game result
-    if (this.error === 0) {
-      this.controlElements[1].textContent = 'Win!';
-      this.getSoundGame('success');
-    } else {
-      this.controlElements[1].textContent = `${this.error} error`;
-      this.getSoundGame('failure');
-    }
+    const result = (this.error === 0) ? 'success' : 'failure';
+    const resultBox = this.controlElements[1];
+    const caption = resultBox.firstElementChild; // <p class='result__caption'>
 
-    setTimeout(() => this.controlElements[1].classList.remove('show'), 3000);
+    caption.textContent = (result !== 'success') ? `${this.error} error` : '';
+
+    resultBox.classList.add(result);
+    this.getSoundGame(result);
+
+    setTimeout(() => {
+      resultBox.classList.remove('success', 'failure');
+      caption.textContent = '';
+    }, 3000);
+
     changePage('main', 'main'); // Back to main page
     this.clearPage(); // Return everything to its original state
   }
 
   clearPage() {
+    const starContainer = this.controlElements[0];
+    const gameBtn = this.controlElements[2];
     // Return "Start game" button
-    this.controlElements[2].classList.remove('repeat');
-    this.controlElements[2].innerHTML = 'Start game';
+    gameBtn.classList.remove('repeat');
+    gameBtn.innerHTML = 'Start game';
     // Clean star-container
-    this.controlElements[0].innerHTML = '';
+    starContainer.innerHTML = '';
     // Remove cards darkening
     this.arrPage.page.forEach((card) => card.classList.remove('darken'));
   }
 }
 
-export default Game;
+export { Game, statistics };

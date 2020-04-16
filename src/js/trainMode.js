@@ -1,4 +1,5 @@
 import { cardsNamesDirectory, imagePreloader, soundPreloader } from './preloaders.js';
+import statistics from './statistics.js';
 
 class Page {
   constructor(categoryPage) {
@@ -7,10 +8,10 @@ class Page {
   }
 
   init(categoryName) {
-    cardsNamesDirectory[categoryName].forEach((card, index) => {
+    cardsNamesDirectory[categoryName].forEach((word, index) => {
       this.cards.push({
-        name: card[0], // 0 - english name
-        translate: card[1], // 1 - russian name
+        name: word[0], // 0 - english name
+        translate: word[1], // 1 - translate
         imgSrc: imagePreloader[categoryName][index].src,
         sound() {
           soundPreloader[categoryName][index].play();
@@ -23,19 +24,22 @@ class Page {
     this.page.forEach((card, index) => {
       const image = card.querySelector('img');
       const captions = card.querySelectorAll('.card__title');
+      const currentCard = this.cards[index];
 
-      image.src = this.cards[index].imgSrc;
+      image.src = currentCard.imgSrc;
 
       captions.forEach((item, id) => {
         const p = item;
-        p.textContent = (id === 0) ? this.cards[index].name : this.cards[index].translate;
+        p.textContent = (id === 0) ? currentCard.name : currentCard.translate;
       });
     });
   }
 
   getSound(card) {
-    const index = this.page.findIndex((item) => item === card);
-    this.cards[index].sound();
+    const clickedCardId = this.page.findIndex((item) => item === card);
+    const clickedCard = this.cards[clickedCardId];
+    clickedCard.sound();
+    statistics.counter(clickedCard.name);
   }
 }
 

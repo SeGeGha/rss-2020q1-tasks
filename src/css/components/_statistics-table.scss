@@ -1,0 +1,18 @@
+.statistics {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  height: 50px;
+}
+
+th {
+  border: 1px solid black;
+  width: (100% / 7);
+}
+
+td {
+  border: 1px solid black;
+  text-align: center;
+}
