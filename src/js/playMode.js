@@ -95,7 +95,7 @@ class Game {
     const resultBox = this.controlElements[1];
     const caption = resultBox.firstElementChild; // <p class='result__caption'>
 
-    caption.textContent = (result !== 'success') ? `${this.error} error` : '';
+    caption.textContent = (result !== 'success') ? `${this.error} error` : 'Win!';
 
     resultBox.classList.add(result);
     this.getSoundGame(result);

@@ -172,26 +172,30 @@
         </div>                                                                            
       </section> 
       <section class="statistics-page page_active">
-        <table class="statistics">
-          <tr>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Translate</th>
-            <th>Click number (train mode)</th>
-            <th>Guessed</th>
-            <th>Mistakes</th>
-            <th>Mistakes / guessed</th>
-          </tr>
-        </table>
-        <button class="statistics__btn-repeat">Repeat difficult world</button>
-        <button class="statistics__btn-reset">Reset</button>
+        <div class="table-wrapper">
+          <table class="statistics">
+            <tr>
+              <th>Category</th>
+              <th>Name</th>
+              <th>Translate</th>
+              <th>Clicked</th>
+              <th>Guessed</th>
+              <th>Mistakes</th>
+              <th>% Mistakes</th>
+            </tr>
+          </table>          
+        </div>
+        <div class="btn-wrapper">
+          <button class="statistics__btn-repeat">Repeat difficult world</button>
+          <button class="statistics__btn-reset">Reset</button>          
+        </div>
       </section>     
     </main>
   </div>
   <div class="result">
     <p class="result__caption"></p>
     <img src="./image/win.png" alt="Win">
-    <img src="./image/lose.jpg" alt="Lose">
+    <img src="./image/lose.png" alt="Lose">
   </div> 
   <script type="module" src="./js/index.js"></script>
 </body>

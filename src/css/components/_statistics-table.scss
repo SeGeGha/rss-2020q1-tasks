@@ -1,3 +1,10 @@
+.table-wrapper {
+  justify-content: flex-start;
+  height: 650px;
+  margin-bottom: 30px;
+  overflow: auto;
+}
+
 .statistics {
   width: 100%;
   border-collapse: collapse;
@@ -10,6 +17,11 @@ tr {
 th {
   border: 1px solid black;
   width: (100% / 7);
+
+  &:hover {
+    cursor: pointer;
+    background: rgb(0, 139, 139);
+  }
 }
 
 td {

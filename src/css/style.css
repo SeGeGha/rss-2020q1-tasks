@@ -310,43 +310,30 @@ body {
 }
 
 .btn-wrapper {
-  display: none;
   width: 100%;
   height: 50px;
 }
-.btn-wrapper .game-btn {
-  width: 150px;
-  height: 50px;
-  border: 0;
-  border-radius: 20px;
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
-  background: gold;
-  font-family: "Indie Flower", cursive;
-  font-size: 25px;
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.4s;
+
+.category-page .btn-wrapper {
+  display: none;
 }
-.btn-wrapper .game-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5);
-}
-.btn-wrapper .game-btn.repeat {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 40px;
-}
-.play-mode .btn-wrapper {
+.play-mode .category-page .btn-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
+.statistics-page .btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .statistics__btn-repeat,
-.statistics__btn-reset {
+.statistics__btn-reset,
+.game-btn {
   width: 150px;
   height: 50px;
   border: 0;
@@ -361,9 +348,30 @@ body {
   transition: all 0.4s;
 }
 .statistics__btn-repeat:hover,
-.statistics__btn-reset:hover {
+.statistics__btn-reset:hover,
+.game-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+.statistics__btn-repeat.repeat,
+.statistics__btn-reset.repeat,
+.game-btn.repeat {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 40px;
+}
+
+.statistics__btn-repeat,
+.statistics__btn-reset {
+  font-size: 20px;
+}
+
+.table-wrapper {
+  justify-content: flex-start;
+  height: 650px;
+  margin-bottom: 30px;
+  overflow: auto;
 }
 
 .statistics {
@@ -378,6 +386,10 @@ tr {
 th {
   border: 1px solid black;
   width: 14.2857142857%;
+}
+th:hover {
+  cursor: pointer;
+  background: darkcyan;
 }
 
 td {
@@ -408,12 +420,6 @@ td {
 
 .page_active {
   display: flex;
-}
-
-.statistics-page {
-  justify-content: flex-start;
-  height: 650px;
-  overflow: auto;
 }
 
 .container {
@@ -453,7 +459,9 @@ td {
 .result img,
 .result .result__caption {
   display: none;
-  width: 50%;
+  width: 40%;
+  min-width: 300px;
+  max-width: 512px;
   text-align: center;
   color: snow;
   font-size: 60px;
@@ -465,6 +473,7 @@ td {
   align-items: center;
   justify-content: center;
 }
+.result.success .result__caption,
 .result.success img[alt=Win] {
   display: inline;
 }
