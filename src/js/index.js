@@ -75,13 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 1: { // reverseBtnVerify - true
         const card = target.closest('.category-card');
+        const cardWrapper = card.closest('.card-wrapper');
         const handler = function cardBlur() {
           card.classList.remove('flip');
-          card.removeEventListener('mouseleave', handler);
+          cardWrapper.removeEventListener('mouseleave', handler);
         };
 
         card.classList.add('flip');
-        card.addEventListener('mouseleave', handler);
+        cardWrapper.addEventListener('mouseleave', handler);
         break;
       }
       case 2: // sectionVerify - true; we don't do anything
