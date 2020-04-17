@@ -6,7 +6,7 @@ const cardsNamesDirectory = {
     ['dog', 'собака'],
     ['fox', 'лиса'],
     ['horse', 'лошадь'],
-    ['rabbit', 'заяц'],
+    ['rabbit', 'кролик'],
     ['tiger', 'тигр'],
   ],
   food: [
