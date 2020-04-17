@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break;
       case 1: { // reverseBtnVerify - true
-        const card = target.parentElement.parentElement; // reverse-btn -> its container -> card
+        const card = target.closest('.category-card');
         const handler = function cardBlur() {
           card.classList.remove('flip');
           card.removeEventListener('mouseleave', handler);
@@ -87,9 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 2: // sectionVerify - true; we don't do anything
         break;
       default:
-        while (!target.classList.contains('category-card')) {
-          target = target.parentElement;
-        }
+        target = target.closest('.category-card');
 
         if (!checkBoxVerify) { // if train mode
           cards.getSound(target);
@@ -116,5 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
     starContainer.classList.toggle('play-mode');
     document.querySelector('.container').classList.toggle('play-mode');
     gameDestroyer(); // Destroy game if you clicked on switch-btn during the game
+  });
+
+  // Back flip for touchpad
+  categoryPage.addEventListener('touchend', (event) => {
+    const card = event.target.closest('.category-card');
+    setTimeout(() => card.classList.remove('flip'), 3000);
   });
 });
