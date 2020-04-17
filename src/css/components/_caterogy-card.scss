@@ -5,9 +5,12 @@ $captionHeight: 70px;
 $color: rgb(230, 230, 250);
 $transition: all 0.4s;
 
+.card-wrapper {
+  margin: 30px 15px;
+}
+
 .category-card {
   position: relative;
-  margin: 30px 15px;
   border: $cardBorder solid $color;
   @include size($cardWidth, $cardHeight);
   background: $color;

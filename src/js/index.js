@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const starContainer = document.querySelector('.star-container');
   const table = document.querySelector('.statistics');
 
+  document.querySelector('.preloader').classList.add('hidden');
+  document.querySelector('.wrapper').classList.remove('hidden');
+
   statistics.init(); // Load data to a statistics-page
   // Show || hide menu
   document.addEventListener('click', (event) => {
