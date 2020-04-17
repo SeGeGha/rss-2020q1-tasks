@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const table = document.querySelector('.statistics');
 
   statistics.init(); // Load data to a statistics-page
-
   // Show || hide menu
   document.addEventListener('click', (event) => {
     const { target } = event;
@@ -83,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.classList.add('flip');
         card.addEventListener('mouseleave', handler);
-
         break;
       }
       case 2: // sectionVerify - true; we don't do anything
@@ -108,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   table.addEventListener('click', (event) => {
     if (event.target.tagName.toLowerCase() === 'th') {
-      statistics.sort(event.target);
+      statistics.sortTable(event.target);
     }
   });
 

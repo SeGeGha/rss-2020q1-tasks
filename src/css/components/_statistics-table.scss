@@ -10,8 +10,17 @@
   border-collapse: collapse;
 }
 
+tr:first-child {
+  background: rgb(95, 158, 160);
+}
+
 tr {
   height: 50px;
+}
+
+.row-word {
+  background: lighten(rgb(95, 158, 160), 20%);
+  color: lighten(black, 10%);
 }
 
 th {

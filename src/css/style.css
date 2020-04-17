@@ -379,8 +379,17 @@ body {
   border-collapse: collapse;
 }
 
+tr:first-child {
+  background: cadetblue;
+}
+
 tr {
   height: 50px;
+}
+
+.row-word {
+  background: #9fc5c6;
+  color: #1a1a1a;
 }
 
 th {
