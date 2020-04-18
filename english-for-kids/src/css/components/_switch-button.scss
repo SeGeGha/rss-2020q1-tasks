@@ -36,7 +36,7 @@ $startBtnPosition: ($padding / 2);
     left: $startBtnPosition;
     top: $startBtnPosition;
     border-radius: $circle;
-    background:  radial-gradient(white, rgb(47, 143, 216));
+    background:  radial-gradient(rgb(255, 255, 255), rgb(47, 143, 216));
     transition: $transition;
   }
 

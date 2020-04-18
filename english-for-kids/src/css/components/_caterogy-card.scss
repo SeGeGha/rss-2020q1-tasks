@@ -4,6 +4,7 @@ $cardBorder: 5px;
 $captionHeight: 70px;
 $color: rgb(230, 230, 250);
 $transition: all 0.4s;
+$goldColor: rgb(255, 215, 0);
 
 .card-wrapper {
   margin: 30px 15px;
@@ -16,7 +17,6 @@ $transition: all 0.4s;
   background: $color;
   box-shadow: $boxShadow;
   cursor: pointer;
-  user-select: none;
   opacity: 1;
   transition: $transition;
   
@@ -47,11 +47,11 @@ $transition: all 0.4s;
   }
 
   &:hover {
-    border-color: rgb(255, 215, 0);
+    border-color: $goldColor;
 
     .card_front,
     .card_back {
-      background: rgb(255, 215, 0);
+      background: $goldColor;
     }
   }
 }
