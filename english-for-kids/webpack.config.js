@@ -3,6 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
@@ -10,11 +11,10 @@ module.exports = (env, options) => {
   const config = {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'none' : 'source-map',
-  //  watch: !isProduction,
-    entry: ['./src/index.js', './src/css/style.scss'],
+    entry: ['./src/js/index.js', './src/css/style.scss'],
     output: {
       path: path.join(__dirname, '/dist'),
-      filename: 'script.js',
+      filename: 'main.js',
     },
     module: {
       rules: [
@@ -24,28 +24,34 @@ module.exports = (env, options) => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
-            }
-          }
-        }, {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        },
+        {
           test: /\.scss$/,
           use: [
-            MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
-          ]
-        }, {
-          test: /\.(png|svg|jpe?g|gif)$/,
+            MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',
+          ],
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
           use: [
             {
               loader: 'file-loader',
-            }
-          ]
-        }, {
+              options: {
+                outputPath: './assets/img',
+                name: '[name].[ext]',
+              },
+            },
+          ],
+        },
+        {
           test: /\.html$/,
           loader: 'html-loader',
         },
-      ]
+      ],
     },
-
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -54,7 +60,11 @@ module.exports = (env, options) => {
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),
-    ]
+      new CopyPlugin([
+        { from: './src/assets/audio', to: './assets/audio' },
+        { from: './src/assets/img', to: './assets/img' },
+      ]),
+    ],
   };
 
   return config;
