@@ -18,6 +18,15 @@
   }
 }
 
+@media (max-width: 400px) {
+  .statistics-page {
+    .btn-wrapper {
+      @include flex(column, center, space-between);
+      height: 130px;
+    }
+  }
+}
+
 .statistics__btn-repeat,
 .statistics__btn-reset,
 .game-btn {
