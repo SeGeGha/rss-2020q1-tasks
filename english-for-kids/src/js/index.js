@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     switch (verify) {
       case 0: // gameBtnVerify - true
         if (!newGame) {
-          const gameResult = document.querySelector('.result');
+          const gameResult = document.querySelector('.game-result');
 
           newGame = new Game(cards, starContainer, gameResult, gameBtn);
           newGame.startGame();
@@ -118,11 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
     starContainer.classList.toggle('play-mode');
     document.querySelector('.container').classList.toggle('play-mode');
     gameDestroyer(); // Destroy game if you clicked on switch-btn during the game
-  });
-
-  // Back flip for touchpad
-  categoryPage.addEventListener('touchend', (event) => {
-    const card = event.target.closest('.category-card');
-    setTimeout(() => card.classList.remove('flip'), 3000);
   });
 });
