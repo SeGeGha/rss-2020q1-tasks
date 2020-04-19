@@ -1,5 +1,5 @@
-import changePage from './changerPage.js';
-import statistics from './statistics.js';
+import changePage from './changerPage';
+import statistics from './statistics';
 
 class Game {
   constructor(pageCards, ...elements) {
@@ -44,7 +44,7 @@ class Game {
 
   getSoundGame(type) {
     this.soundEffect = new Audio();
-    this.soundEffect.src = `./audio/${type}.mp3`;
+    this.soundEffect.src = `./assets/audio/${type}.mp3`;
     this.soundEffect.play();
   }
 
@@ -67,7 +67,7 @@ class Game {
 
   validation(condition, cardIndex) {
     const correctCard = this.arrPage.page[cardIndex]; // Find correct card on page
-    const starContainer = this.controlElements[0];
+    const [starContainer] = this.controlElements;
 
     if (condition) { // If card is correct
       correctCard.classList.add('darken');
@@ -92,7 +92,7 @@ class Game {
 
   finishGame() {
     const result = (this.error === 0) ? 'success' : 'failure';
-    const resultBox = this.controlElements[1];
+    const [, resultBox] = this.controlElements;
     const caption = resultBox.firstElementChild; // <p class='result__caption'>
 
     caption.textContent = (result !== 'success') ? `${this.error} error` : 'Win!';
@@ -110,8 +110,7 @@ class Game {
   }
 
   clearPage() {
-    const starContainer = this.controlElements[0];
-    const gameBtn = this.controlElements[2];
+    const [starContainer, , gameBtn] = this.controlElements;
     // Return "Start game" button
     gameBtn.classList.remove('repeat');
     gameBtn.innerHTML = 'Start game';

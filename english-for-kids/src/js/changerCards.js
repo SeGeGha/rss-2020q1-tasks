@@ -1,5 +1,5 @@
-import Page from './trainMode.js';
-import changePage from './changerPage.js';
+import Page from './trainMode';
+import changePage from './changerPage';
 
 let cards = null;
 

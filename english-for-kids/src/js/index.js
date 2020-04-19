@@ -1,5 +1,5 @@
-import { Game, statistics } from './playMode.js';
-import { changeCard, cards } from './changerCards.js';
+import { Game, statistics } from './playMode';
+import { changeCard, cards } from './changerCards';
 
 let newGame = null;
 
@@ -116,5 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.container').classList.toggle('play-mode');
     gameDestroyer(); // Destroy game if you clicked on switch-btn during the game
   });
-
 });

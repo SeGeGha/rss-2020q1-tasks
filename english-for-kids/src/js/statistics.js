@@ -1,4 +1,4 @@
-import cardsNamesDirectory from './cardsDirectory.js';
+import cardsNamesDirectory from './cardsDirectory';
 
 const statistics = {
   table: document.querySelector('.statistics'),
@@ -9,8 +9,7 @@ const statistics = {
     // Create table row
 
     data.forEach((arr) => {
-      const categoryName = arr[0];
-      const categoryWords = arr[1];
+      const [categoryName, categoryWords] = arr;
 
       categoryWords.forEach((item) => {
         const row = document.createElement('tr');
@@ -65,7 +64,7 @@ const statistics = {
   },
   sortTable(eventTarget) {
     const header = this.table.querySelectorAll('th');
-    const index = Array.from(header).findIndex((item) => item === eventTarget);
+    const index = Array.from(header).findIndex((th) => th === eventTarget);
 
     const compareString = function compare(a, b) {
       let answer;
@@ -88,10 +87,10 @@ const statistics = {
     const currentCompare = (index < 3) ? compareString : compareNumber;
 
     if (!this.sortParameters[index]) {
-      this.words = this.words.sort((a, b) => currentCompare(a[index], b[index]));
+      this.words = this.words.sort((a, b) => currentCompare(a[index], b[index])); // Ascending sort
       this.sortParameters[index] = true;
     } else {
-      this.words = this.words.sort((a, b) => currentCompare(b[index], a[index]));
+      this.words = this.words.sort((a, b) => currentCompare(b[index], a[index])); // Descending sort
       delete this.sortParameters[index];
     }
 
@@ -99,7 +98,7 @@ const statistics = {
   },
   resetData() {
     localStorage.removeItem('appStatistics');
-    const header = this.table.firstElementChild;
+    const header = this.table.querySelector('.table-header');
     this.table.textContent = '';
     this.table.append(header);
     this.words = [];

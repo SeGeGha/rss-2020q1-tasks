@@ -1,9 +1,9 @@
-import { cardsNamesDirectory, imagePreloader, soundPreloader } from './preloaders.js';
-import statistics from './statistics.js';
+import { cardsNamesDirectory, imagePreloader, soundPreloader } from './preloaders';
+import statistics from './statistics';
 
 class Page {
-  constructor(categoryPage) {
-    this.page = [...categoryPage];
+  constructor(categoryCards) {
+    this.page = [...categoryCards];
     this.cards = [];
   }
 
