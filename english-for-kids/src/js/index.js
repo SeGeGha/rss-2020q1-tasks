@@ -25,9 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const starContainer = document.querySelector('.star-container');
   const table = document.querySelector('.statistics');
 
-  document.querySelector('.preloader').classList.add('hidden');
-  document.querySelector('.wrapper').classList.remove('hidden');
-
   statistics.init(); // Load data to a statistics-page
   // Show || hide menu
   document.addEventListener('click', (event) => {
@@ -119,4 +116,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.container').classList.toggle('play-mode');
     gameDestroyer(); // Destroy game if you clicked on switch-btn during the game
   });
+
 });
