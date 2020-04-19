@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const burgerBtn = document.querySelector('.burger-menu__btn');
   const gameBtn = document.querySelector('.game-btn');
   const resetBtn = document.querySelector('.statistics__btn-reset');
+  const repeatDifficultWords = document.querySelector('.statistics__btn-repeat');
   // Other
   const starContainer = document.querySelector('.star-container');
   const table = document.querySelector('.statistics');
@@ -99,14 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  resetBtn.addEventListener('click', () => {
-    statistics.resetData();
-  });
-
   table.addEventListener('click', (event) => {
     if (event.target.tagName.toLowerCase() === 'th') {
       statistics.sortTable(event.target);
     }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    statistics.resetData();
+  });
+
+  repeatDifficultWords.addEventListener('click', () => {
+    statistics.getDifficultWords();
   });
 
   checkBoxLabel.addEventListener('click', () => {

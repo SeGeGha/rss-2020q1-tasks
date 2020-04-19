@@ -8,6 +8,10 @@ $goldColor: rgb(255, 215, 0);
 
 .card-wrapper {
   margin: 30px 15px;
+  
+  &.hidden {
+    display: none;
+  }
 }
 
 .category-card {

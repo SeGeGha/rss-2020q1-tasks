@@ -1,4 +1,5 @@
 import cardsNamesDirectory from './cardsDirectory';
+import { changeCard } from './changerCards';
 
 const statistics = {
   table: document.querySelector('.statistics'),
@@ -52,7 +53,7 @@ const statistics = {
     this.words[rowIndex][cellIndex] = cells[cellIndex].textContent;
 
     if (switchMode) { // Play mode
-      const cellPercent = cells[6];
+      const cellPercent = cells[6]; // 6 - persentage mistakes
       const mistakesValue = +cells[5].textContent;
       const guessedValue = +cells[4].textContent;
 
@@ -122,6 +123,20 @@ const statistics = {
         cell.textContent = this.words[rowId][columnId];
       });
     });
+  },
+  getDifficultWords() {
+    // Get all difficult words
+    // index 6 - column with percentage mistakes
+    let arrDifficultWords = this.words.filter((item) => parseInt(item[6], 10) > 0);
+    // Sort in ascending order
+    arrDifficultWords = arrDifficultWords.sort((a, b) => parseInt(b[6], 10) - parseInt(a[6], 10));
+    // Create an object to send
+    // index 1 - english name; index 2 - translate
+    const obj = {
+      'difficult words': arrDifficultWords.slice(0, 8).map((item) => [item[1], item[2], item[0]]),
+    };
+
+    changeCard(null, obj);
   },
 };
 

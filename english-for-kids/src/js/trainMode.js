@@ -1,4 +1,4 @@
-import { cardsNamesDirectory, imagePreloader, soundPreloader } from './preloaders';
+import { cardsNamesDirectory as directory, imagePreloader, soundPreloader } from './preloaders';
 import statistics from './statistics';
 
 class Page {
@@ -7,32 +7,54 @@ class Page {
     this.cards = [];
   }
 
-  init(categoryName) {
-    cardsNamesDirectory[categoryName].forEach((word, index) => {
+  init(categoryName, objDifWords) {
+    // Check sender of the request:
+    // (!objDifWords) - links on pages
+    // (objDifWords) - btn repeat words on statistics page
+    const data = (!objDifWords) ? directory[categoryName] : objDifWords['difficult words'];
+
+    data.forEach((word, index) => {
+      // Word index: 0 - english name; 1 - translate; 2 (for objDifWords) - word category
+      const id = (objDifWords) ? directory[word[2]].findIndex((item) => item[0] === word[0]) : null;
+
+      const category = (!objDifWords) ? categoryName : word[2];
+      const indexWord = (!objDifWords) ? index : id;
       this.cards.push({
-        name: word[0], // 0 - english name
-        translate: word[1], // 1 - translate
-        imgSrc: imagePreloader[categoryName][index].src,
+        name: word[0],
+        translate: word[1],
+        imgSrc: imagePreloader[category][indexWord].src,
         sound() {
-          soundPreloader[categoryName][index].play();
+          soundPreloader[category][indexWord].play();
         },
       });
     });
   }
 
   connectPage() {
-    this.page.forEach((card, index) => {
-      const image = card.querySelector('img');
-      const captions = card.querySelectorAll('.card__title');
-      const currentCard = this.cards[index];
+    if (this.cards.length === 0) {
+      document.querySelector('.category-page').classList.add('hidden');
+    } else {
+      document.querySelector('.category-page').classList.remove('hidden');
 
-      image.src = currentCard.imgSrc;
+      this.page.forEach((card, index) => {
+        const image = card.querySelector('img');
+        const captions = card.querySelectorAll('.card__title');
+        const currentCard = this.cards[index];
 
-      captions.forEach((item, id) => {
-        const p = item;
-        p.textContent = (id === 0) ? currentCard.name : currentCard.translate;
+        if (currentCard) {
+          card.closest('.card-wrapper').classList.remove('hidden');
+
+          image.src = currentCard.imgSrc;
+
+          captions.forEach((item, id) => {
+            const p = item;
+            p.textContent = (id === 0) ? currentCard.name : currentCard.translate;
+          });
+        } else {
+          card.closest('.card-wrapper').classList.add('hidden');
+        }
       });
-    });
+    }
   }
 
   getSound(card) {

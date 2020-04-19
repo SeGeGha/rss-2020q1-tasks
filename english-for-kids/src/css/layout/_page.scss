@@ -10,3 +10,9 @@
 .page_active {
   display: flex;
 }
+
+.category-page {
+  &.hidden {
+    display: none;
+  }
+}
