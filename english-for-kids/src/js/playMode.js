@@ -3,7 +3,8 @@ import statistics from './statistics';
 
 class Game {
   constructor(pageCards, ...elements) {
-    this.arrPage = pageCards;
+    this.page = pageCards.page;
+    this.cards = pageCards.cards;
     this.controlElements = [...elements];
     this.gameCards = [];
     this.currentCard = null;
@@ -12,7 +13,7 @@ class Game {
   }
 
   makeGameCards() {
-    this.arrPage.cards.forEach((card, index) => {
+    this.cards.forEach((card, index) => {
       this.gameCards.push({
         name: card.name,
         id: index,
@@ -51,7 +52,7 @@ class Game {
 
   checkCard(card) {
     // Find card index from page
-    const cardIndex = this.arrPage.page.findIndex((item) => item === card);
+    const cardIndex = this.page.findIndex((item) => item === card);
 
     // Check cardIndex in cards array
     if (this.gameCards.some((currentCard) => currentCard.id === cardIndex)) {
@@ -62,7 +63,7 @@ class Game {
   }
 
   validation(condition, cardIndex) {
-    const correctCard = this.arrPage.page[cardIndex]; // Find correct card on page
+    const correctCard = this.page[cardIndex]; // Find correct card on page
     const [starContainer] = this.controlElements;
 
     if (condition) { // If card is correct
@@ -113,7 +114,7 @@ class Game {
     // Clean star-container
     starContainer.innerHTML = '';
     // Remove cards darkening
-    this.arrPage.page.forEach((card) => card.classList.remove('darken'));
+    this.page.forEach((card) => card.classList.remove('darken'));
   }
 }
 
