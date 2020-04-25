@@ -14,9 +14,10 @@ const statistics = {
 
       categoryWords.forEach((item) => {
         const row = document.createElement('tr');
+        const columnCount = 7;
         const arrValues = [];
 
-        for (let i = 0; i < 7; i += 1) { // Count column
+        for (let i = 0; i < columnCount; i += 1) {
           const cell = document.createElement('td');
 
           cell.textContent = (i === 0) ? categoryName : item[[i - 1]] || 0;
