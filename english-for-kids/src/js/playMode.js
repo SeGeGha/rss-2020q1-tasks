@@ -23,15 +23,11 @@ class Game {
   }
 
   shuffleCards() {
-    let currentIndex = this.gameCards.length;
-    let temporaryValue;
-    let randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
+    for (let currentIndex = this.gameCards.length; currentIndex > 0;) {
+      const randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
+      const temporaryValue = this.gameCards[currentIndex];
 
-      temporaryValue = this.gameCards[currentIndex];
       this.gameCards[currentIndex] = this.gameCards[randomIndex];
       this.gameCards[randomIndex] = temporaryValue;
     }
