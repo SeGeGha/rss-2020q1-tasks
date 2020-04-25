@@ -45,6 +45,7 @@ class Page {
           card.closest('.card-wrapper').classList.remove('hidden');
 
           image.src = currentCard.imgSrc;
+          image.alt = `Image of ${currentCard.name}`;
 
           captions.forEach((item, id) => {
             const p = item;
