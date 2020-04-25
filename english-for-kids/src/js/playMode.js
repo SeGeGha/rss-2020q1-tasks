@@ -54,7 +54,6 @@ class Game {
     // Find card index from page
     const cardIndex = this.page.findIndex((item) => item === card);
 
-    // Check cardIndex in cards array
     if (this.gameCards.some((currentCard) => currentCard.id === cardIndex)) {
       const condition = this.currentCard.id === cardIndex; // card is correct?
       this.validation(condition, cardIndex);
