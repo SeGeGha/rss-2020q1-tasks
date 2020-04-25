@@ -11,14 +11,14 @@ class Page {
     // Check sender of the request:
     // (!objDifWords) - links on pages
     // (objDifWords) - btn repeat words on statistics page
-    const data = (!objDifWords) ? directory[categoryName] : objDifWords['difficult words'];
+    const data = !objDifWords ? directory[categoryName] : objDifWords['difficult words'];
 
     data.forEach((word, index) => {
       // Word index: 0 - english name; 1 - translate; 2 (for objDifWords) - word category
-      const id = (objDifWords) ? directory[word[2]].findIndex((item) => item[0] === word[0]) : null;
+      const id = objDifWords ? directory[word[2]].findIndex((item) => item[0] === word[0]) : null;
 
-      const category = (!objDifWords) ? categoryName : word[2];
-      const indexWord = (!objDifWords) ? index : id;
+      const category = !objDifWords ? categoryName : word[2];
+      const indexWord = !objDifWords ? index : id;
       this.cards.push({
         name: word[0],
         translate: word[1],
