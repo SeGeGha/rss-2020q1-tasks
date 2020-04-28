@@ -1,0 +1,12 @@
+.slider__btn {
+  font-size: 65px;
+  user-select: none;
+  color: rgb(47, 79, 79);
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+    color: rgb(32, 178, 170);
+  }
+}

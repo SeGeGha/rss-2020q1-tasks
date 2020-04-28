@@ -1,0 +1,15 @@
+.header {
+  @include flex(row, center, center);
+  @include size(100%, 70px);
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+  user-select: none;
+  background: $background;
+  
+  h1 {
+    letter-spacing: 5px;
+    text-transform: uppercase;  
+    text-shadow: 2px 2px 0 #000;
+    color: $mainColor;
+  }
+}
+

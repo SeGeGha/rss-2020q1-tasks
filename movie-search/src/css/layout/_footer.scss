@@ -1,0 +1,9 @@
+.footer {
+  @include flex(row, center, space-between);
+  @include size(100%, 50px);
+  padding: 0 10%;
+  color: $mainColor;
+  box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.5);
+  background: $background;
+  user-select: none;
+}

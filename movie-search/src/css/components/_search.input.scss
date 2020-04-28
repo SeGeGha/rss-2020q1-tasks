@@ -1,0 +1,26 @@
+.search__field {
+  position: relative;
+  @include size (calc(95% - 90px), 45px);
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  
+  &:focus {
+    border: 2.5px dotted;
+    border-color: deepskyblue;
+  }
+}
+
+.field__clean {
+  position: relative;
+  top: 0;
+  left: -30px;
+  user-select: none;
+  color: grey;
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+}

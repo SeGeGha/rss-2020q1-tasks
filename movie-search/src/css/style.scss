@@ -1,0 +1,23 @@
+@import './base/reset';
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+@import './abstract/global-variables';
+@import './abstract/mixin';
+
+@import './base/main';
+
+@import './layout/header';
+@import './layout/main-content';
+@import './layout/footer';
+@import './layout/search';
+@import './layout/slider';
+
+@import './components/search.input';
+@import './components/search.button';
+@import './components/slider.screen';
+@import './components/slider.card';
+@import './components/slider.button';
+@import './components/footer.link';
+
+
