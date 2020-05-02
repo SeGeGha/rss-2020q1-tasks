@@ -1,3 +1,4 @@
-import searchComponent from './search';
+import { movieComponent, searchComponent } from './search';
 
 searchComponent();
+movieComponent('spider-man');

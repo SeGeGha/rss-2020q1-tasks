@@ -1,8 +1,0 @@
-.slider__screen {
-  @include flex(row);
-  flex-wrap: wrap;
-  @include size(95%, 580px);
-  margin: 0 30px;
-  position: relative;
-  overflow: hidden;
-}

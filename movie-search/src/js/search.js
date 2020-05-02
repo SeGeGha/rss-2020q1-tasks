@@ -54,4 +54,4 @@ function searchComponent() {
   });
 }
 
-export default searchComponent;
+export { movieComponent, searchComponent };

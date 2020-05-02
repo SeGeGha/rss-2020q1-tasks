@@ -1,6 +1,7 @@
 @import './base/reset';
 
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import '../../node_modules/swiper/css/swiper.css';
 
 @import './abstract/global-variables';
 @import './abstract/mixin';
@@ -9,16 +10,15 @@
 
 @import './layout/header';
 @import './layout/main-content';
+@import './layout/swiper';
 @import './layout/footer';
 @import './layout/search';
-@import './layout/slider';
 
 @import './components/search.input';
 @import './components/search.button';
 @import './components/search.result';
-@import './components/slider.screen';
-@import './components/slider.card';
-@import './components/slider.button';
+@import './components/swiper.card';
 @import './components/footer.link';
+
 
 
