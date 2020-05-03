@@ -9,7 +9,6 @@ const swiperManager = {
   },
   previousQueryName: null,
   handlerObtainData: function a(data) {
-    debugger;
     const { movieCardStorage, pageNumber, queryName } = data;
     const isNewRequest = pageNumber === 1;
 
@@ -25,9 +24,27 @@ const swiperManager = {
 
 const newSwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
-  slidesPerView: 3, // Responsive
   centerInsufficientSlides: true,
   observer: true,
+  grabCursor: true,
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 100,
+    },
+    775: {
+      slidesPerView: 2,
+      spaceBetween: 75,
+    },
+    1200: {
+      slidesPerView: 3,
+      spaceBetween: 100,
+    },
+    1600: {
+      slidesPerView: 4,
+      spaceBetween: 100,
+    },
+  },
 
   pagination: {
     el: '.swiper-pagination',

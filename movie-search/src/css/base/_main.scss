@@ -1,4 +1,5 @@
 body {
+  @include flex(column, center, space-between);
   height: 100vh;
   background: linear-gradient(to left, #44a08d, #093637);
   font-family: $fontFamily;

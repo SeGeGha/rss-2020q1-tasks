@@ -4,5 +4,7 @@
   .wrapper {
     width: 100%;
     @include flex(row, center, center);
+    position: relative;
+    left: 10px;
   }
 }

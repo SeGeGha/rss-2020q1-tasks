@@ -1,3 +1,5 @@
+$fontSize: 40px;
+
 .header {
   @include flex(row, center, center);
   @include size(100%, 70px);
@@ -10,6 +12,11 @@
     text-transform: uppercase;  
     text-shadow: 2px 2px 0 #000;
     color: $mainColor;
+    font-size: $fontSize;
+
+    @media (max-width: 774px) {
+      font-size: ($fontSize * 0.75);
+    }
   }
 }
 

@@ -4,9 +4,7 @@
   background:  lightslategrey;
   animation: 0.5s ease-in-out;
   overflow: hidden;
-  margin: 15px 50px 15px 55px;
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
-  cursor: default;
 
   .card__header {
     @include flex(row, center, center);
@@ -23,5 +21,9 @@
 
   .star {
     color: gold;
+  }
+
+  @media (max-width: 774px) {
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.45);
   }
 }
