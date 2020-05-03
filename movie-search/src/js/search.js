@@ -5,6 +5,7 @@ function searchComponent() {
   const searchButton = document.querySelector('.search__submit');
   const searchInputReset = document.querySelector('.field__clean');
   const searchResult = document.querySelector('.search__result');
+  const searchLoader = document.querySelector('.search__loader');
 
   async function handlerQuery(query) {
     const key = keyApiDirectory.yandex;
@@ -17,6 +18,7 @@ function searchComponent() {
 
       return translation;
     } catch (error) {
+      searchLoader.classList.remove('active');
       searchResult.textContent = 'No results, failed to translate request...';
       return null;
     }
@@ -27,6 +29,8 @@ function searchComponent() {
 
     if (query === '') {
       searchResult.textContent = 'Request must not be an empty string, try again...';
+
+      searchLoader.classList.remove('active');
     } else {
       searchResult.textContent = '';
 
@@ -46,6 +50,7 @@ function searchComponent() {
 
   searchButton.addEventListener('click', (event) => {
     event.preventDefault();
+    searchLoader.classList.add('active');
     handlerInputValue();
   });
 

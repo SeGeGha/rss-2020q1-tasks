@@ -66,11 +66,15 @@ const newSwiper = new Swiper('.swiper-container', {
 });
 
 swiperManager.updateSwiper = function updateSwiper(slides, queryName) {
+  const searchLoader = document.querySelector('.search__loader');
+
   this.pageObj.totalPageNumber = 0; // костыль)
   newSwiper.removeAllSlides();
   newSwiper.slideTo(0);
   newSwiper.appendSlide(slides);
   newSwiper.update();
+
+  searchLoader.classList.remove('active');
 
   this.pageObj.currentPageNumber = 1;
   this.pageObj.totalPageNumber = 1;

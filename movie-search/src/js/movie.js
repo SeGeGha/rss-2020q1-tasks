@@ -3,6 +3,7 @@ import swiperManager from './swiper';
 
 function movieComponent(query, pageCount = 1) {
   const searchResult = document.querySelector('.search__result');
+  const searchLoader = document.querySelector('.search__loader');
   const apiKey = keyApiDirectory.omdb;
   const url = `https://www.omdbapi.com/?s=${query}&page=${pageCount}&apikey=${apiKey}`;
 
@@ -34,7 +35,10 @@ function movieComponent(query, pageCount = 1) {
     const hasResult = Boolean(moviesArr);
     const isFirstPage = pageCount === 1;
 
-    searchResult.textContent = (!hasResult && isFirstPage) ? `No results for your query - ${query}` : '';
+    if (!hasResult && isFirstPage) {
+      searchResult.textContent = `No results for your query - ${query}`;
+      searchLoader.classList.remove('active');
+    }
 
     if (hasResult) {
       for (let i = 0; i < moviesArr.length; i += 1) {
@@ -78,6 +82,7 @@ function movieComponent(query, pageCount = 1) {
       handlerData(moviesArr);
     } catch (error) {
       searchResult.textContent = 'Data could not be loaded, please try again later';
+      searchLoader.classList.remove('active');
     }
   }
 

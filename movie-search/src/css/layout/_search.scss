@@ -7,4 +7,10 @@
     position: relative;
     left: 10px;
   }
+
+  .result-wrapper{
+    @include flex(column, center, center);
+    width: 100%;
+    position: relative;
+  }
 }
