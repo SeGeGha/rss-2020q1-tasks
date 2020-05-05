@@ -1,9 +1,8 @@
 import keyApiDirectory from './keyApi.directory';
 import swiperManager from './swiper';
+import { searchResult, searchLoader } from './globalVariables.directory';
 
 function movieComponent(query, pageCount = 1) {
-  const searchResult = document.querySelector('.search__result');
-  const searchLoader = document.querySelector('.search__loader');
   const apiKey = keyApiDirectory.omdb;
   const url = `https://www.omdbapi.com/?s=${query}&page=${pageCount}&apikey=${apiKey}`;
 
@@ -36,7 +35,7 @@ function movieComponent(query, pageCount = 1) {
     const isFirstPage = pageCount === 1;
 
     if (!hasResult && isFirstPage) {
-      searchResult.textContent = `No results for your query - ${query}`;
+      searchResult.textContent = `No results for '${query}'`;
       searchLoader.classList.remove('active');
     }
 

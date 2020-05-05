@@ -1,32 +1,26 @@
 import Swiper from 'swiper';
 import { movieComponent } from './movie';
+import { searchInput, searchResult, searchLoader } from './globalVariables.directory';
 
 const swiperManager = {
-  pageObj: {
-    currentPageNumber: null,
-    totalPageNumber: 0,
-    pageStorage: new Map(),
-  },
   previousQueryName: null,
-  handlerObtainData: function a(data) {
-    const { movieCardStorage, pageNumber, queryName } = data;
-    const isNewRequest = pageNumber === 1;
-
-    if (isNewRequest) {
-      this.updateSwiper(movieCardStorage, queryName);
-      movieComponent(queryName, pageNumber + 1);
-    } else {
-      this.pageObj.totalPageNumber += 1;
-      this.pageObj.pageStorage.set(pageNumber, movieCardStorage);
-    }
-  },
+  totalPageNumber: 0,
 };
 
 const newSwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
   centerInsufficientSlides: true,
-  observer: true,
   grabCursor: true,
+  preventInteractionOnTransition: true,
+  observer: true,
+  virtual: {
+    renderSlide(slide) {
+      return slide;
+    },
+    cache: true,
+    addSlidesAfter: 6,
+    addSlidesBefore: 6,
+  },
   breakpoints: {
     320: {
       slidesPerView: 1,
@@ -45,54 +39,42 @@ const newSwiper = new Swiper('.swiper-container', {
       spaceBetween: 100,
     },
   },
-
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-  on: {
-    reachEnd: () => {
-      const isSwiperInit = swiperManager.pageObj.totalPageNumber;
-
-      if (isSwiperInit) {
-        swiperManager.addSlide();
-      }
-    },
-  },
 });
 
-swiperManager.updateSwiper = function updateSwiper(slides, queryName) {
-  const searchLoader = document.querySelector('.search__loader');
-  const searchResult = document.querySelector('.search__result');
-  const searchInput = document.querySelector('.search__field');
+newSwiper.on('slideChange', () => {
+  if (newSwiper.activeIndex % 10 === 7) {
+    const query = swiperManager.previousQueryName;
+    const pageNumber = swiperManager.totalPageNumber + 1;
 
-  newSwiper.removeAllSlides();
-  newSwiper.slideTo(0);
-  newSwiper.appendSlide(slides);
-  newSwiper.update();
+    movieComponent(query, pageNumber);
+  }
+});
 
-  searchLoader.classList.remove('active');
-  searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
 
-  this.pageObj.currentPageNumber = 1;
-  this.pageObj.totalPageNumber = 1;
-  this.previousQueryName = queryName;
-  this.pageObj.pageStorage.clear();
-  this.pageObj.pageStorage.set(1, slides);
-};
+swiperManager.handlerObtainData = function handler(data) {
+  const { movieCardStorage, pageNumber, queryName } = data;
+  const isNewRequest = pageNumber === 1;
 
-swiperManager.addSlide = function addSlide() {
-  if (this.pageObj.currentPageNumber !== this.pageObj.totalPageNumber) {
-    this.pageObj.currentPageNumber += 1;
-    const id = newSwiper.activeIndex;
-    newSwiper.appendSlide(this.pageObj.pageStorage.get(this.pageObj.currentPageNumber));
-    newSwiper.update();
-    newSwiper.slideTo(id);
-    movieComponent(this.previousQueryName, this.pageObj.currentPageNumber + 1);
+  if (isNewRequest) {
+    this.previousQueryName = queryName;
+    this.totalPageNumber = 1;
+
+    newSwiper.virtual.removeAllSlides();
+    newSwiper.virtual.appendSlide(movieCardStorage);
+    newSwiper.virtual.update();
+
+    searchLoader.classList.remove('active');
+    searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
+
+    movieComponent(queryName, pageNumber + 1);
+  } else {
+    this.totalPageNumber += 1;
+
+    newSwiper.virtual.appendSlide(movieCardStorage);
   }
 };
 
