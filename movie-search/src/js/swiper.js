@@ -67,14 +67,16 @@ const newSwiper = new Swiper('.swiper-container', {
 
 swiperManager.updateSwiper = function updateSwiper(slides, queryName) {
   const searchLoader = document.querySelector('.search__loader');
+  const searchResult = document.querySelector('.search__result');
+  const searchInput = document.querySelector('.search__field');
 
-  this.pageObj.totalPageNumber = 0; // костыль)
   newSwiper.removeAllSlides();
   newSwiper.slideTo(0);
   newSwiper.appendSlide(slides);
   newSwiper.update();
 
   searchLoader.classList.remove('active');
+  searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
 
   this.pageObj.currentPageNumber = 1;
   this.pageObj.totalPageNumber = 1;
