@@ -5,7 +5,7 @@
   outline: none;
   border: none;
   border-radius: 0 10px 10px 0;
-  background: darkcyan;
+  background: rgb(0, 139, 139);
   text-transform: uppercase;
   letter-spacing: 2px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
@@ -13,7 +13,7 @@
 
   &:hover {
     cursor: pointer;
-    background: darken(darkcyan, 10%);
+    background: darken(rgb(0, 139, 139), 10%);
   }
 
   &:active {

@@ -4,6 +4,7 @@ import { searchInput, searchResult, searchLoader } from './globalVariables.direc
 function searchComponent() {
   const searchButton = document.querySelector('.search__submit');
   const searchInputReset = document.querySelector('.field__clean');
+
   async function handlerQuery(query) {
     const key = keyApiDirectory.yandex;
     const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${key}&text=${query}&lang=ru-en`;
@@ -17,6 +18,7 @@ function searchComponent() {
     } catch (error) {
       searchLoader.classList.remove('active');
       searchResult.textContent = 'No results, failed to translate request...';
+
       return null;
     }
   }
@@ -52,6 +54,7 @@ function searchComponent() {
 
   searchInputReset.addEventListener('click', () => {
     searchInput.value = '';
+    searchResult.textContent = '';
   });
 }
 

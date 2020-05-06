@@ -8,7 +8,7 @@
   
   &:focus {
     border: 2.5px dotted;
-    border-color: deepskyblue;
+    border-color: rgb(0, 191, 255);
   }
 }
 
@@ -17,10 +17,10 @@
   top: 0;
   left: -30px;
   user-select: none;
-  color: grey;
+  color: rgb(128, 128, 128);
 
   &:hover {
     cursor: pointer;
-    color: black;
+    color: rgb(0, 0, 0);
   }
 }

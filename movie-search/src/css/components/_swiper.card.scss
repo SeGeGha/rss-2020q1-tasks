@@ -1,7 +1,7 @@
 .card {
   @include flex(column, center);
   @include size(300px !important, 550px);
-  background:  lavender;
+  background:  rgb(230, 230, 250);
   animation: 0.5s ease-in-out;
   overflow: hidden;
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
@@ -11,8 +11,13 @@
     @include flex(row, center, center);
     @include size(100%, 50px);
     color: black;
-    overflow: hidden;
-    text-align: center;
+
+    & a {
+      max-height: 50px;
+      text-align: center;
+      padding: 0 5px;
+      color: inherit;
+    }
   }
 
   .card__body {

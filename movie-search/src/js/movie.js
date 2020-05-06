@@ -10,14 +10,28 @@ function movieComponent(query, pageCount = 1) {
     const movieCardStorage = [];
 
     movieStorage.forEach((movie) => {
-      movieCardStorage.push(`<div class="swiper-slide card">
-      <a href="${movie.link}" class="card__header" target="_blank">${movie.title}</a>
-      <div class="card__body" style="background-image: url(${movie.poster});"></div>
-      <div class="card__footer">${movie.year}</div>
-      <div class="card__imbd">
-        <span class="star">&#9733;</span>${movie.imdbRated}
-      </div>
-    </div>`);
+      const card = document.createElement('div');
+      const cardHeader = document.createElement('div');
+      const cardBody = document.createElement('div');
+      const cardFooter = document.createElement('div');
+      const cardImbd = document.createElement('div');
+
+      cardHeader.className = 'card__header';
+      cardBody.className = 'card__body';
+      cardFooter.className = 'card__footer';
+      cardImbd.className = 'card__imbd';
+      card.className = 'swiper-slide card';
+
+      cardHeader.insertAdjacentHTML('afterbegin', `<a href='${movie.link}' target='_blank'>${movie.title}</a>`);
+      cardImbd.insertAdjacentHTML('afterbegin', `<span class='star'>&#9733;</span>${movie.imdbRating}`);
+
+      cardBody.style.backgroundImage = `url(${movie.poster})`;
+
+      cardFooter.textContent = movie.year;
+
+      card.append(cardHeader, cardBody, cardFooter, cardImbd);
+
+      movieCardStorage.push(card);
     });
 
     const data = {
@@ -35,7 +49,7 @@ function movieComponent(query, pageCount = 1) {
     const isFirstPage = pageCount === 1;
 
     if (!hasResult && isFirstPage) {
-      searchResult.textContent = `No results for '${query}'`;
+      searchResult.textContent = `No results were found for '${query}'`;
       searchLoader.classList.remove('active');
     }
 
@@ -43,27 +57,34 @@ function movieComponent(query, pageCount = 1) {
       for (let i = 0; i < moviesArr.length; i += 1) {
         const movie = moviesArr[i];
         const { Title: title, Year: year, imdbID } = movie;
-        const poster = (movie.Poster === 'N/A') ? './assets/img/no-poster.jpg' : movie.Poster;
         const link = `https://www.imdb.com/title/${imdbID}/videogallery`;
         const urlImdbRating = `https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`;
 
-        // TODO: use async await ?
-        movieStorage.push((async function c() {
+
+        // TODO: handling image + rating
+        const image = new Image();
+        image.src = (movie.Poster !== 'N/A') ? movie.Poster : './assets/img/no-poster.jpg';
+
+        image.onerror = function handlerDownloadError() {
+          image.src = './assets/img/no-poster.jpg';
+        };
+
+        movieStorage.push((async function getFullInfo() {
           return fetch(urlImdbRating)
             .then((result) => result.json())
             .then((movieObj) => ({
               title,
               link,
-              poster,
+              poster: image.src,
               year,
-              imdbRated: movieObj.imdbRating,
+              imdbRating: movieObj.imdbRating,
             }))
             .catch(() => ({
               title,
               link,
-              poster,
+              poster: image.src,
               year,
-              imdbRated: 'N/A',
+              imdbRating: 'N/A',
             }));
         }()));
       }
@@ -80,7 +101,7 @@ function movieComponent(query, pageCount = 1) {
 
       handlerData(moviesArr);
     } catch (error) {
-      searchResult.textContent = 'Data could not be loaded, please try again later';
+      searchResult.textContent = `No results were found for '${query}'`;
       searchLoader.classList.remove('active');
     }
   }

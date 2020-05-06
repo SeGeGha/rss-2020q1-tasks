@@ -12,7 +12,6 @@ const newSwiper = new Swiper('.swiper-container', {
   centerInsufficientSlides: true,
   grabCursor: true,
   preventInteractionOnTransition: true,
-  observer: true,
   virtual: {
     renderSlide(slide) {
       return slide;
@@ -54,7 +53,6 @@ newSwiper.on('slideChange', () => {
   }
 });
 
-
 swiperManager.handlerObtainData = function handler(data) {
   const { movieCardStorage, pageNumber, queryName } = data;
   const isNewRequest = pageNumber === 1;
@@ -65,7 +63,7 @@ swiperManager.handlerObtainData = function handler(data) {
 
     newSwiper.virtual.removeAllSlides();
     newSwiper.virtual.appendSlide(movieCardStorage);
-    newSwiper.virtual.update();
+    newSwiper.update();
 
     searchLoader.classList.remove('active');
     searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
