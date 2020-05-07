@@ -1,6 +1,6 @@
 .github-link {
   position: relative;
-  color: $mainColor;
+  color: rgb(0, 139, 139);
 
   &::before {
     content: '';
@@ -8,7 +8,7 @@
     top: -3px;
     left: -35px;
     @include size(30px, 30px);
-    background: url(/src/assets/img/github-logo.svg);
+    background-image: url('../assets/img/github-logo.svg');
     background-size: cover;
   }
 }
