@@ -28,6 +28,7 @@ function searchComponent() {
 
     if (query === '') {
       searchLoader.classList.remove('active');
+      searchInput.focus();
       searchResult.textContent = 'Request must not be an empty string, try again...';
     } else {
       searchResult.textContent = '';
@@ -54,7 +55,7 @@ function searchComponent() {
 
   searchInputReset.addEventListener('click', () => {
     searchInput.value = '';
-    searchResult.textContent = '';
+    searchInput.focus();
   });
 }
 
