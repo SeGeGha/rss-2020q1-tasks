@@ -10,28 +10,19 @@ function movieComponent(query, pageCount = 1) {
     const movieCardStorage = [];
 
     movieStorage.forEach((movie) => {
-      const card = document.createElement('div');
-      const cardHeader = document.createElement('div');
-      const cardBody = document.createElement('div');
-      const cardFooter = document.createElement('div');
-      const cardImbd = document.createElement('div');
-
-      cardHeader.className = 'card__header';
-      cardBody.className = 'card__body';
-      cardFooter.className = 'card__footer';
-      cardImbd.className = 'card__imbd';
-      card.className = 'swiper-slide card';
-
-      cardHeader.insertAdjacentHTML('afterbegin', `<a href='${movie.link}' target='_blank'>${movie.title}</a>`);
-      cardImbd.insertAdjacentHTML('afterbegin', `<span class='star'>&#9733;</span>${movie.imdbRating}`);
-
-      cardBody.style.backgroundImage = `url(${movie.poster})`;
-
-      cardFooter.textContent = movie.year;
-
-      card.append(cardHeader, cardBody, cardFooter, cardImbd);
-
-      movieCardStorage.push(card);
+      movieCardStorage.push(`<div class="swiper-slide card swiper-slide-next">
+        <div class="card__header">
+          <a href="${movie.link}" target="_blank">${movie.title}</a>
+        </div>
+        <div class="card__body">
+          <div class="poster" style="background: url(${movie.poster}")></div>
+        </div>
+        <div class="card__footer">
+          <div class="year">${movie.year}</div>
+          <div class="imbd-rating">
+            <span class="star">&#9733;</span>${movie.imdbRating}</div>
+        </div>
+      </div>`);
     });
 
     const data = {
@@ -60,14 +51,9 @@ function movieComponent(query, pageCount = 1) {
         const link = `https://www.imdb.com/title/${imdbID}/videogallery`;
         const urlImdbRating = `https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`;
 
-
-        // TODO: handling image + rating
         const image = new Image();
-        image.src = (movie.Poster !== 'N/A') ? movie.Poster : './assets/img/no-poster.jpg';
 
-        image.onerror = function handlerDownloadError() {
-          image.src = './assets/img/no-poster.jpg';
-        };
+        image.src = (movie.Poster !== 'N/A') ? movie.Poster : './assets/img/no-poster.jpg';
 
         movieStorage.push((async function getFullInfo() {
           return fetch(urlImdbRating)

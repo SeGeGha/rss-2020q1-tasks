@@ -2,7 +2,6 @@
   @include flex(column, center);
   @include size(300px !important, 550px);
   background:  rgb(230, 230, 250);
-  animation: 0.5s ease-in-out;
   overflow: hidden;
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
@@ -22,8 +21,17 @@
 
   .card__body {
     @include size(100%, 450px);
-    background-size: cover;
-    background-position: center;
+    background: url('../assets/img/no-poster.jpg') center;
+
+    .poster {
+      height: 100%;
+    }
+  }
+
+  .card__footer {
+    @include flex(column, center, space-around);
+    @include size(100%, 50px);
+    line-height: 1em;
   }
 
   .star {
@@ -32,5 +40,18 @@
 
   @media (max-width: 774px) {
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.animating {
+  animation: fade 1.5s linear;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
