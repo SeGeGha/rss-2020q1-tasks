@@ -15,7 +15,7 @@ function movieComponent(query, pageCount = 1) {
           <a href="${movie.link}" target="_blank">${movie.title}</a>
         </div>
         <div class="card__body">
-          <div class="poster" style="background: url(${movie.poster}")></div>
+          <div class="poster" style="background-image: url(${movie.poster})"></div>
         </div>
         <div class="card__footer">
           <div class="year">${movie.year}</div>
