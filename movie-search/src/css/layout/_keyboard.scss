@@ -1,0 +1,27 @@
+.keyboard {
+  position: fixed;
+  left: 0;
+  bottom: -100%;
+  z-index: 10;
+  width: 100%;
+  padding: 5px 0;
+  background: rgb(74, 84, 92);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  transition: bottom 0.4s;
+
+  .keyboard__keys {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 910px;
+  }
+
+  &.active {
+    bottom: 0;
+  }
+
+  @media (max-width: 909px) {
+    display: none;
+  }
+}

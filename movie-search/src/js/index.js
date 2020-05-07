@@ -1,4 +1,8 @@
 import { movieComponent, searchComponent } from './search';
+import { keyboardComponent } from './keyboard';
 
-searchComponent();
-movieComponent('John Wick');
+window.addEventListener('DOMContentLoaded', () => {
+  searchComponent();
+  movieComponent('John Wick');
+  keyboardComponent();
+});

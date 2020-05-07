@@ -1,6 +1,6 @@
 import Swiper from 'swiper';
 import { movieComponent } from './movie';
-import { searchInput, searchResult, searchLoader } from './globalVariables.directory';
+import { searchInput, searchResult, searchLoader } from './directory/globalVariables';
 
 const swiperManager = {
   previousQueryName: null,

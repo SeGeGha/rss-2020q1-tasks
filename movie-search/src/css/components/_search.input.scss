@@ -15,12 +15,27 @@
 .field__clean {
   position: relative;
   top: 0;
-  left: -30px;
+  left: -65px;
   user-select: none;
   color: rgb(128, 128, 128);
 
   &:hover {
     cursor: pointer;
     color: rgb(0, 0, 0);
+  }
+}
+
+.keyboard-btn {
+  @include size(36px, 30px);
+  position: relative;
+  left: -80px;
+  background: url('../assets/img/keyboard.png');
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 909px) {
+    display: none;
   }
 }

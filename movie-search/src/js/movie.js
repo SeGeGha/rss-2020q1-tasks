@@ -1,6 +1,6 @@
-import keyApiDirectory from './keyApi.directory';
+import keyApiDirectory from './directory/keyApi';
 import swiperManager from './swiper';
-import { searchResult, searchLoader } from './globalVariables.directory';
+import { searchResult, searchLoader } from './directory/globalVariables';
 
 function movieComponent(query, pageCount = 1) {
   const apiKey = keyApiDirectory.omdb;
