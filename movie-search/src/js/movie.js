@@ -87,7 +87,7 @@ function movieComponent(query, pageCount = 1) {
 
       handlerData(moviesArr);
     } catch (error) {
-      searchResult.textContent = `No results were found for '${query}'`;
+      searchResult.textContent = 'Api key is not valid, please repeat later';
       searchLoader.classList.remove('active');
     }
   }
