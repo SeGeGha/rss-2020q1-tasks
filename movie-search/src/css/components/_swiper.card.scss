@@ -5,6 +5,7 @@
   overflow: hidden;
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  opacity: 1;
 
   .card__header {
     @include flex(row, center, center);
@@ -41,18 +42,5 @@
 
   @media (max-width: 774px) {
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.45);
-  }
-}
-
-.animating {
-  animation: fade 1.5s linear;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

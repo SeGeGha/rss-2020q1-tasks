@@ -12,6 +12,7 @@ const newSwiper = new Swiper('.swiper-container', {
   centerInsufficientSlides: true,
   grabCursor: true,
   preventInteractionOnTransition: true,
+  speed: 400,
   virtual: {
     renderSlide(slide) {
       return slide;
@@ -56,19 +57,28 @@ newSwiper.on('slideChange', () => {
 swiperManager.handlerObtainData = function handler(data) {
   const { movieCardStorage, pageNumber, queryName } = data;
   const isNewRequest = pageNumber === 1;
-
   if (isNewRequest) {
     this.previousQueryName = queryName;
     this.totalPageNumber = 1;
 
-    newSwiper.virtual.removeAllSlides();
-    newSwiper.virtual.appendSlide(movieCardStorage);
-    newSwiper.update();
-
     searchLoader.classList.remove('active');
     searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
 
-    movieComponent(queryName, pageNumber + 1);
+    document.querySelector('.swiper-container').classList.add('fadeOut');
+
+    setTimeout(() => {
+      newSwiper.virtual.removeAllSlides();
+      newSwiper.virtual.appendSlide(movieCardStorage);
+      newSwiper.update();
+
+      movieComponent(queryName, pageNumber + 1);
+
+      document.querySelector('.swiper-container').classList.add('fadeIn');
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector('.swiper-container').classList.remove('fadeOut', 'fadeIn');
+    }, 2000);
   } else {
     this.totalPageNumber += 1;
 
