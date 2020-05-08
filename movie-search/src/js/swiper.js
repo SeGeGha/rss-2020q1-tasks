@@ -57,6 +57,13 @@ newSwiper.on('slideChange', () => {
 swiperManager.handlerObtainData = function handler(data) {
   const { movieCardStorage, pageNumber, queryName } = data;
   const isNewRequest = pageNumber === 1;
+
+  function preventChangeSlide(isAllowed) {
+    newSwiper.allowSlideNext = isAllowed;
+    newSwiper.allowSlidePrev = isAllowed;
+    newSwiper.allowTouchMove = isAllowed;
+  }
+
   if (isNewRequest) {
     this.previousQueryName = queryName;
     this.totalPageNumber = 1;
@@ -64,7 +71,8 @@ swiperManager.handlerObtainData = function handler(data) {
     searchLoader.classList.remove('active');
     searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
 
-    document.querySelector('.swiper-container').classList.add('fadeOut');
+    newSwiper.wrapperEl.classList.add('fadeOut');
+    preventChangeSlide(false);
 
     setTimeout(() => {
       newSwiper.virtual.removeAllSlides();
@@ -73,11 +81,12 @@ swiperManager.handlerObtainData = function handler(data) {
 
       movieComponent(queryName, pageNumber + 1);
 
-      document.querySelector('.swiper-container').classList.add('fadeIn');
+      newSwiper.wrapperEl.classList.add('fadeIn');
     }, 1000);
 
     setTimeout(() => {
-      document.querySelector('.swiper-container').classList.remove('fadeOut', 'fadeIn');
+      newSwiper.wrapperEl.classList.remove('fadeOut', 'fadeIn');
+      preventChangeSlide(true);
     }, 2000);
   } else {
     this.totalPageNumber += 1;

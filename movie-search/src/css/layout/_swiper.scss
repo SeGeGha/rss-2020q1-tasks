@@ -6,19 +6,21 @@
     padding: 15px 10px;
   }
 
-  &.fadeOut {
-    opacity: 0;
-    transition: opacity 1.0s !important;
-  }
-
-  &.fadeIn {
-    opacity: 1;
-  }
-
   .swiper-button-next,
   .swiper-button-prev {
     color: rgb(255, 240, 245);
     outline: none;
+  }
+
+  .swiper-wrapper {
+    &.fadeOut {
+      opacity: 0;
+      transition: opacity 1.0s !important;
+    }
+  
+    &.fadeIn {
+      opacity: 1;
+    }
   }
 }
 
