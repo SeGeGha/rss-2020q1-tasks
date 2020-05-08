@@ -9,13 +9,6 @@ function handlerAction(event) {
 
   if (isKeyboardEnabled) {
     switch (event.type) {
-      case 'keydown':
-        event.preventDefault();
-        keyboard.keyPress(event);
-        break;
-      case 'keyup':
-        keyboard.keyPress(event, true);
-        break;
       case 'mousedown':
         if (event.target.dataset.keycode === '16') {
           const isPressed = event.target.classList.contains('key_pressed');
@@ -39,20 +32,16 @@ function handlerAction(event) {
 }
 
 function keyboardComponent() {
-  window.addEventListener('keydown', (event) => {
-    handlerAction(event);
-  });
-
-  window.addEventListener('keyup', (event) => {
-    handlerAction(event);
-  });
-
   keyboard.keysContainer.addEventListener('mousedown', (event) => {
     handlerAction(event);
   });
 
   keyboard.keysContainer.addEventListener('mouseup', (event) => {
     handlerAction(event);
+  });
+
+  keyboard.keysContainer.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
   });
 
   searchInput.addEventListener('blur', (event) => {
