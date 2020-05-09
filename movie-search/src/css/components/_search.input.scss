@@ -1,6 +1,5 @@
 .search__field {
-  position: relative;
-  @include size (calc(95% - 90px), 45px);
+  @include size (100%, 45px);
   padding: 5px 10px;
   outline: none;
   border: none;
@@ -13,9 +12,10 @@
 }
 
 .field__clean {
-  position: relative;
-  top: 0;
-  left: -65px;
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 10px;
+  line-height: 1;
   user-select: none;
   color: rgb(128, 128, 128);
 
@@ -27,8 +27,9 @@
 
 .keyboard-btn {
   @include size(36px, 30px);
-  position: relative;
-  left: -80px;
+  position: absolute;
+  top: calc(50% - 15px);
+  right: 40px;
   background: url('../assets/img/keyboard.png');
 
   &:hover {
