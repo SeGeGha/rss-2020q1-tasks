@@ -4,7 +4,6 @@ import { keyboard } from '../virtualKeyboard/main';
 import handlerQuery from './queryHandler';
 
 function handlerInputValue() {
-  debugger;
   let query = searchInput.value.trim();
 
   if (query === '') {

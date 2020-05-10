@@ -1,5 +1,5 @@
 import keyDirectory from '../js/directory/keyDirectory';
-import swiperManager from '../js/swiper';
+import uploadMoviesPoster from '../js/movie/moviesCardCreator';
 
 const keyDirectoryFunctions = {
   getLength: () => Object.keys(keyDirectory).length,
@@ -12,15 +12,33 @@ const keyDirectoryFunctions = {
   },
 };
 
-const swiperFunctions = {
-  getLength: () => Object.keys(swiperManager).length,
-  checkPreviousQueryName: (data) => {
-    const swiper = jest.createMockFromModule('../js/swiper.js').default;
-    swiper.handlerObtainData(data);
-    return swiper.totalPageNumber;
-  },
+const cardCreatorFunctions = {
+  checkResult: (movieStorage, programObj) => {
+    const movieCardStorage = [];
+    const { page, query } = programObj;
+  
+    movieStorage.forEach((movie) => {
+      movieCardStorage.push(`<div class="swiper-slide card swiper-slide-next">
+        <div class="card__header">
+          <a href="${movie.link}" target="_blank">${movie.title}</a>
+        </div>
+        <div class="card__body" style="background-image: url(${movie.poster})"></div>
+        <div class="card__footer">
+          <div class="year">${movie.year}</div>
+          <div class="imbd-rating">
+            <span class="star">&#9733;</span>${movie.imdbRating}</div>
+        </div>
+      </div>`);
+    });
+  
+    const data = {
+      movieCardStorage,
+      pageNumber: page,
+      query,
+    };
+  
+    return data;
+  }
 };
 
-export { 
-  keyDirectory, keyDirectoryFunctions, swiperManager, swiperFunctions,
-};
+export { keyDirectory, keyDirectoryFunctions, cardCreatorFunctions };
