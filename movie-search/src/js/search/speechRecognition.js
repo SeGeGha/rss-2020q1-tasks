@@ -11,7 +11,6 @@ const SpeechRecognition = speechObj.standard || speechObj.webkit || speechObj.mo
 class Recognizer {
   constructor() {
     this.recognition = new SpeechRecognition();
-    this.recognition.lang = 'en-US';
     this.recognition.continuous = true;
     this.recognition.interimResults = true;
     this.isRecognizing = false;
