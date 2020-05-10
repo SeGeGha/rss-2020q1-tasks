@@ -15,7 +15,7 @@
   .swiper-wrapper {
     &.fadeOut {
       opacity: 0;
-      transition: opacity 1.0s !important;
+      transition: opacity 0.5s !important;
     }
   
     &.fadeIn {

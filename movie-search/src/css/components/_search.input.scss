@@ -25,11 +25,11 @@
   }
 }
 
-.keyboard-btn {
+.field__keyboard-btn {
   @include size(36px, 30px);
   position: absolute;
   top: calc(50% - 15px);
-  right: 40px;
+  right: 90px;
   background: url('../assets/img/keyboard.png');
 
   &:hover {
@@ -38,5 +38,28 @@
 
   @media (max-width: 909px) {
     display: none;
+  }
+}
+
+.field__speech-recognition {
+  position: absolute;
+  top: calc(50% - 20px);
+  right: 40px;
+  @include size(40px, 40px);
+  background: url(../assets/img/voice.jpg);
+  background-size: cover;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.active {
+    &::after {
+      content: '';
+      @include size(8px, 8px);
+      display: block;
+      border-radius: 50%;
+      background: red;
+    }
   }
 }

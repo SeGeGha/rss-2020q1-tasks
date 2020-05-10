@@ -22,12 +22,7 @@
 
   .card__body {
     @include size(100%, 450px);
-    background: url('../assets/img/no-poster.jpg') center;
-
-    .poster {
-      height: 100%;
-      background-size: cover;
-    }
+    background-size: cover;
   }
 
   .card__footer {

@@ -1,8 +1,8 @@
-import keyDirectory from './directory/keyDirectory';
+import keyDirectory from '../directory/keyDirectory';
 import {
   searchInput, searchLoader, english, russian,
-} from './directory/globalVariables';
-import { handlerInputValue } from './search';
+} from '../directory/globalVariables';
+import { handlerInputValue } from '../search/main';
 
 class Keyboard {
   constructor() {

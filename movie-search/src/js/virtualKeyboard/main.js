@@ -1,5 +1,5 @@
 import Keyboard from './keyboard.constructor';
-import { searchInput } from './directory/globalVariables';
+import { searchInput } from '../directory/globalVariables';
 
 const keyboard = new Keyboard();
 keyboard.init();
