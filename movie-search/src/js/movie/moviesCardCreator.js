@@ -2,7 +2,7 @@ import swiperManager from '../swiper/main';
 
 function createCards(movieStorage, programObj) {
   const movieCardStorage = [];
-  const { page, userQuery } = programObj;
+  const { page, query } = programObj;
 
   movieStorage.forEach((movie) => {
     movieCardStorage.push(`<div class="swiper-slide card swiper-slide-next">
@@ -21,7 +21,7 @@ function createCards(movieStorage, programObj) {
   const data = {
     movieCardStorage,
     pageNumber: page,
-    queryName: userQuery,
+    query,
   };
 
   swiperManager.handlerObtainData(data);

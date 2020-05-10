@@ -5,10 +5,10 @@ function movieComponent(query, pageCount = 1) {
   const apiKey = keyApiDirectory.omdb;
   const urlQueryName = query.replace(/\s/g, '+');
   const programObj = {
-    query: urlQueryName,
+    query,
     page: pageCount,
     key: apiKey,
-    userQuery: query,
+    urlQueryName,
   };
 
   receiveData(programObj);

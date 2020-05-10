@@ -6,7 +6,7 @@ const swiperManager = {
   previousQueryName: null,
   totalPageNumber: 0,
   handlerObtainData: function handler(data) {
-    const { movieCardStorage, pageNumber, queryName } = data;
+    const { movieCardStorage, pageNumber, query } = data;
     const isNewRequest = pageNumber === 1;
 
     function preventChangeSlide(isAllowed) {
@@ -16,11 +16,11 @@ const swiperManager = {
     }
 
     if (isNewRequest) {
-      this.previousQueryName = queryName;
+      this.previousQueryName = query;
       this.totalPageNumber = 1;
 
       searchLoader.classList.remove('active');
-      searchResult.textContent = (searchInput.value !== '') ? `Show result for '${queryName}'` : '';
+      searchResult.textContent = (searchInput.value !== '') ? `Show result for '${query}'` : '';
 
       newSwiper.wrapperEl.classList.add('fadeOut');
       preventChangeSlide(false);
@@ -30,7 +30,7 @@ const swiperManager = {
         newSwiper.virtual.appendSlide(movieCardStorage);
         newSwiper.update();
 
-        movieComponent(queryName, pageNumber + 1);
+        movieComponent(query, pageNumber + 1);
 
         newSwiper.wrapperEl.classList.add('fadeIn');
       }, 500);
