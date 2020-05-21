@@ -13,7 +13,9 @@ function createCards(movieStorage, programObj) {
       <div class="card__footer">
         <div class="year">${movie.year}</div>
         <div class="imbd-rating">
-          <span class="star">&#9733;</span>${movie.imdbRating}</div>
+          <span class="star">&#9733;</span>
+          ${movie.imdbRating}
+        </div>
       </div>
     </div>`);
   });
