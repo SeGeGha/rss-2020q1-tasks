@@ -12,7 +12,11 @@ async function receiveData(programObj) {
 
     handlerData(moviesArr, programObj);
   } catch (error) {
-    searchResult.textContent = 'Api key is not valid, please repeat later';
+    const messageNetworkOffline = 'Network error, please repeat later';
+    const messageFetchFailing = 'Problems with API request, try again...';
+
+    searchResult.textContent = (error.message === 'Failed to fetch') ? messageNetworkOffline : messageFetchFailing;
+
     searchLoader.classList.remove('active');
   }
 }
