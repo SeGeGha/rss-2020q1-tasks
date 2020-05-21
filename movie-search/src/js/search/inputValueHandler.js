@@ -4,7 +4,7 @@ import { keyboard } from '../virtualKeyboard/main';
 import handlerQuery from './queryHandler';
 
 function handlerInputValue() {
-  let query = searchInput.value.trim();
+  const query = searchInput.value.trim();
 
   if (query === '') {
     searchLoader.classList.remove('active');
@@ -16,13 +16,15 @@ function handlerInputValue() {
     keyboard.hideKeyboard();
 
     if (/[а-я]/gi.test(query)) {
-      (async function getTranslate() {
-        query = await handlerQuery(query);
-
-        if (query) {
-          movieComponent(query);
-        }
-      }());
+      handlerQuery(query)
+        .then((result) => {
+          if (result) {
+            movieComponent(result);
+          }
+        })
+        .catch(() => {
+          searchResult.textContent = 'Failed to translate request, try again later...';
+        });
     } else {
       movieComponent(query);
     }
