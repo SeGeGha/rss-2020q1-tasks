@@ -8,10 +8,6 @@ const valuesDirectory = {
     celsius: '°C',
     fahrenheit: '°F',
   },
-  weatherPrediction: {
-    currentWeather: 'weather',
-    forecastWeather: 'forecast',
-  },
 };
 
 export default valuesDirectory;

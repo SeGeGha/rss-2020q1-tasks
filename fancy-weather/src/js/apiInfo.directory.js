@@ -9,11 +9,11 @@ const apiDirectory = {
   openWeatherMap: {
     key: '804f2d959ae5f66700e8e2ea6b23fabd',
     url: 'https://api.openweathermap.org',
-    getRequestUrl(coordinates, settings, typePrediction) {
+    getRequestUrl(coordinates, settings) {
       const { latitude, longitude } = coordinates;
       const { appLanguage: lang } = settings;
 
-      return `${this.url}/data/2.5/${typePrediction}?&lat=${latitude}&lon=${longitude}&lang=${lang}&units=metric&APPID=${this.key}`;
+      return `${this.url}/data/2.5/onecall?&lat=${latitude}&lon=${longitude}&lang=${lang}&exclude=hourly&units=metric&APPID=${this.key}`;
     },
   },
 };
