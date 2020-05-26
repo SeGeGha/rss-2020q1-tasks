@@ -10,24 +10,16 @@
     <div class="header">
       <div class="control-block">
         <button class="control__update"></button>
-        <div class="drop-down-box">
-          <button class="drop-down-button">
-            <span></span>
-            <span class="arrow-down"></span>
-          </button>
-          <div class="drop-down-menu">
-            <div class="menu__item"></div>
-            <div class="menu__item"></div>
-            <div class="menu__item"></div>
-          </div>
-        </div>
-        <button class="control__temperature_f"></button>
-        <button class="control__temperature_c"></button>
+        <button class="control__language" data-value="en">en</button>
+        <button class="control__language" data-value="ru">ru</button>
+        <button class="control__language" data-value="be">be</button>
+        <button class="control__temperature" data-value="°F">°F</button>
+        <button class="control__temperature" data-value="°C">°C</button>
       </div>
       <form class="search-block">
-        <input type="text" class="search__input" placeholder="Search city">
+        <input type="text" class="search__input" data-multilingual="searchCity">
         <div class="search__speech-recognition"></div>
-        <input type="submit" class="search__button">
+        <button type="submit" class="search__button" data-multilingual="search"></button>
       </form>
     </div>
     <main class="main-info-container">
@@ -35,30 +27,57 @@
         <div class="info-header">
           <div class="header__location"></div>
           <div class="header__date"></div>
-          <div class="header__clock"></div>
         </div>
         <div class="weather-info-today">
-          <div class="info__temperature"></div>
+          <div class="info__temperature" data-naming="temp"></div>
           <div class="info-summary">
             <div class="info__weather-icon"></div>
             <div class="weather-indicators">
-              <div class="indicators__weather-description"></div>
-              <div class="indicators__apparent-temperature"></div>
-              <div class="indicators__wind-speed"></div>
-              <div class="indicators__humidity"></div> 
+              <div class="indicators__weather-description" data-naming="weatherDescription"></div>
+              <div class="indicators__apparent-temperature">
+                <span data-multilingual="apparentTemp"></span>
+                <span data-naming="apparentTemp"></span>
+              </div>
+              <div class="indicators__wind-speed">
+                <span data-multilingual="wind"></span>
+                <span data-naming="windSpeed"></span>
+                <span data-multilingual="windUnit"></span>
+              </div>
+              <div class="indicators__humidity">
+                <span data-multilingual="humidity"></span>
+                <span data-naming="humidity"></span>
+              </div> 
             </div>
           </div>
         </div>
         <div class="weather-info-three-days">
-          <div class="info__day"></div>
-          <div class="info__temperature"></div>
-          <div class="info__weather-icon"></div>
+          <div class="weather-info">
+            <div class="info__day"></div>
+            <div class="info__temperature" data-naming="averageTemp"></div>
+            <div class="info__weather-icon"></div>            
+          </div>
+          <div class="weather-info">
+            <div class="info__day"></div>
+            <div class="info__temperature" data-naming="averageTemp"></div>
+            <div class="info__weather-icon"></div>            
+          </div>
+          <div class="weather-info">
+            <div class="info__day"></div>
+            <div class="info__temperature" data-naming="averageTemp"></div>
+            <div class="info__weather-icon"></div>              
+          </div>
         </div>
       </section>
       <section class="location-info">
         <div class="location__map"></div>
-        <div class="location__latitude"></div>  
-        <div class="location__longitude"></div>  
+        <div class="location__latitude">
+          <span data-multilingual="latitude"></span> 
+          <span></span> 
+        </div>  
+        <div class="location__longitude">
+          <span data-multilingual="longitude"></span> 
+          <span></span>           
+        </div>  
       </section>
     </main>
   </div>
