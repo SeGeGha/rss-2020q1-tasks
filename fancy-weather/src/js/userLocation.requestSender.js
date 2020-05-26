@@ -1,16 +1,14 @@
 import apiDirectory from './apiInfo.directory';
 
 function getUserLocation() {
-  const urlIpInfo = apiDirectory.ipInfo.getRequestUrl();
-
-  return fetch(urlIpInfo)
+  return fetch(apiDirectory.ipInfo.getRequestUrl())
     .then((response) => response.json())
-    .then((userLocationInfo) => {
-      const coordinates = userLocationInfo.loc.split(',');
+    .then((data) => {
+      const UserCoordinates = data.loc.split(',');
 
       return {
-        latitude: coordinates[0],
-        longitude: coordinates[1],
+        latitude: UserCoordinates[0],
+        longitude: UserCoordinates[1],
       };
     })
     .catch(() => ({

@@ -8,6 +8,11 @@ const valuesDirectory = {
     celsius: '°C',
     fahrenheit: '°F',
   },
+  requestType: {
+    getPlace: 'search',
+    getWeather: 'weather',
+  },
+  requestError: 'error',
 };
 
 export default valuesDirectory;
