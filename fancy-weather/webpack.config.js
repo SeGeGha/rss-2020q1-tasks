@@ -61,7 +61,6 @@ module.exports = (env, options) => {
         filename: 'style.css',
       }),
       new CopyPlugin([
-        { from: './src/assets/audio', to: './assets/audio' },
         { from: './src/assets/img', to: './assets/img' },
       ]),
     ],
