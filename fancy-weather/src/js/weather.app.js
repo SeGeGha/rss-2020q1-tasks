@@ -4,6 +4,8 @@ import valuesDirectory from './values.directory';
 import changeTemperatureUnit from './temperature.changer';
 import checkTemperatureUnit from './temperature.checker';
 import translationDirectory from './translate.directory';
+import moment from '../../node_modules/moment';
+import handleData from './apiData.handler';
 
 const {
   language,
@@ -17,13 +19,16 @@ const weatherApplication = {
     btnTempUnit: document.querySelectorAll('.control__temperature'),
     btnLanguage: document.querySelectorAll('.control__language'),
     blockLocation: document.querySelector('.header__location'),
+    blockCurrentDate: document.querySelector('.header__date'),
     blockCurrentWeather: {
       tuningValue: document.querySelectorAll('.weather-info-today [data-naming]'),
     },
     blockForecast: {
+      day: document.querySelectorAll('.weather-info-three-days .info__day'),
       tuningValue: document.querySelectorAll('.weather-info-three-days [data-naming]'),
     },
     multilingualBlocks: document.querySelectorAll('[data-multilingual]'),
+    blockCoordinates: document.querySelectorAll('[data-coordinates'),
   },
   programSettings: {
     appLanguage: null,
@@ -76,8 +81,8 @@ const weatherApplication = {
         this.forecast.currentWeather[tempParameter] = changeTemperatureUnit(newUnit, currentWeather[tempParameter]);
       });
 
-    dailyWeather.averageTemp.forEach((value, id) => {
-      this.forecast.dailyWeather.averageTemp[id] = changeTemperatureUnit(newUnit, value);
+    dailyWeather.forEach((day, dayId) => {
+      this.forecast.dailyWeather[dayId].averageTemp = changeTemperatureUnit(newUnit, day.averageTemp);
     });
 
     this.render();
@@ -96,46 +101,64 @@ const weatherApplication = {
     switch (inputData.type) {
       case requestType.getWeather: {
         const {
-          timezone_offset: timezone,
           current: currentWeatherData,
           daily: dailyWeatherData,
         } = inputData.content;
-        const {
-          temp,
-          feels_like: apparentTemp,
-          humidity,
-          wind_speed: windSpeed,
-          weather: weatherInfo,
-        } = currentWeatherData;
 
-        this.locationInfo.timezone = timezone;
+        moment.locale(this.programSettings.appLanguage);
+        this.locationInfo.timezone = inputData.content.timezone_offset / 60;
+        this.locationInfo.date = moment().utcOffset(this.locationInfo.timezone).format('ddd D MMMM, HH:mm:ss');
 
         this.forecast = {
-          currentWeather: {
-            temp: checkTemperatureUnit(temp),
-            weatherDescription: weatherInfo[0].description,
-            apparentTemp: checkTemperatureUnit(apparentTemp),
-            windSpeed: `${windSpeed.toFixed(1)}`,
-            humidity: `${humidity}%`,
-          },
-          dailyWeather: {
-            averageTemp: dailyWeatherData.map((dayWeatherInfo) => {
-              const { min: minTemp, max: maxTemp } = dayWeatherInfo.temp;
-              const averageTemp = Math.round((minTemp + maxTemp) / 2);
-
-              return checkTemperatureUnit(averageTemp);
-            }),
-          },
+          renderCoordinates: handleData.render.coordinates(this.locationInfo),
+          currentWeather: handleData.weatherData.current(currentWeatherData),
+          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, {
+            lang: this.programSettings.appLanguage,
+            timezone: this.locationInfo.timezone,
+          }),
         };
 
         this.render();
       }
         break;
       case requestType.getPlace: { // TODO: HANDLER ERROR 200- 0k
+        // TODO: найти city, county, neighbo... village из всех результатов
         this.locationInfo.latitude = inputData.content.results[0].geometry.lat;
         this.locationInfo.longitude = inputData.content.results[0].geometry.lng;
-        this.locationInfo.date = inputData.content.timestamp.created_http;
-        this.locationInfo.name = inputData.content.results[0].formatted;
+
+        let resultId = inputData.content.results.findIndex((result) => result.components._type === 'city') || 0;
+        
+        resultId = (resultId === -1) ? 0 : resultId;
+        let city;
+
+        const country = inputData.content.results[resultId].components.country;
+        const bbb = inputData.content.results[resultId].components._type;
+
+        switch (bbb) {
+          case 'city':
+            city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.town;
+            break;
+          case 'county':
+            city = inputData.content.results[resultId].components.county;
+            break;
+          case 'neighbourhood':
+            city = inputData.content.results[resultId].components.suburb || inputData.content.results[resultId].components.city;
+            break;
+          case 'village':
+            city = inputData.content.results[resultId].components.village;
+            break;
+          case 'state':
+            city = inputData.content.results[resultId].components.state;
+            break;
+          case 'townhall':
+            city = inputData.content.results[resultId].components.city;
+            break;
+          default:
+            city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.state;
+            break;
+        }
+
+        this.locationInfo.name = `${city} ${country}`;
 
         const { latitude, longitude } = this.locationInfo;
 
@@ -143,23 +166,26 @@ const weatherApplication = {
           .then((response) => this.dataHandler(response));
       }
         break;
-      case requestError: // TODO: requestSender -> { type: 'error'}
-        break;
       default:
+        document.querySelector('error').textContent = inputData;
         break;
     }
   },
 
-  render() {
+  render() { // TODO:
     const {
       blockLocation,
+      blockCurrentDate,
       multilingualBlocks,
       blockCurrentWeather,
       blockForecast,
+      blockCoordinates,
     } = this.appComponents;
     const { appLanguage: translationLang } = this.programSettings;
+    const countDaysForecast = 3;
 
     blockLocation.textContent = this.locationInfo.name;
+    blockCurrentDate.textContent = this.locationInfo.date;
 
     for (let blockId = 0; blockId < multilingualBlocks.length; blockId += 1) {
       const blockCode = multilingualBlocks[blockId].dataset.multilingual;
@@ -178,10 +204,14 @@ const weatherApplication = {
       blockCurrentWeather.tuningValue[blockId].textContent = this.forecast.currentWeather[blockCode];
     }
 
-    for (let blockId = 0; blockId < blockForecast.tuningValue.length; blockId += 1) {
-      const blockCode = blockForecast.tuningValue[blockId].dataset.naming;
+    for (let blockId = 0; blockId < countDaysForecast; blockId += 1) {
+      blockForecast.day[blockId].textContent = this.forecast.dailyWeather[blockId + 1].dayName;
+      blockForecast.tuningValue[blockId].textContent = this.forecast.dailyWeather[blockId + 1].averageTemp;
+    }
 
-      blockForecast.tuningValue[blockId].textContent = this.forecast.dailyWeather[blockCode][blockId + 1];
+    for (let blockId = 0; blockId < blockCoordinates.length; blockId += 1) {
+      const blockCode = blockCoordinates[blockId].dataset.coordinates;
+      blockCoordinates[blockId].textContent = this.forecast.renderCoordinates[blockCode];
     }
   },
 };

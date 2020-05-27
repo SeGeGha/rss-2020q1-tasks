@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
@@ -63,6 +64,9 @@ module.exports = (env, options) => {
       new CopyPlugin([
         { from: './src/assets/img', to: './assets/img' },
       ]),
+      new MomentLocalesPlugin({
+        localesToKeep: ['es-us', 'ru', 'be'],
+      }),
     ],
   };
 

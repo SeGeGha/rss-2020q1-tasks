@@ -2,6 +2,22 @@ import weatherApplication from './weather.app';
 import sendRequest from './forecast.requestSender';
 import valuesDirectory from './values.directory';
 
+function handleClicksControlBlock(clickTarget) {
+  const { value: newParameterValue } = clickTarget.dataset;
+  const { language, unit: tempUnit } = valuesDirectory;
+  let OldParameterValue;
+  let handlerFunctionName;
+
+  switch (newParameterValue) {
+    case tempUnit.celsius:
+    case tempUnit.fahrenheit:
+      OldParameterValue = weatherApplication.programSettings.appTemperatureUnit;
+      break;
+    default:
+      break;
+  }
+}
+//TODO: CONTROL BLOCK HANDLER CHANGE
 function eventsCreator() {
   document.querySelector('.control-block').addEventListener('click', (event) => {
     const { target } = event;
