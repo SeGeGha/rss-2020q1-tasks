@@ -1,0 +1,5 @@
+.search-block {
+  .search__input {
+    @include size(75%, 100%);
+  }
+}

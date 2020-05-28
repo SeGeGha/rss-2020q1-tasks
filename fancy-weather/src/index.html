@@ -9,7 +9,7 @@
   <div class="wrapper">
     <div class="header">
       <div class="control-block">
-        <button class="control__update"></button>
+        <button class="control__update">&#8634;</button>
         <button class="control__language" data-value="en">en</button>
         <button class="control__language" data-value="ru">ru</button>
         <button class="control__language" data-value="be">be</button>
@@ -31,7 +31,7 @@
         <div class="weather-info-today">
           <div class="info__temperature" data-naming="temp"></div>
           <div class="info-summary">
-            <div class="info__weather-icon"></div>
+            <img class="info__weather-icon"></img>
             <div class="weather-indicators">
               <div class="indicators__weather-description" data-naming="weatherDescription"></div>
               <div class="indicators__apparent-temperature">
@@ -52,19 +52,25 @@
         </div>
         <div class="weather-info-three-days">
           <div class="weather-info">
-            <div class="info__day"></div>
-            <div class="info__temperature" data-naming="averageTemp"></div>
-            <div class="info__weather-icon"></div>            
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>            
           </div>
           <div class="weather-info">
-            <div class="info__day"></div>
-            <div class="info__temperature" data-naming="averageTemp"></div>
-            <div class="info__weather-icon"></div>            
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>            
           </div>
           <div class="weather-info">
-            <div class="info__day"></div>
-            <div class="info__temperature" data-naming="averageTemp"></div>
-            <div class="info__weather-icon"></div>              
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>              
           </div>
         </div>
       </section>

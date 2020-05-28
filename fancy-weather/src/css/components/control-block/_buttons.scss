@@ -1,0 +1,45 @@
+$btnWidth: 40px;
+$btnMargin: ($btnWidth / 4);
+$borderRadius: ($btnWidth / 4);
+
+.control-block {
+  button {
+    @include size(40px, 100%);
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      background: #708090;
+    }
+
+    &.active {
+      background: #a9a9a9;
+    }
+  }
+
+  .control__update {
+    margin-right: $btnMargin;
+    border-radius: $borderRadius;
+  }
+
+  .control__language {
+    text-transform: uppercase;
+  }
+
+  button[data-value="en"],
+  button[data-value="°F"] {
+    border-radius: $borderRadius 0 0 $borderRadius;
+  }
+
+  button[data-value="be"],
+  button[data-value="°C"] {
+    border-radius: 0 $borderRadius $borderRadius 0;
+  }
+
+  button[data-value="°F"] {
+    margin-left: $btnMargin;
+  }
+}

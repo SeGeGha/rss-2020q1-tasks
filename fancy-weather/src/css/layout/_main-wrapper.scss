@@ -1,0 +1,9 @@
+.wrapper {
+  @include flex(column, stretch, space-between);
+  @include size(100%, 100%);
+  min-height: 100vh;
+  padding: 40px 60px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fffaf0;
+  cursor: default;
+}

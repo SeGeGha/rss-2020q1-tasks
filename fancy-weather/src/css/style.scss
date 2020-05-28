@@ -1,10 +1,21 @@
 @import './base/reset';
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
 @import './abstract/global-variables';
 @import './abstract/mixin';
 
 @import './base/main';
 
+@import './layout/main-wrapper';
+@import './layout/header';
+@import './layout/main-content';
 
+@import './components/control-block/buttons';
+@import './components/search-block/input';
+@import './components/search-block/submit';
+@import './components/weather-info/location-date-info';
+@import './components/weather-info/weather-info';
+@import './components/location-info/map';
 
 

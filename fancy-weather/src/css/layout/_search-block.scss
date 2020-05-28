@@ -1,0 +1,4 @@
+.search-block {
+  @include flex(row, center, center);
+  @include size(400px, 100%);
+}

@@ -1,0 +1,44 @@
+.weather-info-today {
+  @include flex (row, stretch, center);
+  width: 100%;
+
+  .info__temperature {
+    @include flex(row, center, center);
+    width: 60%;
+    font-size: 7rem;
+  }
+
+  .info-summary {
+    width: 40%;
+    font-size: 1rem;
+    text-align: justify;
+
+    .info__weather-icon {
+      height: 200px;
+    }
+
+    .weather-indicators {
+      position: relative;
+      top: -40px;
+      font-size: 1.4rem;
+
+      .indicators__weather-description {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+
+.weather-info-three-days {
+  @include flex(row);
+  font-size: 1.5rem;
+
+  .weather-info {
+    @include flex(row, center);
+
+    .info__weather-icon {
+      height: 100px;
+    }
+  }
+}

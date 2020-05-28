@@ -1,0 +1,16 @@
+.main-info-container {
+  @include flex(row, center, space-between);
+  width: 1200px;
+  margin: 40px auto;
+
+  .weather-info {
+    width: 55%;
+    text-align: center;
+  }
+
+  .location-info {
+    width: 30%;
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+}

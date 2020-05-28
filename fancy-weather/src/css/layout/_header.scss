@@ -1,0 +1,14 @@
+.header {
+  @include flex(row, center, space-between);
+  @include size(100%, 40px);
+
+  .control-block {
+    @include flex(row, center, center);
+    @include size(260px, 100%);
+  }
+
+  .search-block {
+    @include flex(row, center, center);
+    @include size(400px, 100%);
+  }
+}
