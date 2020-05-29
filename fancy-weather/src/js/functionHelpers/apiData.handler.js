@@ -1,6 +1,6 @@
 import checkTemperatureUnit from './temperature.checker';
-import moment from '../../node_modules/moment';
-import weatherIdDirectory from './weatherId.directory';
+import moment from '../../../node_modules/moment';
+import weatherIdDirectory from '../directories/weatherId.directory';
 
 const handleData = {
   weatherData: {

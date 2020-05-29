@@ -1,4 +1,4 @@
-import valuesDirectory from './values.directory';
+import valuesDirectory from '../directories/values.directory';
 
 function changeTemperatureUnit(newUnit, temperatureString) {
   const { unit } = valuesDirectory;

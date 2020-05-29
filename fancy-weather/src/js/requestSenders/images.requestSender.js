@@ -1,5 +1,5 @@
-import apiDirectory from './apiInfo.directory';
-import valuesDirectory from './values.directory';
+import apiDirectory from '../directories/apiInfo.directory';
+import valuesDirectory from '../directories/values.directory';
 
 function getBackgroundImages(keywords) {
   const { flickr } = apiDirectory;

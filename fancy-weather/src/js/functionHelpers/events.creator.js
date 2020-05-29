@@ -1,6 +1,6 @@
-import weatherApplication from './weather.app';
-import sendRequest from './forecast.requestSender';
-import valuesDirectory from './values.directory';
+import weatherApplication from '../weather.app';
+import sendRequest from '../requestSenders/forecast.requestSender';
+import valuesDirectory from '../directories/values.directory';
 
 function eventsCreator() {
   document.querySelector('.control-block').addEventListener('click', (event) => {

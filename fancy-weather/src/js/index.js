@@ -1,5 +1,5 @@
 import weatherApplication from './weather.app';
-import eventsCreator from './events.creator';
+import eventsCreator from './functionHelpers/events.creator';
 
 document.addEventListener('DOMContentLoaded', () => {
   eventsCreator();

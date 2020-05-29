@@ -1,5 +1,5 @@
-import weatherApplication from './weather.app';
-import valuesDirectory from './values.directory';
+import weatherApplication from '../weather.app';
+import valuesDirectory from '../directories/values.directory';
 import changeTemperatureUnit from './temperature.changer';
 
 function checkTemperatureUnit(temperature) {

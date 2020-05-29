@@ -1,4 +1,4 @@
-import apiDirectory from './apiInfo.directory';
+import apiDirectory from '../directories/apiInfo.directory';
 
 function getUserLocation() {
   return fetch(apiDirectory.ipInfo.getRequestUrl())

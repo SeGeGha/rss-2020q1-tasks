@@ -1,11 +1,11 @@
-import getUserLocation from './userLocation.requestSender';
-import sendRequest from './forecast.requestSender';
-import valuesDirectory from './values.directory';
-import changeTemperatureUnit from './temperature.changer';
-import translationDirectory from './translate.directory';
+import getUserLocation from './requestSenders/userLocation.requestSender';
+import sendRequest from './requestSenders/forecast.requestSender';
+import valuesDirectory from './directories/values.directory';
+import changeTemperatureUnit from './functionHelpers/temperature.changer';
+import translationDirectory from './directories/translate.directory';
 import moment from '../../node_modules/moment';
-import handleData from './apiData.handler';
-import getBackgroundImages from './images.requestSender';
+import handleData from './functionHelpers/apiData.handler';
+import getBackgroundImages from './requestSenders/images.requestSender';
 
 const {
   language,
