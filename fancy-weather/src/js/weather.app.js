@@ -89,7 +89,7 @@ const weatherApplication = {
       this.forecast.dailyWeather[dayId].averageTemp = changeTemperatureUnit(newUnit, day.averageTemp);
     });
 
-    this.render();
+    this.render(false);
   },
   translator(newLanguage) {
     this.programSettings.appLanguage = newLanguage;
@@ -170,7 +170,7 @@ const weatherApplication = {
       image.src = imageDirectory[this.backgroundImages.currentImageNumber].url_h;
     };
   },
-  render() {
+  render(isAppInit = true) {
     const {
       blockLocation,
       blockCurrentDate,
@@ -182,7 +182,9 @@ const weatherApplication = {
     const { appLanguage: translationLang } = this.programSettings;
     const countDaysForecast = 3;
 
-    this.backgroundImgChanger();
+    if (isAppInit) {
+      this.backgroundImgChanger();
+    }
 
     blockLocation.textContent = this.locationInfo.name;
     blockCurrentDate.textContent = this.locationInfo.date;
