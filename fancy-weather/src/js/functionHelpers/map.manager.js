@@ -1,20 +1,43 @@
 import mapboxgl from 'mapbox-gl';
 import apiDirectory from '../directories/apiInfo.directory';
 
-function createMap(locationInfo) {
-  const { latitude, longitude } = locationInfo;
-  mapboxgl.accessToken = apiDirectory.mapbox.key;
+const [standardLongitude, standardLatitude] = [27.57, 53.9];
+mapboxgl.accessToken = apiDirectory.mapbox.key;
 
-  const map = new mapboxgl.Map({
+const mapManager = {
+  coordinates: {
+    latitude: standardLatitude,
+    longitude: standardLongitude,
+  },
+  map: new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
-    center: [longitude, latitude],
-    zoom: 10,
-  });
+    center: [standardLongitude, standardLatitude],
+    zoom: 8,
+    attributionControl: false,
+    logoPosition: 'top-left',
+  }),
+  marker: new mapboxgl.Marker(),
+  setMarker() {
+    const appMap = this.map;
 
-  const marker = new mapboxgl.Marker()
-    .setLngLat([longitude, latitude])
-    .addTo(map);
-}
+    this.marker
+      .setLngLat([this.coordinates.longitude, this.coordinates.latitude])
+      .addTo(appMap);
+  },
+  flyToCoordinates(locationInfo) {
+    this.coordinates.latitude = locationInfo.latitude;
+    this.coordinates.longitude = locationInfo.longitude;
 
-export default createMap;
+    this.map.flyTo({
+      center: [this.coordinates.longitude, this.coordinates.latitude],
+      speed: 2,
+      curve: 1,
+      essential: true,
+    });
+
+    this.setMarker();
+  },
+};
+
+export default mapManager;

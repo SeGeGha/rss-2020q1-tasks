@@ -11,7 +11,7 @@ function getUserLocation() {
         longitude: UserCoordinates[1],
       };
     })
-    .catch(() => ({
+    .catch(() => ({ // Minsk
       latitude: 53.9,
       longitude: 27.57,
     }));

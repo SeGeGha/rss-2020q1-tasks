@@ -6,7 +6,7 @@ import translationDirectory from './directories/translate.directory';
 import moment from '../../node_modules/moment';
 import handleData from './functionHelpers/apiData.handler';
 import getBackgroundImages from './requestSenders/images.requestSender';
-import createMap from './functionHelpers/map.manager';
+import mapManager from './functionHelpers/map.manager';
 
 const {
   language,
@@ -40,7 +40,7 @@ const weatherApplication = {
   locationInfo: null,
   forecast: null,
   backgroundImages: {
-    currentImageId: null,
+    currentImageNumber: 0,
     imageDirectory: null,
   },
   init() {
@@ -146,9 +146,7 @@ const weatherApplication = {
       }
         break;
       case requestType.getImages:
-        this.backgroundImages.currentImageNumber = 0;
         this.backgroundImages.imageDirectory = inputData.content.photos.photo.filter((imageInfo) => imageInfo.url_h);
-
         this.render();
         break;
       default:
@@ -186,7 +184,7 @@ const weatherApplication = {
 
     if (!isCorrection) {
       this.backgroundImgChanger();
-      createMap(this.locationInfo);
+      mapManager.flyToCoordinates(this.locationInfo);
     }
 
     blockLocation.textContent = this.locationInfo.name;
