@@ -6,6 +6,7 @@ import translationDirectory from './directories/translate.directory';
 import moment from '../../node_modules/moment';
 import handleData from './functionHelpers/apiData.handler';
 import getBackgroundImages from './requestSenders/images.requestSender';
+import createMap from './functionHelpers/map.manager';
 
 const {
   language,
@@ -184,6 +185,10 @@ const weatherApplication = {
 
     if (isAppInit) {
       this.backgroundImgChanger();
+
+      createMap(this.locationInfo);
+    } else {
+      
     }
 
     blockLocation.textContent = this.locationInfo.name;

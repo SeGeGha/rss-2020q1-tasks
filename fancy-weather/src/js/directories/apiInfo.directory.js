@@ -35,6 +35,9 @@ const apiDirectory = {
       return `${this.url}/services/rest/?method=flickr.photos.search&api_key=${this.key}&tags=${tags}&tag_mode=all&extras=url_h&format=json&nojsoncallback=1`;
     },
   },
+  mapbox: {
+    key: 'pk.eyJ1Ijoic2VnZWdoYSIsImEiOiJja2FydzB1aGMwOTVuMnNtb2s2YzQwYzFpIn0.5DRUQvTZFKjEzDAjSOW-TA',
+  },
 };
 
 export default apiDirectory;

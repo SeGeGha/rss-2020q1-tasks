@@ -1,3 +1,5 @@
 .location__map {
   @include size(100%, 300px);
+  clip-path: polygon(0% 0%, 100% 0, 100% 75%, 100% 75%, 100% 96%, 5% 96%, 0 100%);
+  border-radius: 20px 20px 0 0;
 }
