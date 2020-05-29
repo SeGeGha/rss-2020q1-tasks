@@ -16,5 +16,6 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': ['off'],
+    'max-len': ["error", { "code": 130 }]
   },
 };

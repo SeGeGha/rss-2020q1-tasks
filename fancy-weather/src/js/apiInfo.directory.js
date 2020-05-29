@@ -27,6 +27,14 @@ const apiDirectory = {
       return `${this.url}/geocode/v1/json?q=${preparedQuery}&key=${this.key}&language=${lang}&pretty=1&no_annotations=1`;
     },
   },
+  flickr: {
+    key: 'c1cac9aa60759f58a978608fc41d4bdc',
+    url: 'https://www.flickr.com',
+    getRequestUrl(keywords) {
+      const tags = keywords.replace(/\s/g, ',');
+      return `${this.url}/services/rest/?method=flickr.photos.search&api_key=${this.key}&tags=${tags}&tag_mode=all&extras=url_h&format=json&nojsoncallback=1`;
+    },
+  },
 };
 
 export default apiDirectory;

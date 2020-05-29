@@ -2,16 +2,16 @@ import getUserLocation from './userLocation.requestSender';
 import sendRequest from './forecast.requestSender';
 import valuesDirectory from './values.directory';
 import changeTemperatureUnit from './temperature.changer';
-import checkTemperatureUnit from './temperature.checker';
 import translationDirectory from './translate.directory';
 import moment from '../../node_modules/moment';
 import handleData from './apiData.handler';
+import getBackgroundImages from './images.requestSender';
 
 const {
   language,
   unit,
   requestType,
-  requestError,
+  daysTime,
 } = valuesDirectory;
 
 const weatherApplication = {
@@ -22,10 +22,12 @@ const weatherApplication = {
     blockCurrentDate: document.querySelector('.header__date'),
     blockCurrentWeather: {
       tuningValue: document.querySelectorAll('.weather-info-today [data-naming]'),
+      weatherIcon: document.querySelector('.weather-info-today .info__weather-icon'),
     },
     blockForecast: {
       day: document.querySelectorAll('.weather-info-three-days .info__day'),
       tuningValue: document.querySelectorAll('.weather-info-three-days [data-naming]'),
+      weatherIcon: document.querySelectorAll('.weather-info-three-days .info__weather-icon'),
     },
     multilingualBlocks: document.querySelectorAll('[data-multilingual]'),
     blockCoordinates: document.querySelectorAll('[data-coordinates'),
@@ -36,7 +38,10 @@ const weatherApplication = {
   },
   locationInfo: null,
   forecast: null,
-
+  backgroundImages: {
+    currentImageId: null,
+    imageDirectory: null,
+  },
   init() {
     this.defaultSetup();
 
@@ -47,7 +52,6 @@ const weatherApplication = {
         .then((response) => this.dataHandler(response));
     });
   },
-
   defaultSetup() {
     const defaultParameters = {
       appLanguage: {
@@ -87,7 +91,6 @@ const weatherApplication = {
 
     this.render();
   },
-
   translator(newLanguage) {
     this.programSettings.appLanguage = newLanguage;
 
@@ -96,8 +99,7 @@ const weatherApplication = {
     sendRequest(this.locationInfo, this.programSettings, requestType.getPlace)
       .then((response) => this.dataHandler(response));
   },
-
-  dataHandler(inputData) { // TODO:
+  dataHandler(inputData) {
     switch (inputData.type) {
       case requestType.getWeather: {
         const {
@@ -109,70 +111,66 @@ const weatherApplication = {
         this.locationInfo.timezone = inputData.content.timezone_offset / 60;
         this.locationInfo.date = moment().utcOffset(this.locationInfo.timezone).format('ddd D MMMM, HH:mm:ss');
 
+        const getDaysTime = (date) => {
+          const hours = new Date(date).getHours();
+
+          return (hours < 6 || hours > 22) ? daysTime.night : daysTime.day;
+        };
+
         this.forecast = {
           renderCoordinates: handleData.render.coordinates(this.locationInfo),
-          currentWeather: handleData.weatherData.current(currentWeatherData),
+          currentWeather: handleData.weatherData.current(currentWeatherData, getDaysTime(this.locationInfo.date)),
           dailyWeather: handleData.weatherData.forecast(dailyWeatherData, {
             lang: this.programSettings.appLanguage,
             timezone: this.locationInfo.timezone,
-          }),
+          }, getDaysTime(this.locationInfo.date)),
         };
 
-        this.render();
-      }
-        break;
-      case requestType.getPlace: { // TODO: HANDLER ERROR 200- 0k
-        // TODO: найти city, county, neighbo... village из всех результатов
-        this.locationInfo.latitude = inputData.content.results[0].geometry.lat;
-        this.locationInfo.longitude = inputData.content.results[0].geometry.lng;
+        const keywords = this.forecast.currentWeather.weatherIconName;
 
-        let resultId = inputData.content.results.findIndex((result) => result.components._type === 'city') || 0;
-        
-        resultId = (resultId === -1) ? 0 : resultId;
-        let city;
-
-        const country = inputData.content.results[resultId].components.country;
-        const bbb = inputData.content.results[resultId].components._type;
-
-        switch (bbb) {
-          case 'city':
-            city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.town;
-            break;
-          case 'county':
-            city = inputData.content.results[resultId].components.county;
-            break;
-          case 'neighbourhood':
-            city = inputData.content.results[resultId].components.suburb || inputData.content.results[resultId].components.city;
-            break;
-          case 'village':
-            city = inputData.content.results[resultId].components.village;
-            break;
-          case 'state':
-            city = inputData.content.results[resultId].components.state;
-            break;
-          case 'townhall':
-            city = inputData.content.results[resultId].components.city;
-            break;
-          default:
-            city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.state;
-            break;
-        }
-
-        this.locationInfo.name = `${city} ${country}`;
-
-        const { latitude, longitude } = this.locationInfo;
-
-        sendRequest({ latitude, longitude }, this.programSettings, requestType.getWeather)
+        getBackgroundImages(keywords)
           .then((response) => this.dataHandler(response));
       }
         break;
+      case requestType.getPlace: {
+        const placeInfoObj = handleData.searchData(inputData.content);
+
+        this.locationInfo.latitude = placeInfoObj.latitude;
+        this.locationInfo.longitude = placeInfoObj.longitude;
+        this.locationInfo.name = placeInfoObj.name;
+
+        sendRequest(placeInfoObj, this.programSettings, requestType.getWeather)
+          .then((response) => this.dataHandler(response));
+      }
+        break;
+      case requestType.getImages:
+        this.backgroundImages.currentImageNumber = 0;
+        this.backgroundImages.imageDirectory = inputData.content.photos.photo.filter((imageInfo) => imageInfo.url_h);
+
+        this.render();
+        break;
       default:
-        document.querySelector('error').textContent = inputData;
+        handleData.error(inputData);
         break;
     }
   },
+  backgroundImgChanger() {
+    const { currentImageNumber, imageDirectory } = this.backgroundImages;
+    const image = new Image();
 
-  render() { // TODO:
+    this.backgroundImages.currentImageNumber = (currentImageNumber + 1) % imageDirectory.length;
+    image.src = imageDirectory[currentImageNumber].url_h;
+
+    image.onload = () => {
+      document.body.style.backgroundImage = `url('${image.src}')`;
+    };
+
+    image.onerror = () => {
+      this.backgroundImages.currentImageNumber += 1;
+      image.src = imageDirectory[this.backgroundImages.currentImageNumber].url_h;
+    };
+  },
+  render() {
     const {
       blockLocation,
       blockCurrentDate,
@@ -183,6 +181,8 @@ const weatherApplication = {
     } = this.appComponents;
     const { appLanguage: translationLang } = this.programSettings;
     const countDaysForecast = 3;
+
+    this.backgroundImgChanger();
 
     blockLocation.textContent = this.locationInfo.name;
     blockCurrentDate.textContent = this.locationInfo.date;
@@ -198,6 +198,8 @@ const weatherApplication = {
       }
     }
 
+    blockCurrentWeather.weatherIcon.src = this.forecast.currentWeather.weatherIconUrl;
+
     for (let blockId = 0; blockId < blockCurrentWeather.tuningValue.length; blockId += 1) {
       const blockCode = blockCurrentWeather.tuningValue[blockId].dataset.naming;
 
@@ -207,6 +209,7 @@ const weatherApplication = {
     for (let blockId = 0; blockId < countDaysForecast; blockId += 1) {
       blockForecast.day[blockId].textContent = this.forecast.dailyWeather[blockId + 1].dayName;
       blockForecast.tuningValue[blockId].textContent = this.forecast.dailyWeather[blockId + 1].averageTemp;
+      blockForecast.weatherIcon[blockId].src = this.forecast.dailyWeather[blockId + 1].weatherIconUrl;
     }
 
     for (let blockId = 0; blockId < blockCoordinates.length; blockId += 1) {

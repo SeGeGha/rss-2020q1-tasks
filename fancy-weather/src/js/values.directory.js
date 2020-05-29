@@ -11,6 +11,11 @@ const valuesDirectory = {
   requestType: {
     getPlace: 'search',
     getWeather: 'weather',
+    getImages: 'images',
+  },
+  daysTime: {
+    night: 'night',
+    day: 'day',
   },
   requestError: 'error',
 };
