@@ -3,16 +3,15 @@ import sendRequest from './requestSenders/forecast.requestSender';
 import valuesDirectory from './directories/values.directory';
 import changeTemperatureUnit from './functionHelpers/temperature.changer';
 import translationDirectory from './directories/translate.directory';
-import moment from '../../node_modules/moment';
-import handleData from './functionHelpers/apiData.handler';
+import handleData from './functionHelpers/data.handler';
 import getBackgroundImages from './requestSenders/images.requestSender';
 import mapManager from './functionHelpers/map.manager';
+import clockManager from './functionHelpers/clock.manager';
 
 const {
   language,
   unit,
   requestType,
-  daysTime,
 } = valuesDirectory;
 
 const weatherApplication = {
@@ -107,25 +106,18 @@ const weatherApplication = {
         const {
           current: currentWeatherData,
           daily: dailyWeatherData,
+          timezone_offset: timezoneOffsetSec,
         } = inputData.content;
+        const { appLanguage } = this.programSettings;
+        const renderElem = this.appComponents.blockCurrentDate;
 
-        moment.locale(this.programSettings.appLanguage);
-        this.locationInfo.timezone = inputData.content.timezone_offset / 60;
-        this.locationInfo.date = moment().utcOffset(this.locationInfo.timezone).format('ddd D MMMM, HH:mm:ss');
-
-        const getDaysTime = (date) => {
-          const hours = new Date(date).getHours();
-
-          return (hours < 6 || hours > 22) ? daysTime.night : daysTime.day;
-        };
-
+        clockManager.init(renderElem, timezoneOffsetSec, appLanguage);
+        const dateInfo = clockManager.getDateInfo();
+        console.log(dateInfo);
         this.forecast = {
           renderCoordinates: handleData.render.coordinates(this.locationInfo),
-          currentWeather: handleData.weatherData.current(currentWeatherData, getDaysTime(this.locationInfo.date)),
-          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, {
-            lang: this.programSettings.appLanguage,
-            timezone: this.locationInfo.timezone,
-          }, getDaysTime(this.locationInfo.date)),
+          currentWeather: handleData.weatherData.current(currentWeatherData, dateInfo),
+          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, dateInfo),
         };
 
         const keywords = this.forecast.currentWeather.weatherIconName;
@@ -173,7 +165,6 @@ const weatherApplication = {
   render(isCorrection = false) {
     const {
       blockLocation,
-      blockCurrentDate,
       multilingualBlocks,
       blockCurrentWeather,
       blockForecast,
@@ -188,7 +179,6 @@ const weatherApplication = {
     }
 
     blockLocation.textContent = this.locationInfo.name;
-    blockCurrentDate.textContent = this.locationInfo.date;
 
     for (let blockId = 0; blockId < multilingualBlocks.length; blockId += 1) {
       const blockCode = multilingualBlocks[blockId].dataset.multilingual;

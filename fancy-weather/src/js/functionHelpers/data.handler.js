@@ -1,32 +1,30 @@
 import checkTemperatureUnit from './temperature.checker';
-import moment from '../../../node_modules/moment';
 import weatherIdDirectory from '../directories/weatherId.directory';
+import clockManager from './clock.manager';
 
 const handleData = {
   weatherData: {
-    current(currentWeatherData, daysTime) {
+    current(currentWeatherData, dateInfo) {
       const { id } = currentWeatherData.weather[0];
 
       return {
-        daysTime,
         weatherDescription: currentWeatherData.weather[0].description,
         weatherIconName: weatherIdDirectory[id].name,
-        weatherIconUrl: weatherIdDirectory[id][daysTime],
+        weatherIconUrl: weatherIdDirectory[id][dateInfo.currentDayTime],
         temp: checkTemperatureUnit(currentWeatherData.temp),
         apparentTemp: checkTemperatureUnit(currentWeatherData.feels_like),
         windSpeed: currentWeatherData.wind_speed.toFixed(1),
         humidity: `${currentWeatherData.humidity}%`,
       };
     },
-    forecast(dailyWeatherData, dateSettings, daysTime) {
+    forecast(dailyWeatherData, dateInfo) {
       return dailyWeatherData.map((weatherForDay, dayId) => {
         const { min: minTemp, max: maxTemp } = weatherForDay.temp;
         const { id } = weatherForDay.weather[0];
 
         return {
-          dayName: moment().add(dayId, 'd').utcOffset(dateSettings.timezone).format('dddd'),
-          daysTime,
-          weatherIconUrl: weatherIdDirectory[id][daysTime],
+          dayName: clockManager.getNextDayName(dayId),
+          weatherIconUrl: weatherIdDirectory[id][dateInfo.currentDayTime],
           averageTemp: checkTemperatureUnit(Math.round((minTemp + maxTemp) / 2)),
         };
       });
