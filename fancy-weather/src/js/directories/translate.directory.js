@@ -71,6 +71,23 @@ const directory = {
       be: 'СУБ',
     },
   },
+  error: {
+    noResult: {
+      en: 'No result for your query',
+      ru: 'Нет результата по Вашему запросу',
+      be: 'Няма выніку па вашаму запыту',
+    },
+    invalidRequest: {
+      en: 'Invalid request',
+      ru: 'Неверный запрос',
+      be: 'Няправільны запыт',
+    },
+    failedRequest: {
+      en: 'Request failed, try again later',
+      ru: 'Ошибка запроса, повторите позже',
+      be: 'Памылка запыту, паўтарыце пазней',
+    },
+  },
 };
 
 export default directory;

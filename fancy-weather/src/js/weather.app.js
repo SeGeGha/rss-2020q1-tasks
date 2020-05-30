@@ -32,6 +32,7 @@ const weatherApplication = {
     },
     multilingualBlocks: document.querySelectorAll('[data-multilingual]'),
     blockCoordinates: document.querySelectorAll('[data-coordinates'),
+    preloader: document.querySelector('#cube-loader'),
   },
   programSettings: {
     appLanguage: null,
@@ -134,14 +135,18 @@ const weatherApplication = {
       }
         break;
       case requestType.getPlace: {
-        const placeInfoObj = handleData.searchData(inputData.content);
+        const result = handleData.searchData(inputData.content, this.programSettings.appLanguage);
 
-        this.locationInfo.latitude = placeInfoObj.latitude;
-        this.locationInfo.longitude = placeInfoObj.longitude;
-        this.locationInfo.name = placeInfoObj.name;
+        if (!result.error) {
+          this.locationInfo.latitude = result.latitude;
+          this.locationInfo.longitude = result.longitude;
+          this.locationInfo.name = result.name;
 
-        sendRequest(placeInfoObj, this.programSettings, requestType.getWeather)
-          .then((response) => this.dataHandler(response));
+          sendRequest(result, this.programSettings, requestType.getWeather)
+            .then((response) => this.dataHandler(response));
+        } else {
+          this.dataHandler(result);
+        }
       }
         break;
       case requestType.getImages:
@@ -162,6 +167,7 @@ const weatherApplication = {
 
     image.onload = () => {
       document.body.style.backgroundImage = `url('${image.src}')`;
+      this.appComponents.preloader.classList.remove('active');
     };
 
     image.onerror = () => {
