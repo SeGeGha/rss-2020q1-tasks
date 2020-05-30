@@ -30,8 +30,8 @@ const apiDirectory = {
   flickr: {
     key: 'c1cac9aa60759f58a978608fc41d4bdc',
     url: 'https://www.flickr.com',
-    getRequestUrl(keywords) {
-      const tags = keywords.replace(/\s/g, ',');
+    getRequestUrl(tags) {
+      console.log('tags for flickr.com:', tags);
       return `${this.url}/services/rest/?method=flickr.photos.search&api_key=${this.key}&tags=${tags}&tag_mode=all&extras=url_h&format=json&nojsoncallback=1`;
     },
   },

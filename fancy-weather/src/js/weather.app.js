@@ -112,15 +112,21 @@ const weatherApplication = {
         const renderElem = this.appComponents.blockCurrentDate;
 
         clockManager.init(renderElem, timezoneOffsetSec, appLanguage);
-        const dateInfo = clockManager.getDateInfo();
-        console.log(dateInfo);
+        const { currentYearSeason, currentDayTime } = clockManager.getDateInfo();
+
         this.forecast = {
           renderCoordinates: handleData.render.coordinates(this.locationInfo),
-          currentWeather: handleData.weatherData.current(currentWeatherData, dateInfo),
-          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, dateInfo),
+          currentWeather: handleData.weatherData.current(currentWeatherData, currentDayTime),
+          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, currentDayTime),
         };
 
-        const keywords = this.forecast.currentWeather.weatherIconName;
+        const weatherKeyword = this.forecast.currentWeather.weatherIconName;
+
+        const keywords = {
+          yearSeason: currentYearSeason,
+          weather: weatherKeyword,
+          dayTime: currentDayTime,
+        };
 
         getBackgroundImages(keywords)
           .then((response) => this.dataHandler(response));

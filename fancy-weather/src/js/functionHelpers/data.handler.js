@@ -4,27 +4,27 @@ import clockManager from './clock.manager';
 
 const handleData = {
   weatherData: {
-    current(currentWeatherData, dateInfo) {
+    current(currentWeatherData, currentDayTime) {
       const { id } = currentWeatherData.weather[0];
 
       return {
         weatherDescription: currentWeatherData.weather[0].description,
         weatherIconName: weatherIdDirectory[id].name,
-        weatherIconUrl: weatherIdDirectory[id][dateInfo.currentDayTime],
+        weatherIconUrl: weatherIdDirectory[id][currentDayTime],
         temp: checkTemperatureUnit(currentWeatherData.temp),
         apparentTemp: checkTemperatureUnit(currentWeatherData.feels_like),
         windSpeed: currentWeatherData.wind_speed.toFixed(1),
         humidity: `${currentWeatherData.humidity}%`,
       };
     },
-    forecast(dailyWeatherData, dateInfo) {
+    forecast(dailyWeatherData, currentDayTime) {
       return dailyWeatherData.map((weatherForDay, dayId) => {
         const { min: minTemp, max: maxTemp } = weatherForDay.temp;
         const { id } = weatherForDay.weather[0];
 
         return {
           dayName: clockManager.getNextDayName(dayId),
-          weatherIconUrl: weatherIdDirectory[id][dateInfo.currentDayTime],
+          weatherIconUrl: weatherIdDirectory[id][currentDayTime],
           averageTemp: checkTemperatureUnit(Math.round((minTemp + maxTemp) / 2)),
         };
       });
