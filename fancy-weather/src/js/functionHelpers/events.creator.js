@@ -1,6 +1,7 @@
 import weatherApplication from '../weather.app';
 import sendRequest from '../requestSenders/forecast.requestSender';
 import valuesDirectory from '../directories/values.directory';
+import recognition from './speech.constructor';
 
 function eventsCreator() {
   document.querySelector('.control-block').addEventListener('click', (event) => {
@@ -44,6 +45,14 @@ function eventsCreator() {
 
   document.querySelector('.control__update').addEventListener('click', () => {
     weatherApplication.backgroundImgChanger();
+  });
+
+  document.querySelector('.search__speech-recognition').addEventListener('click', () => {
+    if (!recognition.isRecognizing) {
+      recognition.start();
+    } else {
+      recognition.stop();
+    }
   });
 }
 export default eventsCreator;
