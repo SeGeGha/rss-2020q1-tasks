@@ -1,7 +1,7 @@
 import weatherApplication from '../weather.app';
 import sendRequest from '../requestSenders/forecast.requestSender';
 import valuesDirectory from '../directories/values.directory';
-import recognition from './speech.constructor';
+import recognition from './speech.manager';
 
 function eventsCreator() {
   document.querySelector('.control-block').addEventListener('click', (event) => {
