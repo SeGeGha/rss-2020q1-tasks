@@ -1,5 +1,9 @@
 .search-block {
   .search__input {
     @include size(75%, 100%);
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    padding: 0 10px;
   }
 }

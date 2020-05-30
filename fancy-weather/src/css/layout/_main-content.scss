@@ -1,7 +1,7 @@
 .main-info-container {
   @include flex(row, center, space-between);
-  width: 1200px;
-  margin: 40px auto;
+  width: 100%;
+  margin: auto;
 
   .weather-info {
     width: 55%;
@@ -12,5 +12,26 @@
     width: 30%;
     font-size: 1.4rem;
     line-height: 1.3;
+  }
+}
+
+@media (max-width: 1099px) {
+  .main-info-container  {
+    flex-direction: column;
+
+    .weather-info {
+      width: 90%;
+    } 
+    .location-info {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 499px) {
+  .main-info-container {
+    .location-info {
+      width: 100%;
+    }    
   }
 }

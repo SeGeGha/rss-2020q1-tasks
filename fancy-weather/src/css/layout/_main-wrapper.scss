@@ -1,9 +1,17 @@
+$paddingValue: 40px;
+
 .wrapper {
   @include flex(column, stretch, space-between);
   @include size(100%, 100%);
   min-height: 100vh;
-  padding: 40px 60px;
+  padding: $paddingValue ($paddingValue * 1.5);
   background: rgba(0, 0, 0, 0.7);
   color: #fffaf0;
   cursor: default;
+}
+
+@media (max-width: 499px) {
+  .wrapper {
+    padding: $paddingValue ($paddingValue * 0.75);
+  }
 }

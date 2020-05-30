@@ -1,5 +1,15 @@
 .search-block {
   .search__button {
-    @include size(25%, 100%);
+    @include size(50px, 100%);
+    border: none;
+    border-radius: 0 10px 10px 0;
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #a9a9a9;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

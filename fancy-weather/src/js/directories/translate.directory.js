@@ -34,11 +34,6 @@ const directory = {
     ru: 'Найти город',
     be: 'Знайсцi горад',
   },
-  search: {
-    en: 'SEARCH',
-    ru: 'НАЙТИ',
-    be: 'ЗНАЙСЦI',
-  },
   days: {
     0: {
       en: 'SUN',

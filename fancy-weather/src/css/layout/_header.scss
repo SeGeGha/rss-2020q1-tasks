@@ -1,14 +1,30 @@
+$marginValue: 40px;
+
 .header {
   @include flex(row, center, space-between);
-  @include size(100%, 40px);
+  width: 100%;
+  margin-bottom: $marginValue;
 
   .control-block {
     @include flex(row, center, center);
-    @include size(260px, 100%);
+    @include size(260px, 40px);
   }
 
   .search-block {
-    @include flex(row, center, center);
-    @include size(400px, 100%);
+    @include flex(row, center, flex-end);
+    @include size(400px, 40px);
+  }
+}
+
+@media (max-width: 749px) {
+  .header {
+    flex-direction: column;
+    margin-bottom: $marginValue;
+
+    .search-block {
+      width: 100%;
+      margin-top: ($marginValue / 2);
+      justify-content: center;
+    }
   }
 }
