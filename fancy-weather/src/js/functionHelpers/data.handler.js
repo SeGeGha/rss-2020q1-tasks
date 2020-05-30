@@ -1,6 +1,9 @@
 import checkTemperatureUnit from './temperature.checker';
 import weatherIdDirectory from '../directories/weatherId.directory';
 import clockManager from './clock.manager';
+import translationDirectory from '../directories/translate.directory';
+
+const { error } = translationDirectory;
 
 const handleData = {
   weatherData: {
@@ -30,45 +33,73 @@ const handleData = {
       });
     },
   },
-  searchData(placeInfoData) { // TODO STATUS CODE?
-    /*
-    let resultId = inputData.content.results.findIndex((result) => result.components._type === 'city') || 0;
+  searchData(placeInfoData, appLanguage) {
+    let result;
 
-    resultId = (resultId === -1) ? 0 : resultId;
-    let city;
+    switch (placeInfoData.status.code) {
+      case 200: {
+        const hasData = placeInfoData.results.length;
 
-    const { country } = inputData.content.results[resultId].components;
-    const bbb = inputData.content.results[resultId].components._type;
+        if (hasData) {
+          const localityTypes = [
+            'city', 'county', 'state', 'neighbourhood', 'townhall', 'village', 'road', 'attraction', 'monument',
+          ];
+          let locationInfo;
+          let localityName;
+          const localityType = localityTypes.find((type) => {
+            locationInfo = placeInfoData.results.find((res) => res.components._type === type);
+            return locationInfo;
+          });
 
-    switch (bbb) {
-      case 'city':
-        city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.town;
+          locationInfo = locationInfo || placeInfoData.results[0];
+
+          switch (localityType) {
+            case 'county':
+            case 'state':
+            case 'village':
+              localityName = locationInfo.components[localityType];
+              break;
+            case 'neighbourhood':
+              localityName = locationInfo.components.suburb || locationInfo.components.city;
+              break;
+            case 'road':
+            case 'attraction':
+            case 'monument':
+              localityName = locationInfo.components.state;
+              break;
+            default:
+              localityName = locationInfo.components.city || locationInfo.components.town;
+              break;
+          }
+
+          const countryName = locationInfo.components.country;
+          const localityFullName = (localityName) ? `${localityName} ${countryName}` : locationInfo.formatted;
+
+          result = {
+            name: localityFullName,
+            latitude: locationInfo.geometry.lat,
+            longitude: locationInfo.geometry.lng,
+          };
+        } else {
+          result = {
+            error: error.noResult[appLanguage],
+          };
+        }
+      }
         break;
-      case 'county':
-        city = inputData.content.results[resultId].components.county;
-        break;
-      case 'neighbourhood':
-        city = inputData.content.results[resultId].components.suburb || inputData.content.results[resultId].components.city;
-        break;
-      case 'village':
-        city = inputData.content.results[resultId].components.village;
-        break;
-      case 'state':
-        city = inputData.content.results[resultId].components.state;
-        break;
-      case 'townhall':
-        city = inputData.content.results[resultId].components.city;
+      case 400:
+        result = {
+          error: error.invalidRequest[appLanguage],
+        };
         break;
       default:
-        city = inputData.content.results[resultId].components.city || inputData.content.results[resultId].components.state;
+        result = {
+          error: error.failedRequest[appLanguage],
+        };
         break;
-    } */
+    }
 
-    return {
-      latitude: placeInfoData.results[0].geometry.lat,
-      longitude: placeInfoData.results[0].geometry.lng,
-      name: placeInfoData.results[0].formatted,
-    };
+    return result;
   },
   render: {
     coordinates(locationInfo) {
@@ -90,8 +121,8 @@ const handleData = {
       return locationCoordinates;
     },
   },
-  error(error) {
-    document.querySelector('error').textContent = error;
+  error(errorData) {
+    console.log(errorData);
   },
 };
 
