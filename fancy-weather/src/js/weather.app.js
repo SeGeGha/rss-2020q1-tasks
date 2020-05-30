@@ -12,6 +12,7 @@ const {
   language,
   unit,
   requestType,
+  dayTime,
 } = valuesDirectory;
 
 const weatherApplication = {
@@ -117,7 +118,7 @@ const weatherApplication = {
         this.forecast = {
           renderCoordinates: handleData.render.coordinates(this.locationInfo),
           currentWeather: handleData.weatherData.current(currentWeatherData, currentDayTime),
-          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, currentDayTime),
+          dailyWeather: handleData.weatherData.forecast(dailyWeatherData, dayTime.day),
         };
 
         const weatherKeyword = this.forecast.currentWeather.weatherIconName;
