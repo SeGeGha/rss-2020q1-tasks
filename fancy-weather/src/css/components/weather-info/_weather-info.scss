@@ -89,6 +89,11 @@
 }
 
 @media (max-width: 499px) {
+  .weather-info-today {
+    .info__temperature {
+      font-size: 5rem;
+    }
+  }
   .weather-info-three-days {
     .info-wrapper {
       @include flex(column, center, center);

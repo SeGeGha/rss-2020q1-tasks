@@ -12,6 +12,6 @@ $paddingValue: 40px;
 
 @media (max-width: 499px) {
   .wrapper {
-    padding: $paddingValue ($paddingValue * 0.75);
+    padding: $paddingValue ($paddingValue * 0.375);
   }
 }
