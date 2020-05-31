@@ -53,7 +53,6 @@ const handleData = {
           });
 
           locationInfo = locationInfo || placeInfoData.results[0];
-          console.log(locationInfo);
 
           switch (localityType) {
             case 'county':
