@@ -15,7 +15,7 @@ function sendRequest(locationInfo, settings, requestType) {
     }))
     .catch(() => ({
       type: valuesDirectory.requestError,
-      message: translationDirectory.failedRequest[settings.appLanguage],
+      message: translationDirectory.error.failedRequest[settings.appLanguage],
     }));
 }
 
