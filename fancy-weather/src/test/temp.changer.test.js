@@ -1,6 +1,15 @@
-import changeTemperatureUnit from '../js/functionHelpers/temperature.changer';
+jest.mock('../js/directories/values.directory', () => {
+  return {
+    unit: {
+      celsius: '°C',
+      fahrenheit: '°F',
+    },
+  };
+});
 
-describe('check "changeTemperatureUnit" function', () => {
+const changeTemperatureUnit = require('../js/functionHelpers/temperature.changer').default;
+
+describe('changeTemperatureUnit', () => {
   it('should return string value', () => {
     expect(changeTemperatureUnit('°C', '55°F')).not.toBeNull();
     expect(changeTemperatureUnit('°C', '45°F')).not.toBeUndefined();
