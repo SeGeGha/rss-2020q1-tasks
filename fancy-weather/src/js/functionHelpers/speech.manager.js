@@ -28,15 +28,21 @@ const recognizer = {
   },
 
   stop() {
-    this.isRecognizing = false;
-    this.speechBtn.classList.remove('active');
-    this.recognition.stop();
-
     const { getPlace } = valuesDirectory.requestType;
     const query = document.querySelector('.search__input').value;
 
+    this.deactivate();
+
+    document.querySelector('#cube-loader').classList.add('active');
+    document.querySelector('.error').textContent = '';
+
     sendRequest(query, weatherApplication.programSettings, getPlace)
       .then((response) => weatherApplication.dataHandler(response));
+  },
+  deactivate() {
+    this.isRecognizing = false;
+    this.speechBtn.classList.remove('active');
+    this.recognition.stop();
   },
 };
 

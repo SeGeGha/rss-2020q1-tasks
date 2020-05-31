@@ -1,16 +1,24 @@
 #cube-loader {
-  display: none;
+  @include flex (row, center);
   @include size (100%, 100%);
   position: fixed;
   top: 0;
-  background: #008080;
+  background: inherit;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.7s,opacity 0.7s linear;
 
   &.active {
-    @include flex (row, center);
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s linear;
+    transition-delay:0s;
   }
+
   & .caption {
     margin: 0 auto;
   }
+
   .cube-loader {
     position: relative;
     @include size(73px, 73px);
@@ -66,5 +74,14 @@
   90%, 100% {
     transform: perspective(136px) rotateY(180deg);
     opacity: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

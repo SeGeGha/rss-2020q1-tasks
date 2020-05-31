@@ -1,12 +1,16 @@
 import weatherApplication from '../weather.app';
 import sendRequest from '../requestSenders/forecast.requestSender';
 import valuesDirectory from '../directories/values.directory';
-import recognition from './speech.manager';
+import recognizer from './speech.manager';
 
 function eventsCreator() {
+  const errorBlock = document.querySelector('.error');
+
   document.querySelector('.control-block').addEventListener('click', (event) => {
     const { target } = event;
     const { appTemperatureUnit, appLanguage } = weatherApplication.programSettings;
+
+    errorBlock.textContent = '';
 
     switch (target.dataset.value) {
       case '°F':
@@ -36,6 +40,11 @@ function eventsCreator() {
   document.querySelector('.search__button').addEventListener('click', (event) => {
     event.preventDefault();
 
+    const preloader = document.querySelector('#cube-loader');
+
+    preloader.classList.add('active');
+    errorBlock.textContent = '';
+
     const { getPlace } = valuesDirectory.requestType;
     const query = document.querySelector('.search__input').value;
 
@@ -44,14 +53,15 @@ function eventsCreator() {
   });
 
   document.querySelector('.control__update').addEventListener('click', () => {
+    errorBlock.textContent = '';
     weatherApplication.backgroundImgChanger();
   });
 
   document.querySelector('.search__speech-recognition').addEventListener('click', () => {
-    if (!recognition.isRecognizing) {
-      recognition.start();
+    if (!recognizer.isRecognizing) {
+      recognizer.start();
     } else {
-      recognition.stop();
+      recognizer.deactivate();
     }
   });
 }

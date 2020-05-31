@@ -11,8 +11,9 @@ function getBackgroundImages(keywords) {
       type: valuesDirectory.requestType.getImages,
       content: data,
     }))
-    .catch((error) => ({
-      type: `${valuesDirectory.requestError}: ${error}`,
+    .catch(() => ({
+      type: valuesDirectory.requestType.getImages,
+      content: valuesDirectory.imageStubs,
     }));
 }
 

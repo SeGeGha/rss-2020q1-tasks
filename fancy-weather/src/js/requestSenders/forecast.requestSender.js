@@ -1,5 +1,6 @@
 import apiDirectory from '../directories/apiInfo.directory';
 import valuesDirectory from '../directories/values.directory';
+import translationDirectory from '../directories/translate.directory';
 
 function sendRequest(locationInfo, settings, requestType) {
   const { openCageData, openWeatherMap } = apiDirectory;
@@ -12,8 +13,9 @@ function sendRequest(locationInfo, settings, requestType) {
       type: requestType,
       content,
     }))
-    .catch((error) => ({
-      type: `${valuesDirectory.requestError}: ${error}`,
+    .catch(() => ({
+      type: valuesDirectory.requestError,
+      message: translationDirectory.failedRequest[settings.appLanguage],
     }));
 }
 

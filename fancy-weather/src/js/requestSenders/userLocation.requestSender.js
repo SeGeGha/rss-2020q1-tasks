@@ -12,8 +12,8 @@ function getUserLocation() {
       };
     })
     .catch(() => ({ // Minsk
-      latitude: 53.9,
-      longitude: 27.57,
+      latitude: 53.902496,
+      longitude: 27.561481,
     }));
 }
 

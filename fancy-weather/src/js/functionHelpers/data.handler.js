@@ -42,7 +42,8 @@ const handleData = {
 
         if (hasData) {
           const localityTypes = [
-            'city', 'county', 'state', 'neighbourhood', 'townhall', 'village', 'road', 'attraction', 'monument',
+            'city', 'county', 'state', 'neighbourhood', 'townhall', 'village', 'road', 'attraction',
+            'monument',
           ];
           let locationInfo;
           let localityName;
@@ -52,6 +53,7 @@ const handleData = {
           });
 
           locationInfo = locationInfo || placeInfoData.results[0];
+          console.log(locationInfo);
 
           switch (localityType) {
             case 'county':
@@ -62,10 +64,12 @@ const handleData = {
             case 'neighbourhood':
               localityName = locationInfo.components.suburb || locationInfo.components.city;
               break;
-            case 'road':
             case 'attraction':
             case 'monument':
               localityName = locationInfo.components.state;
+              break;
+            case 'road':
+              localityName = locationInfo.components.city || locationInfo.components.state;
               break;
             default:
               localityName = locationInfo.components.city || locationInfo.components.town;
@@ -82,19 +86,19 @@ const handleData = {
           };
         } else {
           result = {
-            error: error.noResult[appLanguage],
+            message: error.noResult[appLanguage],
           };
         }
       }
         break;
       case 400:
         result = {
-          error: error.invalidRequest[appLanguage],
+          message: error.invalidRequest[appLanguage],
         };
         break;
       default:
         result = {
-          error: error.failedRequest[appLanguage],
+          message: error.failedRequest[appLanguage],
         };
         break;
     }
@@ -120,9 +124,6 @@ const handleData = {
 
       return locationCoordinates;
     },
-  },
-  error(errorData) {
-    console.log(errorData);
   },
 };
 
