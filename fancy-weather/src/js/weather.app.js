@@ -97,10 +97,10 @@ const weatherApplication = {
   },
   translator(newLanguage) {
     this.programSettings.appLanguage = newLanguage;
-
     localStorage.setItem('appLanguage', newLanguage);
+    this.appComponents.blockPreloader.classList.add('active');
 
-    sendRequest(this.locationInfo, this.programSettings, requestType.getPlace)
+    sendRequest(this.locationInfo.name, this.programSettings, requestType.getPlace)
       .then((response) => this.dataHandler(response));
   },
   dataHandler(inputData) {
