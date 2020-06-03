@@ -7,7 +7,7 @@ $marginValue: 40px;
 
   .control-block {
     @include flex(row, center, center);
-    @include size(260px, 40px);
+    flex-wrap: wrap;
   }
 
   .search-block {

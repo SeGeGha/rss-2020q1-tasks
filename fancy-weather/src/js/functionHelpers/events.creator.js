@@ -1,7 +1,7 @@
 import weatherApplication from '../weather.app';
 import sendRequest from '../requestSenders/forecast.requestSender';
 import valuesDirectory from '../directories/values.directory';
-import recognizer from './speech.manager';
+import { recognizer, speaker } from './speech.manager';
 
 function eventsCreator() {
   const errorBlock = document.querySelector('.error');
@@ -40,9 +40,7 @@ function eventsCreator() {
   document.querySelector('.search__button').addEventListener('click', (event) => {
     event.preventDefault();
 
-    const preloader = document.querySelector('#cube-loader');
-
-    preloader.classList.add('active');
+    document.querySelector('#cube-loader').classList.add('active');
     errorBlock.textContent = '';
 
     const { getPlace } = valuesDirectory.requestType;
@@ -62,6 +60,22 @@ function eventsCreator() {
       recognizer.start();
     } else {
       recognizer.deactivate();
+    }
+  });
+
+  document.querySelector('.control__speak').addEventListener('click', (event) => {
+    event.target.classList.toggle('active');
+
+    if (!speaker.isSpeaking) {
+      speaker.start();
+    }
+  });
+
+  document.querySelector('.btn-wrapper > div').addEventListener('click', (event) => {
+    if (event.target.classList.contains('volume_up')) {
+      speaker.regulateVolume('up');
+    } else {
+      speaker.regulateVolume('down');
     }
   });
 }

@@ -6,10 +6,13 @@
     outline: none;
     font-size: 1.5rem;
     font-weight: bold;
-    background: #a9a9a9;
+    background: url('../assets/img/search.png') #a9a9a9 center no-repeat;
+    background-size: 30px;
+    transition: background 0.3s;
 
     &:hover {
       cursor: pointer;
+      background-color: #708090;
     }
   }
 }

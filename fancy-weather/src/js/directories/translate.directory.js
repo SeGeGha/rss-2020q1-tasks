@@ -1,4 +1,9 @@
 const directory = {
+  temperature: {
+    en: 'Teamperature',
+    ru: 'Температура',
+    be: 'Тэмпература',
+  },
   apparentTemp: {
     en: 'FEELS LIKE:',
     ru: 'ОЩУЩАЕТСЯ КАК:',
@@ -19,6 +24,11 @@ const directory = {
     ru: 'М/С',
     be: 'М/С',
   },
+  fullWindUnit: {
+    en: 'meter per second',
+    ru: 'метров в секунду',
+    be: 'метраў у секунду',
+  },
   latitude: {
     en: 'LATITUDE:',
     ru: 'ШИРОТА:',
@@ -28,6 +38,21 @@ const directory = {
     en: 'LONGITUDE:',
     ru: 'ДОЛГОТА:',
     be: 'ДАЎГАТА:',
+  },
+  forecast: {
+    en: 'forecast',
+    ru: 'прогноз',
+    be: 'прагноз',
+  },
+  louder: {
+    en: 'louder',
+    ru: 'громче',
+    be: 'гучней',
+  },
+  quieter: {
+    en: 'quieter',
+    ru: 'тише',
+    be: 'цішэй',
   },
   searchCity: {
     en: 'Search City',

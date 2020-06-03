@@ -11,19 +11,26 @@
   <div class="wrapper">
     <div class="header">
       <div class="control-block">
-        <button class="control__update">&#8634;</button>
+        <button class="control__update"></button>
         <button class="control__language" data-value="en">en</button>
         <button class="control__language" data-value="ru">ru</button>
         <button class="control__language" data-value="be">be</button>
         <button class="control__temperature" data-value="°F">°F</button>
         <button class="control__temperature" data-value="°C">°C</button>
+        <div class="btn-wrapper">
+          <button class="control__speak"></button>     
+          <div class="btn-wrapper">
+            <button class="control__volume volume_up">&#9650;</button>
+            <button class="control__volume volume_down">&#9660;</button>
+          </div>     
+        </div>
       </div>
       <form class="search-block">
         <div class="input-wrapper">
           <input type="text" class="search__input" data-multilingual="searchCity">
           <div class="search__speech-recognition"></div>          
         </div>
-        <button type="submit" class="search__button">&#128269;</button>
+        <button type="submit" class="search__button"></button>
       </form>
     </div>
     <main class="main-info-container">

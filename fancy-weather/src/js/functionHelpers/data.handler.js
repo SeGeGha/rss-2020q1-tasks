@@ -106,15 +106,13 @@ const handleData = {
   },
   render: {
     coordinates(locationInfo) {
-      const { latitude, longitude } = locationInfo;
       const locationCoordinates = {
-        latitude,
-        longitude,
+        latitude: locationInfo.latitude,
+        longitude: locationInfo.longitude,
       };
 
       Object.entries(locationCoordinates).forEach((coordinatesArr) => {
-        const coordinatesKey = coordinatesArr[0];
-        const coordinatesValue = coordinatesArr[1];
+        const [coordinatesKey, coordinatesValue] = coordinatesArr;
         const degreesValue = `${Math.trunc(coordinatesValue)}°`;
         const minutesValue = `${Math.trunc((coordinatesValue - Math.trunc(coordinatesValue)) * 60)}'`;
 
@@ -123,6 +121,16 @@ const handleData = {
 
       return locationCoordinates;
     },
+  },
+  forecastMessage(language, ...data) {
+    const {
+      temperature, apparentTemp, wind, humidity, fullWindUnit,
+    } = translationDirectory;
+    const [location, weather] = data;
+
+    return `${location}. ${temperature[language]} - ${weather.temp}. ${apparentTemp[language]} - 
+    ${weather.apparentTemp}. ${weather.weatherDescription}. ${wind[language]} - ${weather.windSpeed} 
+    ${fullWindUnit[language]}. ${humidity[language]} - ${weather.humidity}`;
   },
 };
 

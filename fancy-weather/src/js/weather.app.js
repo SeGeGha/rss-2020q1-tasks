@@ -7,6 +7,7 @@ import handleData from './functionHelpers/data.handler';
 import getBackgroundImages from './requestSenders/images.requestSender';
 import mapManager from './functionHelpers/map.manager';
 import clockManager from './functionHelpers/clock.manager';
+import { speaker } from './functionHelpers/speech.manager';
 
 const {
   language,
@@ -45,6 +46,7 @@ const weatherApplication = {
     currentImageNumber: 0,
     imageDirectory: null,
   },
+
   init() {
     this.defaultSetup();
 
@@ -55,6 +57,7 @@ const weatherApplication = {
         .then((response) => this.dataHandler(response));
     });
   },
+
   defaultSetup() {
     const defaultParameters = {
       appLanguage: {
@@ -76,6 +79,7 @@ const weatherApplication = {
       domElements.find((item) => item.dataset.value === this.programSettings[setting]).classList.add('active');
     });
   },
+
   changerTempUnit(newUnit) {
     const { currentWeather, dailyWeather } = this.forecast;
     const isCorrection = true;
@@ -95,6 +99,7 @@ const weatherApplication = {
 
     this.render(isCorrection);
   },
+
   translator(newLanguage) {
     this.programSettings.appLanguage = newLanguage;
     localStorage.setItem('appLanguage', newLanguage);
@@ -103,6 +108,7 @@ const weatherApplication = {
     sendRequest(this.locationInfo.name, this.programSettings, requestType.getPlace)
       .then((response) => this.dataHandler(response));
   },
+
   dataHandler(inputData) {
     switch (inputData.type) {
       case requestType.getWeather: {
@@ -122,6 +128,9 @@ const weatherApplication = {
           currentWeather: handleData.weatherData.current(currentWeatherData, currentDayTime),
           dailyWeather: handleData.weatherData.forecast(dailyWeatherData, dayTime.day),
         };
+
+        const message = handleData.forecastMessage(appLanguage, this.locationInfo.name, this.forecast.currentWeather);
+        speaker.init(appLanguage, message);
 
         const weatherKeyword = this.forecast.currentWeather.weatherIconName;
 
@@ -160,6 +169,7 @@ const weatherApplication = {
         break;
     }
   },
+
   backgroundImgChanger() {
     const { currentImageNumber, imageDirectory } = this.backgroundImages;
     const image = new Image();
@@ -177,6 +187,7 @@ const weatherApplication = {
       image.src = imageDirectory[this.backgroundImages.currentImageNumber].url_h;
     };
   },
+
   render(isCorrection = false) {
     const {
       blockLocation,
