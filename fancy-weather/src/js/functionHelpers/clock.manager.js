@@ -18,19 +18,23 @@ const clockManager = {
 
     this.turnOn();
   },
+
   turnOn() {
     this.implementer();
     this.intervalId = setInterval(() => {
       this.implementer();
     }, 1000);
   },
+
   implementer() {
     this.currentDate = moment().utcOffset(this.currentTimezone).format('ddd D MMMM, HH:mm:ss');
     this.renderElement.textContent = this.currentDate;
   },
+
   turnOff() {
     clearInterval(this.intervalId);
   },
+
   getDateInfo() {
     const hours = new Date(this.currentDate).getHours();
     const month = new Date().getMonth();
@@ -42,6 +46,7 @@ const clockManager = {
       currentDayTime,
     };
   },
+
   getNextDayName(dayCount) {
     return moment().add(dayCount, 'd').utcOffset(this.currentTimezone).format('dddd');
   },

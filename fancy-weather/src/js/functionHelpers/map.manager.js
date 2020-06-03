@@ -18,6 +18,7 @@ const mapManager = {
     logoPosition: 'top-left',
   }),
   marker: new mapboxgl.Marker(),
+
   setMarker() {
     const appMap = this.map;
 
@@ -25,6 +26,7 @@ const mapManager = {
       .setLngLat([this.coordinates.longitude, this.coordinates.latitude])
       .addTo(appMap);
   },
+
   flyToCoordinates(locationInfo) {
     this.coordinates.latitude = locationInfo.latitude;
     this.coordinates.longitude = locationInfo.longitude;
