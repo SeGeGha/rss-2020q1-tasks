@@ -1,5 +1,5 @@
 import { movieComponent } from '../movie/main';
-import { searchInput, searchLoader } from '../directory/globalVariables';
+import { searchResult, searchInput, searchLoader } from '../directory/globalVariables';
 import { keyboard } from '../virtualKeyboard/main';
 import Recognizer from './speechRecognition';
 import handlerInputValue from './inputValueHandler';
@@ -22,7 +22,10 @@ function searchComponent() {
     searchLoader.classList.add('active');
 
     speechBtn.classList.remove('active');
-    recognizer.stop();
+
+    if (recognizer.isRecognizing) {
+      recognizer.stop();
+    }
 
     handlerInputValue();
   });
@@ -33,14 +36,21 @@ function searchComponent() {
   });
 
   speechBtn.addEventListener('click', (event) => {
-    event.target.classList.toggle('active');
-    searchInput.focus();
+    const isSupportSpeech = recognizer.recognition.error;
 
-    if (!recognizer.isRecognizing) {
-      recognizer.start();
+    if (!isSupportSpeech) {
+      event.target.classList.toggle('active');
+
+      if (!recognizer.isRecognizing) {
+        recognizer.start();
+      } else {
+        recognizer.stop();
+      }
     } else {
-      recognizer.stop();
+      searchResult.textContent = isSupportSpeech;
     }
+
+    searchInput.focus();
   });
 }
 

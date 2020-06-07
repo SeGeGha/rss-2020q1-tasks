@@ -4,13 +4,26 @@ const speechObj = {
   standard: window.SpeechRecognition,
   webkit: window.webkitSpeechRecognition,
   moz: window.mozSpeechRecognition,
+  ms: window.msSpeechRecognition,
 };
 
-const SpeechRecognition = speechObj.standard || speechObj.webkit || speechObj.moz;
+const SpeechRecognition = speechObj.standard || speechObj.webkit || speechObj.moz || speechObj.ms;
 
 class Recognizer {
   constructor() {
-    this.recognition = new SpeechRecognition();
+    this.recognition = (function init() {
+      let newRecognition;
+
+      try {
+        newRecognition = new SpeechRecognition();
+      } catch (error) {
+        newRecognition = {
+          error: 'Your browser doesn\'t support Speech Recognition',
+        };
+      }
+
+      return newRecognition;
+    }());
     this.recognition.continuous = true;
     this.recognition.interimResults = true;
     this.isRecognizing = false;
