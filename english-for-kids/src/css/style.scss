@@ -1,0 +1,23 @@
+@import './base/reset';
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+@import './abstract/global-variables';
+@import './abstract/mixin';
+
+@import './base/main';
+
+@import './components/menu-button';
+@import './components/menu';
+@import './components/main-card';
+@import './components/caterogy-card';
+@import './components/switch-button';
+@import './components/button';
+@import './components/statistics-table';
+
+@import './layout/wrapper';
+@import './layout/header';
+@import './layout/page';
+@import './layout/page-container';
+@import './layout/starContainer';
+@import './layout/result';

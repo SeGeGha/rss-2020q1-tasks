@@ -1,0 +1,63 @@
+$lineFirstColor: $bodyThirdColor;
+$lineSecondColor: $BurgerBackground;
+$transition: all 0.3s;
+$btnSize: 60px;
+
+.burger-menu {
+  @include flex(row, center);
+}
+
+.burger-menu__btn {
+  @include size($btnSize, $btnSize);
+  display: block;
+  z-index: 30;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.5s;
+
+  .btn__line {
+    display: block;
+    position: relative;
+    @include size(90%, 5px);
+    margin: 10px auto;
+    background-color: $lineFirstColor;
+    border-radius: 10px;
+    transition: $transition 0.5s;
+  }
+
+  .line_middle {
+    transition: $transition 0.3s;  
+  }
+
+  .line_bottom {
+    transition: $transition 0.1s;  
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.active {
+    position: fixed;
+    left: 120px;
+
+    .line_top {
+      @include size(90%, 90%);
+      margin: 5px auto;
+      transition: $transition 0.1s;
+    }
+
+    .line_middle {
+      background-color: $lineSecondColor;
+      transform: translateY(-40px) rotateZ(45deg);
+      transition: $transition 0.3s;
+    }
+
+    .line_bottom {
+      background-color: $lineSecondColor;
+      transform: translateY(-55px) rotateZ(-45deg);
+      transition: $transition 0.5s;
+    }
+  }
+}

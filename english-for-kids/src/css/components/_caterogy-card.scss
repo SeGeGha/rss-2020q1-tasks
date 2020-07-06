@@ -1,0 +1,102 @@
+$cardWidth: 300px;
+$cardHeight: 300px;
+$cardBorder: 5px;
+$captionHeight: 70px;
+$color: rgb(230, 230, 250);
+$transition: all 0.4s;
+$goldColor: rgb(255, 215, 0);
+
+.card-wrapper {
+  margin: 30px 15px;
+  
+  &.hidden {
+    display: none;
+  }
+}
+
+.category-card {
+  position: relative;
+  border: $cardBorder solid $color;
+  @include size($cardWidth, $cardHeight);
+  background: $color;
+  box-shadow: $boxShadow;
+  cursor: pointer;
+  opacity: 1;
+  transition: $transition;
+  
+  &.flip {
+    transform: rotateY(180deg) scaleX(-1);
+
+    .card_back {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .play-mode & {
+    .image-wrapper {
+      height: 100%;
+    }
+
+    .card_front {
+      display: none
+    }    
+  }
+
+  &.darken {
+    background: rgb(0, 0, 0);
+
+    .image-wrapper {
+      opacity: 0.3;
+    }
+  }
+
+  &:hover {
+    border-color: $goldColor;
+
+    .card_front,
+    .card_back {
+      background: $goldColor;
+    }
+  }
+}
+
+.image-wrapper {
+  @include flex(row, center, center);
+  @include size(($cardWidth - $cardBorder * 2), ($cardHeight - $captionHeight - $cardBorder * 2));
+  overflow: hidden;
+
+  .card__image {
+    height: 100%;
+  }
+}
+
+.card_front, .card_back {
+  @include flex(row, center, center);
+  @include size(($cardWidth - $cardBorder * 2), $captionHeight);
+  position: absolute;
+  background: inherit;
+  backface-visibility: hidden;
+  transition: $transition;
+
+  .card__title {
+    margin-right: 15px;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+  }
+}
+
+.card_back {
+  transition: $transition;
+  transform: rotateY(180deg);
+}
+
+.title__reverse {
+  @include flex(row, center, center);
+  font-size: 40px;
+  height: 40px;
+  transition: $transition ease-in;
+
+  &:hover {
+    transform: rotate(-180deg);
+  }
+}

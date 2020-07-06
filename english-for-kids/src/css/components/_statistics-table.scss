@@ -1,0 +1,41 @@
+$backgroundColor: rgb(95, 158, 160);
+
+.table-wrapper {
+  justify-content: flex-start;
+  height: 650px;
+  margin-bottom: 30px;
+  overflow: auto;
+}
+
+.statistics {
+  width: 100%;
+  border-collapse: collapse;
+
+  .table-header {
+    background: $backgroundColor;
+  }
+
+  .row-word {
+    background: lighten($backgroundColor, 20%);
+    color: lighten(rgb(0, 0, 0), 10%);
+  }
+}
+
+tr {
+  height: 50px;
+  
+  th {
+    border: 1px solid black;
+    width: (100% / 7);
+  
+    &:hover {
+      cursor: pointer;
+      background: rgb(0, 139, 139);
+    }
+  }
+  
+  td {
+    border: 1px solid rgb(0, 0, 0);
+    text-align: center;
+  }
+}

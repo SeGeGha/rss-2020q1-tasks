@@ -1,0 +1,18 @@
+.main-page,
+.category-page,
+.statistics-page {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.page_active {
+  display: flex;
+}
+
+.category-page {
+  &.hidden {
+    display: none;
+  }
+}
