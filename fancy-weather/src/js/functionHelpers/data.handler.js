@@ -114,7 +114,7 @@ const handleData = {
       Object.entries(locationCoordinates).forEach((coordinatesArr) => {
         const [coordinatesKey, coordinatesValue] = coordinatesArr;
         const degreesValue = `${Math.trunc(coordinatesValue)}°`;
-        const minutesValue = `${Math.trunc((coordinatesValue - Math.trunc(coordinatesValue)) * 60)}'`;
+        const minutesValue = `${Math.abs(Math.trunc((coordinatesValue - Math.trunc(coordinatesValue)) * 60))}'`;
 
         locationCoordinates[coordinatesKey] = degreesValue + minutesValue;
       });

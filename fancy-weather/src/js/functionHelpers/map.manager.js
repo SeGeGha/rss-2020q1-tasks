@@ -1,5 +1,8 @@
 import mapboxgl from 'mapbox-gl';
 import apiDirectory from '../directories/apiInfo.directory';
+import valuesDirectory from '../directories/values.directory';
+import sendRequest from '../requestSenders/forecast.requestSender';
+import weatherApplication from '../weather.app';
 
 const [standardLongitude, standardLatitude] = [27.57, 53.9];
 mapboxgl.accessToken = apiDirectory.mapbox.key;
@@ -41,5 +44,16 @@ const mapManager = {
     this.setMarker();
   },
 };
+
+mapManager.map.on('click', (event) => {
+  const { lat: latitude, lng: longitude } = event.lngLat;
+  const { requestType } = valuesDirectory;
+
+  document.querySelector('#cube-loader').classList.add('active');
+  mapManager.flyToCoordinates({ latitude, longitude });
+  sendRequest({ latitude, longitude }, weatherApplication.programSettings, requestType.getPlace)
+    .then((data) => weatherApplication.dataHandler(data));
+});
+
 
 export default mapManager;

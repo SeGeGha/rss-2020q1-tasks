@@ -13,7 +13,19 @@ const SpeechRecognition = speechObj.standard || speechObj.webkit || speechObj.mo
 const speaker = {
   speakBtn: document.querySelector('.control__speak'),
   synthesis: window.speechSynthesis,
-  message: new SpeechSynthesisUtterance(),
+  message: (function init() {
+    let newUtterance;
+
+    try {
+      newUtterance = new SpeechSynthesisUtterance();
+    } catch (error) {
+      newUtterance = {
+        error: 'Browser doesn\'t support Speech Synthesis Utterance',
+      };
+    }
+
+    return newUtterance;
+  }()),
   isSpeaking: false,
 
   init(appLanguage, weatherMessage) {
@@ -56,7 +68,19 @@ const speaker = {
 const recognizer = {
   textInput: document.querySelector('.search__input'),
   speechBtn: document.querySelector('.search__speech-recognition'),
-  recognition: new SpeechRecognition(),
+  recognition: (function init() {
+    let newRecognition;
+
+    try {
+      newRecognition = new SpeechRecognition();
+    } catch (error) {
+      newRecognition = {
+        error: 'Browser doesn\'t support Speech Recognition',
+      };
+    }
+
+    return newRecognition;
+  }()),
   isRecognizing: false,
 
   start() {

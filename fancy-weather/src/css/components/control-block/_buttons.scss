@@ -82,6 +82,10 @@ $borderRadius: ($btnWidth / 4);
   .btn-wrapper {
     display: flex;
 
+    &.hidden {
+      display: none;
+    }
+
     .control__volume {
       @include size(($btnWidth *0.5), ($btnWidth *0.5));
       line-height: 1;

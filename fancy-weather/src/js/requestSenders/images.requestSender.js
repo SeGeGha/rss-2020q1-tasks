@@ -8,7 +8,7 @@ function getBackgroundImages(keywords) {
     .then((response) => response.json())
     .then((data) => ({
       type: valuesDirectory.requestType.getImages,
-      content: data,
+      content: (data.stat === 'ok') ? data : valuesDirectory.imageStubs,
     }))
     .catch(() => ({
       type: valuesDirectory.requestType.getImages,

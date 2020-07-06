@@ -20,8 +20,9 @@
 
     .weather-indicators {
       position: relative;
-      font-size: 1.4rem;
       top: -20px;
+      font-size: 1.4rem;
+      text-align: left;
 
       .indicators__weather-description {
         text-transform: uppercase;
