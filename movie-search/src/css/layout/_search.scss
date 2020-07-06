@@ -1,0 +1,19 @@
+.search {
+  @include flex(column, center, center);
+
+  .wrapper {
+    width: 100%;
+    @include flex(row, center, center);
+  }
+
+  .result-wrapper{
+    @include flex(column, center, center);
+    width: 100%;
+    position: relative;
+  }
+
+  .field {
+    width: calc(95% - 90px);
+    position: relative;
+  }
+}

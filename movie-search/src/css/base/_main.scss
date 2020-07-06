@@ -1,0 +1,7 @@
+body {
+  @include flex(column, center, space-between);
+  height: 100vh;
+  background: linear-gradient(to left, rgb(68, 160, 141), rgb(9, 54, 55));
+  font-family: $fontFamily;
+  font-size: $fontSize;
+}

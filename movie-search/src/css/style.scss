@@ -1,0 +1,27 @@
+@import './base/reset';
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import '../../node_modules/swiper/css/swiper.css';
+
+@import './abstract/global-variables';
+@import './abstract/mixin';
+
+@import './base/main';
+
+@import './layout/header';
+@import './layout/main-content';
+@import './layout/swiper';
+@import './layout/footer';
+@import './layout/search';
+@import './layout/keyboard';
+
+@import './components/search.input';
+@import './components/search.button';
+@import './components/search.result';
+@import './components/search.loader';
+@import './components/swiper.card';
+@import './components/footer.link';
+@import './components/keyboard.key';
+
+
+

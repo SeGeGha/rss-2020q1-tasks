@@ -1,0 +1,30 @@
+$mainColor: rgb(255, 240, 245);
+
+.search__loader {
+  display: none;
+  position: absolute;
+  @include size(45px, 45px);
+
+  &::after {
+    content: " ";
+    display: block;
+    @include size(36px, 36px);
+    border-radius: 50%;
+    border: 4px solid $mainColor;
+    border-color: $mainColor transparent $mainColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+
+  &.active {
+    display: inline-block;
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
