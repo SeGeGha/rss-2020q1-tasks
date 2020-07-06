@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Fancy Weather</title>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/img/weather.ico" type="image/png">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="control-block">
+        <button class="control__update"></button>
+        <button class="control__language" data-value="en">en</button>
+        <button class="control__language" data-value="ru">ru</button>
+        <button class="control__language" data-value="be">be</button>
+        <button class="control__temperature" data-value="°F">°F</button>
+        <button class="control__temperature" data-value="°C">°C</button>
+        <div class="btn-wrapper">
+          <button class="control__speak"></button>     
+          <div class="btn-wrapper">
+            <button class="control__volume volume_up">&#9650;</button>
+            <button class="control__volume volume_down">&#9660;</button>
+          </div>     
+        </div>
+      </div>
+      <form class="search-block">
+        <div class="input-wrapper">
+          <input type="text" class="search__input" data-multilingual="searchCity">
+          <div class="search__speech-recognition"></div>          
+        </div>
+        <button type="submit" class="search__button"></button>
+      </form>
+    </div>
+    <main class="main-info-container">
+      <section class="weather-info">
+        <div class="info-header">
+          <div class="header__location"></div>
+          <div class="header__date"></div>
+        </div>
+        <div class="weather-info-today">
+          <div class="info__temperature" data-naming="temp"></div>
+          <div class="info-summary">
+            <img class="info__weather-icon"></img>
+            <div class="weather-indicators">
+              <div class="indicators__weather-description" data-naming="weatherDescription"></div>
+              <div class="indicators__apparent-temperature">
+                <span data-multilingual="apparentTemp"></span>
+                <span data-naming="apparentTemp"></span>
+              </div>
+              <div class="indicators__wind-speed">
+                <span data-multilingual="wind"></span>
+                <span data-naming="windSpeed"></span>
+                <span data-multilingual="windUnit"></span>
+              </div>
+              <div class="indicators__humidity">
+                <span data-multilingual="humidity"></span>
+                <span data-naming="humidity"></span>
+              </div> 
+            </div>
+          </div>
+        </div>
+        <div class="weather-info-three-days">
+          <div class="weather-info">
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>            
+          </div>
+          <div class="weather-info">
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>            
+          </div>
+          <div class="weather-info">
+            <div class="info-wrapper">
+              <div class="info__day"></div>
+              <div class="info__temperature" data-naming="averageTemp"></div>              
+            </div>
+            <img class="info__weather-icon"></img>              
+          </div>
+        </div>
+      </section>
+      <section class="location-info">
+        <div class="location__map" id="map"></div>
+        <div class="location__latitude">
+          <span data-multilingual="latitude"></span> 
+          <span data-coordinates="latitude"></span> 
+        </div>  
+        <div class="location__longitude">
+          <span data-multilingual="longitude"></span> 
+          <span data-coordinates="longitude"></span>           
+        </div>  
+      </section>
+    </main>
+  </div>
+  <div id="cube-loader" class="active">
+    <div class="caption">
+      <div class="cube-loader">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+      </div>
+    </div>
+  </div>
+  <div class="error"></div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+</body>
+</html>

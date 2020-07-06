@@ -1,0 +1,107 @@
+.weather-info-today {
+  @include flex (row, stretch, center);
+  width: 100%;
+
+  .info__temperature {
+    @include flex(row, center, center);
+    width: 60%;
+    font-size: 7rem;
+  }
+
+  .info-summary {
+    width: 40%;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: justify;
+
+    .info__weather-icon {
+      height: 200px;
+    }
+
+    .weather-indicators {
+      position: relative;
+      top: -20px;
+      font-size: 1.4rem;
+      text-align: left;
+
+      .indicators__weather-description {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+
+.weather-info-three-days {
+  @include flex(row);
+  font-size: 1.5rem;
+
+  .weather-info {
+    @include flex(row, center, center);
+
+    .info__weather-icon {
+      height: 100px;
+    }
+  }
+}
+
+@media (max-width: 1099px) {
+  .weather-info-three-days {
+    justify-content: center;
+
+    .weather-info {
+      width: 100%;
+    }    
+  }
+}
+
+@media (max-width: 749px) {
+  .weather-info-three-days {
+    flex-direction: column;
+    align-items: center;
+
+    .info-wrapper {
+      @include flex(row, center, center);
+
+      .info__temperature {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .weather-info-today {
+    @include flex(column, center, center);
+    margin-top: 40px;
+
+    .info__temperature {
+      width: 100%;
+    }
+
+    .info-summary {
+      width: 100%;
+      @include flex(column, center, center);
+      text-align: center;
+
+      .weather-indicators {
+        top: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 499px) {
+  .weather-info-today {
+    .info__temperature {
+      font-size: 5rem;
+    }
+  }
+  .weather-info-three-days {
+    .info-wrapper {
+      @include flex(column, center, center);
+
+      .info__temperature {
+        margin-left: 0;
+      }
+    }
+  }
+}

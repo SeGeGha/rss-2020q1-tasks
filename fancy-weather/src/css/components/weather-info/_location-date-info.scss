@@ -1,0 +1,18 @@
+.info-header {
+  .header__location {
+    padding: 10px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+  }
+  .header__date {
+    margin-top: 30px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 499px) {
+  .header__location {
+    font-size: 2.5rem;
+  }
+}

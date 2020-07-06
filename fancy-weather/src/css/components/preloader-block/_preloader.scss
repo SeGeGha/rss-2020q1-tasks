@@ -1,0 +1,94 @@
+#cube-loader {
+  @include flex (row, center);
+  @include size (100%, 100%);
+  position: fixed;
+  top: 0;
+  background: inherit;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.7s,opacity 0.7s linear;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s linear;
+    transition-delay:0s;
+  }
+
+  & .caption {
+    margin: 0 auto;
+  }
+
+  .cube-loader {
+    position: relative;
+    @include size(73px, 73px);
+    margin: 49px auto 0 auto;
+    transform: rotateZ(45deg);
+
+    & .cube {
+      position: relative;
+      @include size(50%, 50%);
+      float: left;
+      transform: rotateZ(45deg), scale(1.1);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include size(100%, 100%);
+        background-color: rgba(52, 73, 94, 1.0);
+        animation: cube-loader 2.76s infinite linear both;
+        transform-origin: 100% 100%;
+      }
+
+      &:nth-child(2) {
+        transform: scale(1.1) rotateZ(90deg);    
+        
+        &::before {
+          animation-delay: 0.35s;
+        }
+      }
+
+      &:nth-child(3) {
+        transform: scale(1.1) rotateZ(270deg);
+
+        &::before {
+          animation-delay: 1.04s;
+        }
+      }
+
+      &:nth-child(4) {
+        transform: scale(1.1) rotateZ(180deg);   
+
+        &::before {
+          animation-delay: 0.69s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes cube-loader {
+  0%, 10% {
+    transform: perspective(136px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%, 75% {
+    transform: perspective(136px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%, 100% {
+    transform: perspective(136px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

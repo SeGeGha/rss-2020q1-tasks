@@ -1,0 +1,116 @@
+$btnWidth: 40px;
+$btnMargin: ($btnWidth / 4);
+$borderRadius: ($btnWidth / 4);
+
+.control-block {
+  button {
+    @include size($btnWidth, $btnWidth);
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #efefef center no-repeat;
+    transition: background 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #708090;
+    }
+
+    &.active:not(.control__volume) {
+      background-color: #a9a9a9;
+    }
+  }
+
+  button:not(.volume_down) {
+    margin-top: 10px;
+  }
+
+  .control__update {
+    margin-right: $btnMargin;
+    border-radius: $borderRadius;
+    background-image: url('../assets/img/change.png');
+    background-size: ($btnWidth * 0.625);
+  }
+
+  .control__language {
+    text-transform: uppercase;
+  }
+  
+  .control__speak,
+  button[data-value="en"],
+  button[data-value="°F"] {
+    border-radius: $borderRadius 0 0 $borderRadius;
+  }
+
+  button[data-value="be"],
+  button[data-value="°C"] {
+    border-radius: 0 $borderRadius $borderRadius 0;
+  }
+
+  button[data-value="°F"],
+  .control__speak {
+    margin-left: $btnMargin;
+  }
+
+  .control__speak {
+    background-image: url('../assets/img/play.png');
+    background-size: ($btnWidth * 0.75);
+    position: relative;
+
+    &:hover::before {
+      content: 'Voice control: forecast, louder, quieter';
+      position: absolute;
+      top: 105%;
+      right: 50%;
+      box-sizing: border-box;
+      padding: 15px 5px 10px 5px;
+      @include size (($btnWidth * 3.75), ($btnWidth * 2.25));
+      background-color: #efefef;
+      clip-path: polygon(0 100%, 100% 100%, 100% 8%, 100% 8%, 100% 0, 90% 8%, 0 8%);
+    }
+
+    &.active {
+      background-image: url('../assets/img/volume.png');
+    }
+
+    &+.btn-wrapper {
+      flex-direction: column;
+    }
+  }
+
+  .btn-wrapper {
+    display: flex;
+
+    &.hidden {
+      display: none;
+    }
+
+    .control__volume {
+      @include size(($btnWidth *0.5), ($btnWidth *0.5));
+      line-height: 1;
+  
+      &.volume_up {
+        border-radius: 0 $borderRadius 0 0;
+      }
+  
+      &.volume_down {
+        border-radius: 0 0 $borderRadius 0;
+      }
+    }
+  }
+}
+
+.active[data-value="be"] ~ .btn-wrapper {
+  .control__speak:hover::before {
+    content: 'Speech synthesis не падтрымлівае беларускую мову, выкарыстоўваецца руская мова';
+    @include size(205px, 135px);
+  }
+}
+
+.active[data-value="ru"] ~ .btn-wrapper {
+  .control__speak:hover::before {
+    content: 'Голосовое управление: прогноз, громче, тише';
+    height: 115px;
+  }
+}
