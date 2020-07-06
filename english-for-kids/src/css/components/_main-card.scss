@@ -1,0 +1,44 @@
+.main-card {
+  @include flex(column);
+  margin: 30px;
+  @include size(300px, 300px);
+  border-radius: $circle;
+  box-shadow: $boxShadow;
+  overflow: hidden;
+  transition: all 0.4s;
+
+  .card__image {
+    @include size(inherit, inherit);
+    border-radius: $circle;
+    object-fit: cover;
+  }
+
+  .card__title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-weight: bold;
+    margin-top: -50px;
+    @include size(100%, 50px);
+    color: rgb(255, 140, 0);
+    background: rgba(0, 0, 0, 0.7);
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    letter-spacing: 2.5px;
+
+    .play-mode & {
+      color: rgb(124, 252, 0);
+    }
+  }
+
+  &:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: $hoverBoxShadow;
+  }
+}
+
+@media (max-width: 400px) {
+  .main-card {
+    margin: 15px 0;
+    @include size (270px, 270px);
+  } 
+}

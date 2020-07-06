@@ -1,0 +1,35 @@
+.burger-menu__navigation {
+  @include flex(column, center);
+  position: absolute;
+  left: -100%;
+  top: 0;
+  z-index: 25;
+  padding: 100px 0 0 0;
+  @include size(300px, 100%); 
+  overflow-y: auto;
+  font-size: $fontSize;
+  background: $BurgerBackground;
+  box-shadow: 0px -40px 20px rgba(0, 0, 0, 0.4);
+  transition: left 0.7s;
+
+  &.active {
+    position: fixed;
+    left: 0;
+  }
+
+  a {
+    font-family: $fontFamily;
+    margin-bottom: 2%;
+    width: fit-content;
+    color: $color;
+    
+    &:hover {
+      color: $hoverColor;
+    }
+
+    &.active {
+      color: $hoverColor;
+      text-decoration: underline;
+    }
+  }
+}
