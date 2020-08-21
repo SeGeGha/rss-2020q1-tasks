@@ -68,6 +68,12 @@ module.exports = (env, options) => {
         localesToKeep: ['es-us', 'ru', 'be'],
       }),
     ],
+    devServer: {
+      open: true,
+      historyApiFallback: true,
+      watchContentBase: true,
+      contentBase: path.join(__dirname, 'dist'),
+    },
   };
 
   return config;

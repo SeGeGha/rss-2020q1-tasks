@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack --mode development",
+    "dev": "webpack-dev-server --mode development",
     "prod": "webpack --mode production"
   },
   "keywords": [],
@@ -46,7 +46,8 @@
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.4",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
