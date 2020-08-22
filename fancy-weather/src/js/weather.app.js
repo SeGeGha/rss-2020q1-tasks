@@ -1,20 +1,14 @@
-import getUserLocation from './requestSenders/userLocation.requestSender';
-import sendRequest from './requestSenders/forecast.requestSender';
-import valuesDirectory from './directories/values.directory';
+import { language, unit, requestType } from './configs/appSettings';
+import getUserLocation from './requestSenders/userLocation';
+import sendRequest from './requestSenders/forecast';
+import { dayTime } from './directories/values';
 import changeTemperatureUnit from './functionHelpers/temperature.changer';
-import translationDirectory from './directories/translate.directory';
+import translationDirectory from './directories/translate';
 import handleData from './functionHelpers/data.handler';
-import getBackgroundImages from './requestSenders/images.requestSender';
+import getBackgroundImages from './requestSenders/images';
 import mapManager from './functionHelpers/map.manager';
 import clockManager from './functionHelpers/clock.manager';
 import { speaker } from './functionHelpers/speech.manager';
-
-const {
-  language,
-  unit,
-  requestType,
-  dayTime,
-} = valuesDirectory;
 
 const weatherApplication = {
   appComponents: {
@@ -206,24 +200,25 @@ const weatherApplication = {
 
     blockLocation.textContent = this.locationInfo.name;
 
-    for (let blockId = 0; blockId < multilingualBlocks.length; blockId += 1) {
-      const blockCode = multilingualBlocks[blockId].dataset.multilingual;
+    multilingualBlocks.forEach((block, id) => {
+      const blockCode = block.dataset.multilingual;
       const translationName = translationDirectory[blockCode][translationLang];
 
-      if (multilingualBlocks[blockId].tagName.toLowerCase() === 'input') {
-        multilingualBlocks[blockId].placeholder = translationName;
+      
+      if (block.tagName.toLowerCase() === 'input') {
+        block.placeholder = translationName;
       } else {
-        multilingualBlocks[blockId].textContent = translationName;
+        block.textContent = translationName;
       }
-    }
+    });
 
     blockCurrentWeather.weatherIcon.src = this.forecast.currentWeather.weatherIconUrl;
 
-    for (let blockId = 0; blockId < blockCurrentWeather.tuningValue.length; blockId += 1) {
-      const blockCode = blockCurrentWeather.tuningValue[blockId].dataset.naming;
+    blockCurrentWeather.tuningValue.forEach((block, id) => {
+      const blockCode = block.dataset.naming;
 
-      blockCurrentWeather.tuningValue[blockId].textContent = this.forecast.currentWeather[blockCode];
-    }
+      block.textContent = this.forecast.currentWeather[blockCode];
+    });
 
     for (let blockId = 0; blockId < countDaysForecast; blockId += 1) {
       blockForecast.day[blockId].textContent = this.forecast.dailyWeather[blockId + 1].dayName;
@@ -231,10 +226,10 @@ const weatherApplication = {
       blockForecast.weatherIcon[blockId].src = this.forecast.dailyWeather[blockId + 1].weatherIconUrl;
     }
 
-    for (let blockId = 0; blockId < blockCoordinates.length; blockId += 1) {
-      const blockCode = blockCoordinates[blockId].dataset.coordinates;
-      blockCoordinates[blockId].textContent = this.forecast.renderCoordinates[blockCode];
-    }
+    blockCoordinates.forEach((block, id) => {
+      const blockCode = block.dataset.coordinates;
+      block.textContent = this.forecast.renderCoordinates[blockCode];
+    });
   },
 };
 

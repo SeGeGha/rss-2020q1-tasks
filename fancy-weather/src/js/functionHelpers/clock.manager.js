@@ -1,9 +1,7 @@
 import moment from 'moment';
-import valuesDirectory from '../directories/values.directory';
+import { dayTime, yearSeason } from '../directories/values';
 
-const { dayTime, yearSeason } = valuesDirectory;
-
-const clockManager = {
+export default {
   renderElement: null,
   intervalId: null,
   currentTimezone: null,
@@ -36,10 +34,12 @@ const clockManager = {
   },
 
   getDateInfo() {
-    const hours = new Date(this.currentDate).getHours();
+    const hours = +moment().utcOffset(this.currentTimezone).format('HH');
     const month = new Date().getMonth();
-    const currentDayTime = (hours < 6 || hours > 22) ? dayTime.night : dayTime.day;
     const currentYearSeason = yearSeason[month];
+    const currentDayTime = (hours >= 6 && hours < 12) ? dayTime.morning 
+      : (hours >= 12 && hours < 17) ? dayTime.day
+      : (hours >= 17 && hours < 23) ? dayTime.evening : dayTime.night;
 
     return {
       currentYearSeason,
@@ -51,5 +51,3 @@ const clockManager = {
     return moment().add(dayCount, 'd').utcOffset(this.currentTimezone).format('dddd');
   },
 };
-
-export default clockManager;

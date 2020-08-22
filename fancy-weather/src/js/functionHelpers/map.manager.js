@@ -1,25 +1,18 @@
 import mapboxgl from 'mapbox-gl';
-import apiDirectory from '../directories/apiInfo.directory';
-import valuesDirectory from '../directories/values.directory';
-import sendRequest from '../requestSenders/forecast.requestSender';
+import { requestType } from '../configs/appSettings';
+import { mapOptions, defaultCoordinates } from '../configs/map';
+import { mapbox } from '../directories/apiInfo';
+import sendRequest from '../requestSenders/forecast';
 import weatherApplication from '../weather.app';
 
-const [standardLongitude, standardLatitude] = [27.57, 53.9];
-mapboxgl.accessToken = apiDirectory.mapbox.key;
+mapboxgl.accessToken = mapbox.key;
 
 const mapManager = {
   coordinates: {
-    latitude: standardLatitude,
-    longitude: standardLongitude,
+    latitude: defaultCoordinates.latitude,
+    longitude: defaultCoordinates.longitude,
   },
-  map: new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v10',
-    center: [standardLongitude, standardLatitude],
-    zoom: 8,
-    attributionControl: false,
-    logoPosition: 'top-left',
-  }),
+  map: new mapboxgl.Map(mapOptions),
   marker: new mapboxgl.Marker(),
 
   setMarker() {
@@ -47,7 +40,6 @@ const mapManager = {
 
 mapManager.map.on('click', (event) => {
   const { lat: latitude, lng: longitude } = event.lngLat;
-  const { requestType } = valuesDirectory;
 
   document.querySelector('#cube-loader').classList.add('active');
   mapManager.flyToCoordinates({ latitude, longitude });

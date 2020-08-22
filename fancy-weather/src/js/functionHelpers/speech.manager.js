@@ -1,7 +1,7 @@
+import { requestType } from '../configs/appSettings';
 import weatherApplication from '../weather.app';
-import valuesDirectory from '../directories/values.directory';
-import sendRequest from '../requestSenders/forecast.requestSender';
-import translationDirectory from '../directories/translate.directory';
+import sendRequest from '../requestSenders/forecast';
+import translationDirectory from '../directories/translate';
 
 const speechObj = {
   standard: window.SpeechRecognition,
@@ -119,7 +119,7 @@ const recognizer = {
   },
 
   stop() {
-    const { getPlace } = valuesDirectory.requestType;
+    const { getPlace } = requestType;
     const query = document.querySelector('.search__input').value;
 
     this.deactivate();
