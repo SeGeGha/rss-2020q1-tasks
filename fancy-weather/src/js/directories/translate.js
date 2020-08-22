@@ -1,4 +1,4 @@
-const directory = {
+export default {
   temperature: {
     en: 'Teamperature',
     ru: 'Температура',
@@ -114,5 +114,3 @@ const directory = {
     },
   },
 };
-
-export default directory;

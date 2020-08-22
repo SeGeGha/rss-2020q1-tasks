@@ -1,17 +1,17 @@
-import checkTemperatureUnit from './temperature.checker';
-import weatherIdDirectory from '../directories/weatherId.directory';
+import weatherIdDirectory from '../directories/weatherId';
+import translationDirectory from '../directories/translate';
 import clockManager from './clock.manager';
-import translationDirectory from '../directories/translate.directory';
+import checkTemperatureUnit from './temperature.checker';
 
 const { error } = translationDirectory;
 
 const handleData = {
   weatherData: {
     current(currentWeatherData, currentDayTime) {
-      const { id } = currentWeatherData.weather[0];
+      const { id, description } = currentWeatherData.weather[0];
 
       return {
-        weatherDescription: currentWeatherData.weather[0].description,
+        weatherDescription: description,
         weatherIconName: weatherIdDirectory[id].name,
         weatherIconUrl: weatherIdDirectory[id][currentDayTime],
         temp: checkTemperatureUnit(currentWeatherData.temp),
@@ -35,7 +35,7 @@ const handleData = {
   },
   searchData(placeInfoData, appLanguage) {
     let result;
-
+    
     switch (placeInfoData.status.code) {
       case 200: {
         const hasData = placeInfoData.results.length;

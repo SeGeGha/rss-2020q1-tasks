@@ -1,7 +1,6 @@
-import valuesDirectory from '../directories/values.directory';
+import { unit } from '../configs/appSettings';
 
 function changeTemperatureUnit(newUnit, temperatureString) {
-  const { unit } = valuesDirectory;
   let newTemperatureString;
 
   if (newUnit === unit.celsius) {
